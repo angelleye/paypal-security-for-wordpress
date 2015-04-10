@@ -43,35 +43,36 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin_Display {
                     <tr>
                         <td colspan="2"><strong>Secure Button Pages</strong></td>
 
-                <?php foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_sercure => $paypal_security_scanner_finalarrayresult_secure_value) { ?>
+                        <?php foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_sercure => $paypal_security_scanner_finalarrayresult_secure_value) { ?>
                         <tr>
                             <td><?php echo $key_paypal_security_scanner_finalarrayresult_sercure; ?></td>
                             <td><a href='<?php echo $paypal_security_scanner_finalarrayresult_secure_value; ?>' target="_blank"><?php echo $paypal_security_scanner_finalarrayresult_secure_value; ?></td>
 
                         </tr>
 
-                <?php } ?>
+                    <?php } ?>
                 </table>
                 <table class="form-table tbl_paypal_unsecure_data">
                     <tr>
                         <td colspan="2"><strong>Unsecure Button Pages</strong></td>
 
-                <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { ?>
+                        <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { ?>
                         <tr>
                             <td><?php echo $key_paypal_security_scanner_finalarrayresult_unsecure; ?></td>
                             <td><a href='<?php echo $paypal_security_scanner_finalarrayresult_unsecure_value; ?>' target="_blank"><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value; ?></td>
 
                         </tr>
 
-                <?php } ?>
+                    <?php } ?>
 
                 </tr>
                 </table>	  
-            <?php
+                <?php
             } else {
                 echo "<h3> No unsecured button founds.</h3>";
             }
         }
+        unset($paypal_security_scanner_finalarrayresult);
     }
 
 }

@@ -10,8 +10,6 @@
  * @subpackage paypal-security-for-wordpress/public
  * @author     Angell EYE <service@angelleye.com>
  */
-
-
 class AngellEYE_PayPal_Security_for_WordPress_Public {
-
+    
 }

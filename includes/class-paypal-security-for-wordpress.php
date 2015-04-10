@@ -111,7 +111,10 @@ class AngellEYE_PayPal_Security_for_WordPress {
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-for-wordpress-helper.php';
 
-
+        /**
+         * Dom php class file included.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/simple_html_dom.php';
 
         $this->loader = new AngellEYE_PayPal_Security_for_WordPress_Loader();
     }

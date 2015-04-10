@@ -30,31 +30,61 @@ class AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper {
 
         $paypal_security_for_wordpress_content_filtered_unsecure = array();
         $paypal_security_for_wordpress_content_filtered_secure = array();
-
+        $paypal_action_url = array();
+        $retrive_cmd = array();
+        $paypal_security_for_wordpress_content_temp = array();
         $paypal_security_for_wordpress_publisharray = $wpdb->get_results("SELECT * from $table_name where post_status='publish'");
         foreach ($paypal_security_for_wordpress_publisharray as $key_post => $paypal_security_for_wordpress_publisharray_value) {
 
-            $page_source_row = wp_remote_retrieve_body(wp_remote_get(get_permalink($paypal_security_for_wordpress_publisharray_value->ID)));
-            $raw_paypal_string = $page_source_row;
-            if (preg_match("~\bpaypal.com\b~", $raw_paypal_string)) {
-                $paypal_security_for_wordpress_content[$paypal_security_for_wordpress_publisharray_value->ID] = $paypal_security_for_wordpress_publisharray_value->post_content;
+            //$page_source_row = wp_remote_retrieve_body(wp_remote_get(get_permalink($paypal_security_for_wordpress_publisharray_value->ID)));
+            //$raw_paypal_string = $page_source_row;
+            $html = file_get_html(get_permalink($paypal_security_for_wordpress_publisharray_value->ID));
+
+
+
+            if (isset($html) && !empty($html)) {
+                $paypal_action_url = '';
+                foreach ($html->find('form') as $e) {
+                    if ($e->action == 'https://www.sandbox.paypal.com' || $e->action == 'https://www.sandbox.paypal.com/cgi-bin/webscr' || $e->action == 'https://www.paypal.com/cgi-bin/webscr' || $e->action == 'https://www.paypal.com') {
+                        $paypal_action_url = $e->action;
+                    }
+                }
+                if (isset($paypal_action_url) && !empty($paypal_action_url)) {
+                    $retrive_cmd = $html->find('[name=cmd]');
+
+                    $count_retrive_cmd = count($retrive_cmd);
+
+                    if ($count_retrive_cmd == '1') {
+                        if (isset($retrive_cmd['0']->attr['value']) && !empty($retrive_cmd['0']->attr['value'])) {
+                            if ($retrive_cmd['0']->attr['value'] == '_s-xclick') {
+                                $paypal_security_for_wordpress_content['secure'][$paypal_security_for_wordpress_publisharray_value->ID] = get_permalink($paypal_security_for_wordpress_publisharray_value->ID);
+                            } else {
+                                $paypal_security_for_wordpress_content['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID] = get_permalink($paypal_security_for_wordpress_publisharray_value->ID);
+                            }
+                        }
+                    } else {
+
+
+                        foreach ($retrive_cmd as $key_retrive_cmd => $value_retrive_cmd) {
+                            if (isset($value_retrive_cmd->attr['value']) && !empty($value_retrive_cmd->attr['value'])) {
+                                if ($value_retrive_cmd->attr['value'] == '_s-xclick') {
+                                    $paypal_security_for_wordpress_content_temp['secure'][$paypal_security_for_wordpress_publisharray_value->ID] = get_permalink($paypal_security_for_wordpress_publisharray_value->ID);
+                                } else {
+                                    $paypal_security_for_wordpress_content_temp['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID] = get_permalink($paypal_security_for_wordpress_publisharray_value->ID);
+                                }
+                            }
+                        }
+
+                        if (isset($paypal_security_for_wordpress_content_temp['unsecure']) && !empty($paypal_security_for_wordpress_content_temp['unsecure'])) {
+                            $paypal_security_for_wordpress_content['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID] = get_permalink($paypal_security_for_wordpress_publisharray_value->ID);
+                        } else {
+                            $paypal_security_for_wordpress_content['secure'][$paypal_security_for_wordpress_publisharray_value->ID] = get_permalink($paypal_security_for_wordpress_publisharray_value->ID);
+                        }
+                    }
+                }
             }
         }
-        foreach ($paypal_security_for_wordpress_content as $key_paypal_security_for_wordpress_content => $paypal_security_for_wordpress_content_value) {
-
-            $page_source_first_filter = wp_remote_retrieve_body(wp_remote_get(get_permalink($key_paypal_security_for_wordpress_content)));
-            $first_filter_paypal_string = $page_source_first_filter;
-
-            if (((preg_match('~\b_cart\b~', $first_filter_paypal_string)) && (preg_match("~\bamount\b~", $first_filter_paypal_string))) && (preg_match('~\b_s-xclick\b~', $first_filter_paypal_string))) {
-
-                $paypal_security_for_wordpress_content_final['unsecure'][$key_paypal_security_for_wordpress_content] = get_permalink($key_paypal_security_for_wordpress_content);
-            } else if ((!preg_match('~\b_cart\b~', $first_filter_paypal_string) && (!preg_match('~\bamount\b~', $first_filter_paypal_string))) && (preg_match('~\b_s-xclick\b~', $first_filter_paypal_string))) {
-                $paypal_security_for_wordpress_content_final['secure'][$key_paypal_security_for_wordpress_content] = get_permalink($key_paypal_security_for_wordpress_content);
-            }
-        }
-
-
-        return $paypal_security_for_wordpress_content_final;
+        return $paypal_security_for_wordpress_content;
     }
 
 }
