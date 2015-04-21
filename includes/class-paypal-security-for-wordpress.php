@@ -149,6 +149,7 @@ class AngellEYE_PayPal_Security_for_WordPress {
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+        $this->loader->add_action('wp_ajax_paypal_scan_action', $plugin_admin, 'paypal_security_for_wordpress_scan_action_fn');
     }
 
     /**

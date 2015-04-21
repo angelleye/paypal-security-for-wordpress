@@ -1,1 +1,13 @@
-.tbl_paypal_unsecure_data td {border:1px solid #ccc !important;padding:10px !important;background:#fff !important;}
+.tbl_paypal_unsecure_data td {vertical-align:top;border:1px solid #ccc !important;padding:10px !important;background:#fff !important;}
+img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 5px;display:none;}
+.txt_unsecurenote {width:100%;height:auto;}
+.ui-progressbar {
+    position: relative;
+}
+.progress-label {
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+}
