@@ -68,7 +68,8 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
         wp_enqueue_script('thickbox');
         wp_enqueue_script('media-upload');
         wp_enqueue_script('jquery-ui-tooltip');
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-for-wordpress-admin.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name . 'one', plugin_dir_url(__FILE__) . 'js/paypal-security-for-wordpress-admin.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'js/paypal-security-for-wordpress-jquery.form.min.js', array('jquery'), $this->version, false);
     }
 
     public function load_dependencies() {
@@ -130,7 +131,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
         if (isset($paypal_security_for_wordpress_content)) {
             unset($paypal_security_for_wordpress_content);
         }
-        exit(0);
+        exit(1);
     }
 
 }
