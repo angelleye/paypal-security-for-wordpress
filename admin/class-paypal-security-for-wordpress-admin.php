@@ -97,7 +97,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                         <td><strong>Page Url</strong></td>
                         <td><strong>Unsecure Note</strong></td>
                     </tr>
-            <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { ?>
+                    <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { ?>
                         <tr>
                             <td><?php echo $key_paypal_security_scanner_finalarrayresult_unsecure; ?></td>
                             <td><a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank"><?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></td>
@@ -112,14 +112,14 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                     $key_single = array_keys($paypal_security_scanner_finalarrayresult_unsecure_value);
                     echo '<textarea readonly="readonly" class="txt_unsecurenote">' . $paypal_security_scanner_finalarrayresult_unsecure_value[$key_single['0']] . '</textarea>';
                 }
-                ?>
+                        ?>
 
                             </td>
 
 
                         </tr>
 
-            <?php } ?>
+                    <?php } ?>
 
                     </tr>
             </table>	  
