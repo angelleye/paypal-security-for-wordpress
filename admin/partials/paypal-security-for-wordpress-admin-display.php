@@ -19,7 +19,9 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin_Display {
     }
 
     public static function add_settings_menu() {
-        add_options_page('PayPal Security for WordPress', 'PayPal Security for WordPress', 'manage_options', 'paypal-security-for-wordpress-option', array(__CLASS__, 'paypal_security_for_wordpress_options'));
+        add_management_page('PayPal Security', 'PayPal Security', 'manage_options', 'paypal-security-for-wordpress', array(__CLASS__, 'paypal_security_for_wordpress_options'));
+    	
+    
     }
 
     public static function paypal_security_for_wordpress_options() {
