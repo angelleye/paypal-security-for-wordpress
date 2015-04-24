@@ -60,16 +60,23 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
      * @since    1.0.0
      */
     public function enqueue_scripts() {
+
         wp_enqueue_script('jquery-ui-core');
         wp_enqueue_script('jquery-ui-progressbar');
+        wp_enqueue_script('jquery-ui-datepicker');
+        wp_enqueue_script('jquery-ui-dialog');
 
         wp_enqueue_script('jquery-ui-accordion');
         wp_enqueue_script('jquery-ui-tabs');
         wp_enqueue_script('thickbox');
         wp_enqueue_script('media-upload');
         wp_enqueue_script('jquery-ui-tooltip');
-        wp_enqueue_script($this->plugin_name . 'one', plugin_dir_url(__FILE__) . 'js/paypal-security-for-wordpress-admin.js', array('jquery'), $this->version, false);
-        wp_enqueue_script($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'js/paypal-security-for-wordpress-jquery.form.min.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-for-wordpress-admin.js', array('jquery'), $this->version, false);
+        if (wp_script_is($this->plugin_name)) {
+            wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
+                        'plugin_url' => plugin_dir_url(__FILE__)
+                    )));
+        }
     }
 
     public function load_dependencies() {
@@ -84,52 +91,102 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
 
         $get_array_with_paypal = new AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper();
         $paypal_security_scanner_finalarrayresult = array();
-
+        $paypal_security_scanner_get_all_forms = array();
         $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_for_wordpress_get_arraywithpaypaltext();
-        if (isset($paypal_security_scanner_finalarrayresult) && !empty($paypal_security_scanner_finalarrayresult)) {
-            ?>
-            <h3> Below pages have unsecured paypal buttons.</h3> 
+        $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms();
+        if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
+            $totalpost = $paypal_security_scanner_finalarrayresult['total_post'];
+        } else {
+            $totalpost = '0';
+        }
+        if (isset($paypal_security_scanner_get_all_forms['unsecure_count']) && !empty($paypal_security_scanner_get_all_forms['unsecure_count'])) {
+            $total_unsecur_count = $paypal_security_scanner_get_all_forms['unsecure_count'];
+        } else {
+            $total_unsecur_count = '0';
+        }
+        if (isset($paypal_security_scanner_get_all_forms['secure_count']) && !empty($paypal_security_scanner_get_all_forms['secure_count'])) {
+            $total_secure_count = $paypal_security_scanner_get_all_forms['secure_count'];
+        } else {
+            $total_secure_count = '0';
+        }
 
-            <table class="form-table tbl_paypal_unsecure_data">
-                <thead>
-                    <tr>
-                        <td><strong>Page Id</strong></td>
-                        <td><strong>Page Url</strong></td>
-                        <td><strong>Unsecure Note</strong></td>
-                    </tr>
-                    <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { ?>
+
+        if (isset($paypal_security_scanner_finalarrayresult) && !empty($paypal_security_scanner_finalarrayresult)) :
+            ?>
+            <div id="div_scan_result">
+                <table class="tbl-scan-result">
+                    <tbody>
+                        <tr class="color-note">
+                            <td><strong>Note</strong></td>
+                            <td><strong>Count</strong></td>
+                        </tr>
+                        <tr class="color-total">
+                            <td><strong>Total Posts and Pages Scanned:</strong></td>
+                            <td><?php echo $totalpost; ?></td>
+                        </tr>
+                        <tr class="color-unsecure">
+                            <th>Total Unsecure Forms Found:</th>
+                            <td><?php echo $total_unsecur_count; ?></td>
+                        </tr>
+                        <tr class="color-secure">
+                            <th>Total Secure Forms Found:</th>
+                            <td><?php echo $total_secure_count; ?></td>
+                        </tr>
+                    </tbody></table>
+                <input type='hidden' id='current_page' /><input type='hidden' id='show_per_page' />
+
+                <table class="form-table tbl_paypal_unsecure_data">
+                    <thead>
+                        <tr>
+                            <th><strong>Page ID</strong></th>
+                            <th><strong>URL</strong></th>
+                            <th><strong>Remarks</strong></th>
+                        </tr>
+                    </thead>
+
+                    <?php foreach ($paypal_security_scanner_finalarrayresult['button_type'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) : ?>
                         <tr>
                             <td><?php echo $key_paypal_security_scanner_finalarrayresult_unsecure; ?></td>
-                            <td><a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank"><?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></td>
-                            <td><?php
-                if (count($paypal_security_scanner_finalarrayresult_unsecure_value) > 1) {
-
-                    foreach ($paypal_security_scanner_finalarrayresult_unsecure_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key => $paypal_security_scanner_finalarrayresult_unsecure_value_value) {
-
-                        echo '<textarea readonly="readonly" class="txt_unsecurenote">' . $paypal_security_scanner_finalarrayresult_unsecure_value_value . '</textarea><br/>';
-                    }
-                } else {
-                    $key_single = array_keys($paypal_security_scanner_finalarrayresult_unsecure_value);
-                    echo '<textarea readonly="readonly" class="txt_unsecurenote">' . $paypal_security_scanner_finalarrayresult_unsecure_value[$key_single['0']] . '</textarea>';
-                }
-                        ?>
-
+                            <td>
+                                <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
+                                    <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
                             </td>
+                            <td>
+                                <?php foreach ($paypal_security_scanner_finalarrayresult['button_type'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level2 => $value_level2) { ?>
+                                    <ul class="unsecure_ul">
+                                    <?php
+                                    foreach ($value_level2 as $key_level3 => $value_level3) {
+                                        foreach ($value_level3 as $key_level4 => $value_level4) {
+                                            ?>
+
+                                                <li> <?php echo $value_level4 . '&nbsp;-&nbsp;' . $key_level4; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"></div></li>
+                        <? }
+                    }
+                    ?>
+                                    </ul>
+
+                <? } ?>
+                            </td>
+                        </tr>      
 
 
-                        </tr>
 
-                    <?php } ?>
 
-                    </tr>
-            </table>	  
-            <?php
-        } else {
-            echo "<h3> No unsecured button founds.</h3>";
-        }
+
+            <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+
+            </div> 
+        <?
+        endif;
         unset($paypal_security_scanner_finalarrayresult);
         if (isset($paypal_security_for_wordpress_content)) {
             unset($paypal_security_for_wordpress_content);
+        }
+        if (isset($paypal_security_scanner_get_all_forms)) {
+            unset($paypal_security_scanner_get_all_forms);
         }
         exit(1);
     }
