@@ -37,19 +37,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin_Display {
 
 
                 </form>
-                <table class="tbl_saved_report">
-                    <tr>
-                        <td colspan="5" class="text-right"><h4>Show saved reports</h4></td>
-                    </tr>
-                    <tr>
-
-                        <td><strong>Start From</strong></td>
-                        <td><input name="dt_start_from" id="dt_start_from" class="medium-text"></td>
-                        <td><strong>To</strong></td>
-                        <td><input name="dt_to" id="dt_to" class="medium-text"></td>
-                        <td class="paddingleft"><span id="btn_search_report" class="button button-primary btn_search_report">Search Report</span></td>
-                    </tr>
-                </table>
+            
 
 
             </fieldset>

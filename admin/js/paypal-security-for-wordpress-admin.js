@@ -25,6 +25,20 @@ jQuery( document ).ready(function() {
 
 
     });
+    
+    
+     
+    
+    jQuery(document).on('click', ".cls_dialog", function () {
+	
+   
+    var formhtml = jQuery(this).next().html();
+
+		var newWindow = window.open("", "newWindow", "resizable=1,width=500,height=250");
+		if(!newWindow.document.closed) {
+			newWindow.document.write(formhtml);
+		}
+	});
 
     var pluginurl = paypal_security_plugin_url.plugin_url;
 	
@@ -43,9 +57,15 @@ jQuery( document ).ready(function() {
         autoOpen: false
     });
     
-    jQuery( ".cls_dialog" ).click(function() {
-        //alert('test');
-        });
+   var select_all = function(control){
+       
+        jQuery(control).focus().select();
+        var copy = $(control).val();
+    //window.prompt ("Copy to clipboard: Ctrl+C, Enter", copy);
+    }
+    jQuery(".txt_unsecuresource").click(function(){
+        select_all(this);
+    })
   
 
 });
