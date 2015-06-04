@@ -17,8 +17,6 @@ jQuery( document ).ready(function() {
 
                 jQuery('#paypal_scan_response').html(data);
                 jQuery('#loader_gifimg').css('display','none');
-
-
             },
         });
 
