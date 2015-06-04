@@ -57,7 +57,7 @@ class AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper {
                                 $viewcart_str_html = str_get_html($value_retrive_cmd->parent()->outertext());
                                 $check_is_viewcart = $viewcart_str_html->find('[name=item_name]');
                                 $check_is_shoppingbutton = $viewcart_str_html->find('[name=shopping_url]');
-                                //	if(!empty($check_is_viewcart) || $retrive_cmd[$key_retrive_cmd]->attr['value'] == '_oe-gift-certificate') {
+                                	if(!empty($check_is_viewcart) || $retrive_cmd[$key_retrive_cmd]->attr['value'] == '_oe-gift-certificate') {
                                 if (isset($retrive_cmd[$key_retrive_cmd]->attr['value']) && !empty($retrive_cmd[$key_retrive_cmd]->attr['value'])) {
                                     if ($retrive_cmd[$key_retrive_cmd]->attr['value'] != '_s-xclick') {
                                         $paypal_security_for_wordpress_content['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd] = $value_retrive_cmd->parent()->outertext();
@@ -89,7 +89,7 @@ class AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper {
                                         $paypal_security_for_wordpress_content['secure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd] = $value_retrive_cmd->parent()->outertext();
                                     }
                                 }
-                                //}
+                                }
                             }
                         }
                     }

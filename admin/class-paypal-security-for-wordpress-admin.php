@@ -178,7 +178,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
             <?php } ?>
                     </tbody>
                 </table>
-
+			
 
             </div> 
             <?php
