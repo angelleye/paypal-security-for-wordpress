@@ -30,7 +30,8 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin_Display {
 
 
                 <form id="frm_scan">
-                    <h4>Click Scan Now button for scan all unsecure PayPal buttons.</h4>
+                    <h4>Click Scan Now button for scan all insecure PayPal buttons.</h4>
+                    <h5>This could take a while depending on how many Pages / Posts you have.</h5>
                     <span id="btn_pswp" class="button button-primary btn_pswp">Scan Now</span>
                     <img src="<?php echo plugin_dir_url(__FILE__) ?>images/ajax-loader.gif" id="loader_gifimg"/>
 
