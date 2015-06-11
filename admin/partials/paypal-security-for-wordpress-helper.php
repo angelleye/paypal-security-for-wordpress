@@ -60,9 +60,7 @@ class AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper {
                          //    if(!empty($check_is_viewcart) || $retrive_cmd[$key_retrive_cmd]->attr['value'] == '_oe-gift-certificate') {
                                 if (isset($retrive_cmd[$key_retrive_cmd]->attr['value']) && !empty($retrive_cmd[$key_retrive_cmd]->attr['value'])) {
                                     if (($retrive_cmd[$key_retrive_cmd]->attr['value'] != '_s-xclick')) {
-                                        $paypal_security_for_wordpress_content['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd] = $value_retrive_cmd->parent()->outertext();
                                         $current_form_html = str_get_html($value_retrive_cmd->parent()->outertext());
-
                                         if ($retrive_cmd[$key_retrive_cmd]->attr['value'] == '_xclick') {
                                             $button_name = 'Buy Now button';
                                         } else if ($retrive_cmd[$key_retrive_cmd]->attr['value'] == '_cart') {
@@ -75,25 +73,23 @@ class AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper {
                                             $button_name = 'Buy Gift Certificate button';
                                         }
 
-
-
                                         if ($retrive_cmd[$key_retrive_cmd]->attr['value'] == '_oe-gift-certificate') {
                                             $retrive_item_name = $current_form_html->find('[name=shopping_url]');
                                         } else {
-                                                                                    	                                       	
                                         	$retrive_item_name = $current_form_html->find('[name=item_name]');
                                         }
 				
-											if (isset($retrive_item_name[0]->attr['value']) && !empty($retrive_item_name[0]->attr['value'])) {
-												$itemname = $retrive_item_name[0]->attr['value'];
-											}else {
-												$itemname = 'Not Available';
-											}
-                                        	$paypal_security_for_wordpress_content['button_type'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
+										if (isset($retrive_item_name[0]->attr['value']) && !empty($retrive_item_name[0]->attr['value'])) {
+											$itemname = $retrive_item_name[0]->attr['value'];
+										}else {
+											$itemname = 'Not Available';
+										}
+										$paypal_security_for_wordpress_content['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
+                                    	$paypal_security_for_wordpress_content['button_type'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
 										
 									
                                     } else {
-                                        $paypal_security_for_wordpress_content['secure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd] = $value_retrive_cmd->parent()->outertext();
+                                        $paypal_security_for_wordpress_content['secure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
                                     }
                                 }
                                //} 
@@ -106,9 +102,9 @@ class AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper {
         return $paypal_security_for_wordpress_content;
     }
 
-    public function paypal_security_for_wordpress_get_total_forms() {
+    public function paypal_security_for_wordpress_get_total_forms($paypal_security_scanner_finalarrayresult) {
         $paypal_total_forms = array();
-        $paypal_total_forms = self::paypal_security_for_wordpress_get_arraywithpaypaltext();
+        $paypal_total_forms = $paypal_security_scanner_finalarrayresult;
 
         $paypal_total_forms_unsecure = array();
         $paypal_total_forms_unsecure_count = array();
@@ -121,14 +117,14 @@ class AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper {
         if (isset($paypal_total_forms) && !empty($paypal_total_forms)) {
             if (isset($paypal_total_forms['unsecure']) && !empty($paypal_total_forms['unsecure'])) {
                 foreach ($paypal_total_forms['unsecure'] as $paypal_total_forms_key => $paypal_total_forms_value) {
-                    $paypal_total_forms_unsecure['unsecure_count'][$paypal_total_forms_key] = count($paypal_total_forms['unsecure'][$paypal_total_forms_key]);
+                    $paypal_total_forms_unsecure['unsecure_count'][$paypal_total_forms_key] = count($paypal_total_forms_value);
                 }
                 $paypal_total_forms_unsecure_count = array_sum($paypal_total_forms_unsecure['unsecure_count']);
                 $paypal_total_all_forms_count['unsecure_count'] = $paypal_total_forms_unsecure_count;
             }
             if (isset($paypal_total_forms['secure']) && !empty($paypal_total_forms['secure'])) {
                 foreach ($paypal_total_forms['secure'] as $paypal_total_forms_key => $paypal_total_forms_value) {
-                    $paypal_total_forms_secure['secure_count'][$paypal_total_forms_key] = count($paypal_total_forms['secure'][$paypal_total_forms_key]);
+                    $paypal_total_forms_secure['secure_count'][$paypal_total_forms_key] = count($paypal_total_forms_value);
                 }
                 $paypal_total_forms_secure_count = array_sum($paypal_total_forms_secure['secure_count']);
                 $paypal_total_all_forms_count['secure_count'] = $paypal_total_forms_secure_count;

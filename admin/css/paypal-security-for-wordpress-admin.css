@@ -45,6 +45,14 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 5px;displ
     background-repeat: no-repeat;background-position: inherit;
     padding-left: 20px;
 }
+.secure_ul { list-style-type: none; margin: 0px;padding:0px;}
+.secure_ul li {
+    background-image: url('../partials/images/green-checkmark.png');
+    background-repeat: no-repeat;background-position: inherit;
+    padding-left: 20px;
+    background-size: 10px;
+    background-position: 4px 3px;
+}
 
 .medium-text {width:180px;}
 

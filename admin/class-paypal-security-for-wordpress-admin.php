@@ -93,7 +93,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
         $paypal_security_scanner_finalarrayresult = array();
         $paypal_security_scanner_get_all_forms = array();
         $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_for_wordpress_get_arraywithpaypaltext();
-        $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms();
+        $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($paypal_security_scanner_finalarrayresult);
         if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
             $totalpost = $paypal_security_scanner_finalarrayresult['total_post'];
         } else {
@@ -134,7 +134,8 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                         </tr>
                     </tbody></table>
                 <input type='hidden' id='current_page' /><input type='hidden' id='show_per_page' />
-                <?php if (isset($paypal_security_scanner_finalarrayresult['button_type']) && !empty($paypal_security_scanner_finalarrayresult['button_type'])) { ?>
+                <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
+                	<h2>High Risk buttons</h2>
                     <table class="form-table tbl_paypal_unsecure_data">
                         <thead>
                             <tr>
@@ -144,7 +145,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                             </tr>
                         </thead>
 
-                        <?php foreach ($paypal_security_scanner_finalarrayresult['button_type'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) : ?>
+                        <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) : ?>
                             <tr>
                                 <td class="td_pageid"><?php echo $key_paypal_security_scanner_finalarrayresult_unsecure; ?></td>
                                 <td class="td_url">
@@ -152,7 +153,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                                         <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
                                 </td>
                                 <td class="td_remark_report">
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult['button_type'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level2 => $value_level2) { ?>
+                                    <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level2 => $value_level2) { ?>
                                         <ul class="unsecure_ul">
                                             <?php
                                             foreach ($value_level2 as $key_level3 => $value_level3) {
@@ -175,11 +176,56 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
 
 
                         <?php endforeach; ?>
-            <?php } ?>
-                    </tbody>
+                   </tbody>
                 </table>
-			
+            <?php } ?>
+            
+            <?php if (isset($paypal_security_scanner_finalarrayresult['secure']) && !empty($paypal_security_scanner_finalarrayresult['secure'])) { ?>
+            		<h2>Secure buttons</h2>
+                    <table class="form-table tbl_paypal_unsecure_data">
+                        <thead>
+                            <tr>
+                                <th class="th_pageid"><strong>Page ID</strong></th>
+                                <th class="th_url"><strong>URL</strong></th>
+                                <th class="th_remark_report"><strong>Remarks</strong></th>
+                            </tr>
+                        </thead>
 
+                        <?php foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) : ?>
+                            <tr>
+                                <td class="td_pageid"><?php echo $key_paypal_security_scanner_finalarrayresult_unsecure; ?></td>
+                                <td class="td_url">
+                                    <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
+                                        <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
+                                </td>
+                                <td class="td_remark_report">
+                                    <?php foreach ($paypal_security_scanner_finalarrayresult['secure'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level2 => $value_level2) { ?>
+                                        <ul class="secure_ul">
+                                            <?php
+                                            foreach ($value_level2 as $key_level3 => $value_level3) {
+                                                foreach ($value_level3 as $key_level4 => $value_level4) {
+                                                    ?>
+
+                                                    <li> <?php echo $value_level4 . '&nbsp;-&nbsp;' . $key_level4; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level3; ?></textarea> </div></li>
+                                                <?php
+                                                }
+                                            }
+                                            ?>
+                                        </ul>
+
+                    <?php } ?>
+                                </td>
+                            </tr>      
+
+
+
+
+
+                        <?php endforeach; ?>
+                   </tbody>
+                </table>
+            <?php } ?>
+            
             </div> 
             <?php
         endif;
