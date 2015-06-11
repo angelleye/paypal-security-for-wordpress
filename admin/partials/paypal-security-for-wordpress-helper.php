@@ -84,10 +84,19 @@ class AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper {
 										}else {
 											$itemname = 'Not Available';
 										}
-										$paypal_security_for_wordpress_content['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
-                                    	$paypal_security_for_wordpress_content['button_type'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
 										
-									
+										$retrive_business = $current_form_html->find('[name=business]');
+										
+										if (isset($retrive_business[0]->attr['value']) && !empty($retrive_business[0]->attr['value'])) {
+											if(strpos($retrive_business[0]->attr['value'],'@') !== false) {
+												$paypal_security_for_wordpress_content['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;								
+											} else {
+												$paypal_security_for_wordpress_content['medium_risk_buttons'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
+											}
+										} else {
+											$paypal_security_for_wordpress_content['unsecure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;								
+										}
+                                    	$paypal_security_for_wordpress_content['button_type'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
                                     } else {
                                         $paypal_security_for_wordpress_content['secure'][$paypal_security_for_wordpress_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
                                     }
