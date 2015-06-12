@@ -3,13 +3,12 @@ jQuery( document ).ready(function() {
         jQuery('#gifimg').css('visibility','visible');
         jQuery('#loader_gifimg').css('display','inline');
         jQuery('#btn_pswp').css('margin-right','0px');
-		
-
         jQuery.ajax({
             url: ajaxurl,
             type: "POST",
             data: {
-                'action': 'paypal_scan_action'
+                'action': 'paypal_scan_action',
+                 data: jQuery('form').serialize(),
             },
             dataType: "html",
 
@@ -19,11 +18,24 @@ jQuery( document ).ready(function() {
                 jQuery('#loader_gifimg').css('display','none');
             },
         });
-
-
-
     });
     
+ 
+
+    var $checkboxes = jQuery('#frm_scan input[type="checkbox"]');
+        
+    $checkboxes.change(function(){
+        var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
+        if(countCheckedCheckboxes == 0) {
+        	jQuery('#btn_pswp').hide();
+        	jQuery('#notice').show();
+        } else {
+        	jQuery('#btn_pswp').show();
+        	jQuery('#notice').hide();
+        }
+    });
+
+
     
      
     
