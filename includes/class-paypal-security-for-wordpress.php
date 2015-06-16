@@ -115,6 +115,12 @@ class AngellEYE_PayPal_Security_for_WordPress {
          * Dom php class file included.
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/simple_html_dom.php';
+       
+         /**
+         * Get hosted button details.
+         */
+        
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/PayPal.php';
 
         $this->loader = new AngellEYE_PayPal_Security_for_WordPress_Loader();
     }
