@@ -88,20 +88,20 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
 
     public function paypal_security_for_wordpress_scan_action_fn() {
 
-		if( isset($_POST['data']) && !empty($_POST['data']) ) {
-			parse_str($_POST['data'], $post_type);
-		} else {
-			$post_type = array('all' => 'on');
-		}
+        if (isset($_POST['data']) && !empty($_POST['data'])) {
+            parse_str($_POST['data'], $post_type);
+        } else {
+            $post_type = array('all' => 'on');
+        }
         $get_array_with_paypal = new AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper();
         $paypal_security_scanner_finalarrayresult = array();
         $paypal_security_scanner_get_all_forms = array();
 
         //$paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_for_wordpress_get_arraywithpaypaltext($post_type);
         $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_for_wordpress_get_arraywithpaypaltext($post_type);
-       // $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($paypal_security_scanner_finalarrayresult);
+        // $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($paypal_security_scanner_finalarrayresult);
         $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($post_type);
-       if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
+        if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
             $totalpost = $paypal_security_scanner_finalarrayresult['total_post'];
         } else {
             $totalpost = '0';
@@ -116,8 +116,8 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
         } else {
             $total_secure_count = '0';
         }
-        
-         if (isset($paypal_security_scanner_get_all_forms['medium_secure_count']) && !empty($paypal_security_scanner_get_all_forms['medium_secure_count'])) {
+
+        if (isset($paypal_security_scanner_get_all_forms['medium_secure_count']) && !empty($paypal_security_scanner_get_all_forms['medium_secure_count'])) {
             $total_medium_secure_count = $paypal_security_scanner_get_all_forms['medium_secure_count'];
         } else {
             $total_medium_secure_count = '0';
@@ -141,7 +141,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                             <td>Total High Risk Buttons Found:</td>
                             <td><?php echo $total_unsecur_count; ?></td>
                         </tr>
-                         <tr class="color-unsecure">
+                        <tr class="color-unsecure">
                             <td>Total Medium Risk Buttons Found:</td>
                             <td><?php echo $total_medium_secure_count; ?></td>
                         </tr>
@@ -152,7 +152,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                     </tbody></table>
                 <input type='hidden' id='current_page' /><input type='hidden' id='show_per_page' />
                 <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
-                	<h2>High Risk Buttons</h2>
+                    <h2>High Risk Buttons</h2>
                     <table class="form-table tbl_paypal_unsecure_data">
                         <thead>
                             <tr>
@@ -178,22 +178,22 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                                                     ?>
 
                                                     <li> <?php echo $value_level4 . '&nbsp;-&nbsp;' . $key_level4; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level3; ?></textarea> </div></li>
-                                                <?php
+                                                    <?php
                                                 }
                                             }
                                             ?>
                                         </ul>
 
-                    <?php } ?>
+                                    <?php } ?>
                                 </td>
                             </tr>      
 
                         <?php endforeach; ?>
-                   </tbody>
-                </table>
-            <?php } ?>
-            <?php if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) { ?>
-            		<h2>Medium Risk Buttons</h2>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                <?php if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) { ?>
+                    <h2>Medium Risk Buttons</h2>
                     <table class="form-table tbl_paypal_unsecure_data">
                         <thead>
                             <tr>
@@ -219,20 +219,20 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                                                     ?>
 
                                                     <li> <?php echo $value_level41 . '&nbsp;-&nbsp;' . $key_level41; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level31; ?></textarea> </div></li>
-                                                <?php
+                                                    <?php
                                                 }
                                             }
                                             ?>
                                         </ul>
-                    <?php } ?>
+                                    <?php } ?>
                                 </td>
                             </tr>      
                         <?php endforeach; ?>
-                   </tbody>
-                </table>
-            <?php } ?>
-            <?php if (isset($paypal_security_scanner_finalarrayresult['secure']) && !empty($paypal_security_scanner_finalarrayresult['secure'])) { ?>
-            		<h2>Secure Buttons</h2>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                <?php if (isset($paypal_security_scanner_finalarrayresult['secure']) && !empty($paypal_security_scanner_finalarrayresult['secure'])) { ?>
+                    <h2>Secure Buttons</h2>
                     <table class="form-table tbl_paypal_unsecure_data">
                         <thead>
                             <tr>
@@ -254,23 +254,23 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                                         <ul class="secure_ul">
                                             <?php
                                             foreach ($value_level22 as $key_level32 => $value_level32) {
-                                               // foreach ($value_level32 as $key_level42 => $value_level42) {
-                                                    ?>
+                                                // foreach ($value_level32 as $key_level42 => $value_level42) {
+                                                ?>
 
-                                                    <li> <?php echo $value_level32 ;?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level32; ?></textarea> </div></li>
+                                                <li> <?php echo $value_level32; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level32; ?></textarea> </div></li>
                                                 <?php
-                                               // }
+                                                // }
                                             }
                                             ?>
                                         </ul>
-                    <?php } ?>
+                                    <?php } ?>
                                 </td>
                             </tr>      
                         <?php endforeach; ?>
-                   </tbody>
-                </table>
-            <?php } ?>
-            
+                        </tbody>
+                    </table>
+                <?php } ?>
+
             </div> 
             <?php
         endif;
