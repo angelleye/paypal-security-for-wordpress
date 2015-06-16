@@ -97,9 +97,11 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
         $paypal_security_scanner_finalarrayresult = array();
         $paypal_security_scanner_get_all_forms = array();
 
+        //$paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_for_wordpress_get_arraywithpaypaltext($post_type);
         $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_for_wordpress_get_arraywithpaypaltext($post_type);
-        $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($paypal_security_scanner_finalarrayresult);
-        if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
+       // $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($paypal_security_scanner_finalarrayresult);
+        $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($post_type);
+       if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
             $totalpost = $paypal_security_scanner_finalarrayresult['total_post'];
         } else {
             $totalpost = '0';
@@ -113,6 +115,12 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
             $total_secure_count = $paypal_security_scanner_get_all_forms['secure_count'];
         } else {
             $total_secure_count = '0';
+        }
+        
+         if (isset($paypal_security_scanner_get_all_forms['medium_secure_count']) && !empty($paypal_security_scanner_get_all_forms['medium_secure_count'])) {
+            $total_medium_secure_count = $paypal_security_scanner_get_all_forms['medium_secure_count'];
+        } else {
+            $total_medium_secure_count = '0';
         }
 
 
@@ -130,11 +138,15 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                             <td><?php echo $totalpost; ?></td>
                         </tr>
                         <tr class="color-unsecure">
-                            <td>Total Unsecure Forms Found:</td>
+                            <td>Total High Risk Buttons Found:</td>
                             <td><?php echo $total_unsecur_count; ?></td>
                         </tr>
+                         <tr class="color-unsecure">
+                            <td>Total Medium Risk Buttons Found:</td>
+                            <td><?php echo $total_medium_secure_count; ?></td>
+                        </tr>
                         <tr class="color-secure">
-                            <td>Total Secure Forms Found:</td>
+                            <td>Total Secure Buttons Found:</td>
                             <td><?php echo $total_secure_count; ?></td>
                         </tr>
                     </tbody></table>
