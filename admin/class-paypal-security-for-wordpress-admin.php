@@ -194,14 +194,14 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                                         <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
                                 </td>
                                 <td class="td_remark_report">
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level2 => $value_level2) { ?>
+                                    <?php foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level21 => $value_level21) { ?>
                                         <ul class="medium_risk_buttons">
                                             <?php
-                                            foreach ($value_level2 as $key_level3 => $value_level3) {
-                                                foreach ($value_level3 as $key_level4 => $value_level4) {
+                                            foreach ($value_level21 as $key_level31 => $value_level31) {
+                                                foreach ($value_level31 as $key_level41 => $value_level41) {
                                                     ?>
 
-                                                    <li> <?php echo $value_level4 . '&nbsp;-&nbsp;' . $key_level4; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level3; ?></textarea> </div></li>
+                                                    <li> <?php echo $value_level41 . '&nbsp;-&nbsp;' . $key_level41; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level31; ?></textarea> </div></li>
                                                 <?php
                                                 }
                                             }
@@ -233,16 +233,16 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
                                         <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
                                 </td>
                                 <td class="td_remark_report">
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult['secure'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level2 => $value_level2) { ?>
+                                    <?php foreach ($paypal_security_scanner_finalarrayresult['secure'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level22 => $value_level22) { ?>
                                         <ul class="secure_ul">
                                             <?php
-                                            foreach ($value_level2 as $key_level3 => $value_level3) {
-                                                foreach ($value_level3 as $key_level4 => $value_level4) {
+                                            foreach ($value_level22 as $key_level32 => $value_level32) {
+                                               // foreach ($value_level32 as $key_level42 => $value_level42) {
                                                     ?>
 
-                                                    <li> <?php echo $value_level4 . '&nbsp;-&nbsp;' . $key_level4; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level3; ?></textarea> </div></li>
+                                                    <li> <?php echo $value_level32 ;?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level32; ?></textarea> </div></li>
                                                 <?php
-                                                }
+                                               // }
                                             }
                                             ?>
                                         </ul>
