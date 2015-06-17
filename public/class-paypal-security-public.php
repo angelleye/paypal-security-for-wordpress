@@ -6,13 +6,13 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the dashboard-specific stylesheet and JavaScript.
  *
- * @class       AngellEYE_PayPal_Security_for_WordPress
+ * @class       AngellEYE_PayPal_Security_Public
  * @version		1.0.0
- * @package		paypal-security-for-wordpress
+ * @package		paypal-security
  * @category	Class
  * @author      Angell EYE <service@angelleye.com>
  */
-class AngellEYE_PayPal_Security_for_WordPress_Public {
+class AngellEYE_PayPal_Security_Public {
 
     /**
      * The ID of this plugin.
@@ -51,7 +51,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Public {
      * @since    1.0.0
      */
     public function enqueue_styles() {
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-for-wordpress-public.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-public.css', array(), $this->version, 'all');
     }
 
     /**
@@ -61,8 +61,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Public {
      */
     public function enqueue_scripts() {
 
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-for-wordpress-public.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-public.js', array('jquery'), $this->version, false);
     }
-    
 
 }

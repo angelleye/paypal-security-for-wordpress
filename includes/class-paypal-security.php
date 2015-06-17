@@ -10,11 +10,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    paypal-security-for-wordpress
- * @subpackage paypal-security-for-wordpress/includes
+ * @package    paypal-security
+ * @subpackage paypal-security/includes
  * @author     Angell EYE <service@angelleye.com>
  */
-class AngellEYE_PayPal_Security_for_WordPress {
+class AngellEYE_PayPal_Security {
 
     /**
      * The loader that's responsible for maintaining and registering all hooks that power
@@ -22,7 +22,7 @@ class AngellEYE_PayPal_Security_for_WordPress {
      *
      * @since    1.0.0
      * @access   protected
-     * @var      AngellEYE_PayPal_Security_for_WordPress_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @var      AngellEYE_PayPal_Security_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -55,7 +55,7 @@ class AngellEYE_PayPal_Security_for_WordPress {
      */
     public function __construct() {
 
-        $this->plugin_name = 'paypal-security-for-wordpress';
+        $this->plugin_name = 'paypal-security';
         $this->version = '1.0.0';
 
         $this->load_dependencies();
@@ -69,10 +69,10 @@ class AngellEYE_PayPal_Security_for_WordPress {
      *
      * Include the following files that make up the plugin:
      *
-     * - paypal-security-for-wordpress-loader. Orchestrates the hooks of the plugin.
-     * - paypal-security-for-wordpress-i18n. Defines internationalization functionality.
-     * - paypal-security-for-wordpress-admin. Defines all hooks for the dashboard.
-     * - paypal-security-for-wordpress-public. Defines all hooks for the public side of the site.
+     * - paypal-security-loader. Orchestrates the hooks of the plugin.
+     * - paypal-security-i18n. Defines internationalization functionality.
+     * - paypal-security-admin. Defines all hooks for the dashboard.
+     * - paypal-security-public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
@@ -86,48 +86,43 @@ class AngellEYE_PayPal_Security_for_WordPress {
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-paypal-security-for-wordpress-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-paypal-security-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-paypal-security-for-wordpress-i18n.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-paypal-security-i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the Dashboard.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-paypal-security-for-wordpress-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-paypal-security-admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-paypal-security-for-wordpress-public.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-paypal-security-public.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-for-wordpress-helper.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-helper.php';
 
         /**
          * Dom php class file included.
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/simple_html_dom.php';
 
-        /**
-         * Get hosted button details.
-         */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/PayPal.php';
-
-        $this->loader = new AngellEYE_PayPal_Security_for_WordPress_Loader();
+        $this->loader = new AngellEYE_PayPal_Security_Loader();
     }
 
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the AngellEYE_PayPal_Security_for_WordPress_i18n class in order to set the domain and to register the hook
+     * Uses the AngellEYE_PayPal_Security_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since    1.0.0
@@ -135,7 +130,7 @@ class AngellEYE_PayPal_Security_for_WordPress {
      */
     private function set_locale() {
 
-        $plugin_i18n = new AngellEYE_PayPal_Security_for_WordPress_i18n();
+        $plugin_i18n = new AngellEYE_PayPal_Security_i18n();
         $plugin_i18n->set_domain($this->get_plugin_name());
 
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
@@ -150,11 +145,11 @@ class AngellEYE_PayPal_Security_for_WordPress {
      */
     private function define_admin_hooks() {
 
-        $plugin_admin = new AngellEYE_PayPal_Security_for_WordPress_Admin($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new AngellEYE_PayPal_Security_Admin($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-        $this->loader->add_action('wp_ajax_paypal_scan_action', $plugin_admin, 'paypal_security_for_wordpress_scan_action_fn');
+        $this->loader->add_action('wp_ajax_paypal_scan_action', $plugin_admin, 'paypal_security_scan_action_fn');
     }
 
     /**
@@ -166,7 +161,7 @@ class AngellEYE_PayPal_Security_for_WordPress {
      */
     private function define_public_hooks() {
 
-        $plugin_public = new AngellEYE_PayPal_Security_for_WordPress_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new AngellEYE_PayPal_Security_Public($this->get_plugin_name(), $this->get_version());
 
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
@@ -196,7 +191,7 @@ class AngellEYE_PayPal_Security_for_WordPress {
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
-     * @return    paypal-security-for-wordpress-loader    Orchestrates the hooks of the plugin.
+     * @return    paypal-security-loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader() {
         return $this->loader;

@@ -6,11 +6,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    paypal-security-for-wordpress
- * @subpackage paypal-security-for-wordpress/includes
+ * @package    paypal-security
+ * @subpackage paypal-security/includes
  * @author     Angell EYE <service@angelleye.com>
  */
-class AngellEYE_PayPal_Security_for_WordPress_Deactivator {
+class AngellEYE_PayPal_Security_Deactivator {
 
     /**
      * Short Description. (use period)

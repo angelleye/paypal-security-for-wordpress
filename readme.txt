@@ -1,4 +1,4 @@
-=== PayPal Security for WordPress ===
+=== PayPal Security ===
 Contributors: angelleye
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SG9SQU2GBXJNA
 Tags: paypal, security, payments, standard, buttons, subscriptions
@@ -20,7 +20,7 @@ Scans all site pages and posts and return a report of any insecure PayPal button
 
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't need to leave your web browser. To do an automatic install, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
 
-In the search field type PayPal Security for WordPress and click Search Plugins. Once you've found our plugin you can view details about it such as the the rating and description. Most importantly, of course, you can install it by simply clicking Install Now¬ù.
+In the search field type PayPal Security and click Search Plugins. Once you've found our plugin you can view details about it such as the the rating and description. Most importantly, of course, you can install it by simply clicking Install Now¬?.
 
 = Manual Installation =
 

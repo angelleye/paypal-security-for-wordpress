@@ -6,11 +6,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the dashboard-specific stylesheet and JavaScript.
  *
- * @package    paypal-security-for-wordpress
- * @subpackage paypal-security-for-wordpress/admin
+ * @package    paypal-security
+ * @subpackage paypal-security/admin
  * @author     Angell EYE <service@angelleye.com>
  */
-class AngellEYE_PayPal_Security_for_WordPress_Admin {
+class AngellEYE_PayPal_Security_Admin {
 
     /**
      * The ID of this plugin.
@@ -51,7 +51,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
      */
     public function enqueue_styles() {
 
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-for-wordpress-admin.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-admin.css', array(), $this->version, 'all');
     }
 
     /**
@@ -71,7 +71,7 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
         wp_enqueue_script('thickbox');
         wp_enqueue_script('media-upload');
         wp_enqueue_script('jquery-ui-tooltip');
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-for-wordpress-admin.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-admin.js', array('jquery'), $this->version, false);
         if (wp_script_is($this->plugin_name)) {
             wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
                         'plugin_url' => plugin_dir_url(__FILE__)
@@ -83,24 +83,24 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
         /**
          * The class responsible for defining all actions that occur in the Dashboard
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-for-wordpress-admin-display.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-admin-display.php';
     }
 
-    public function paypal_security_for_wordpress_scan_action_fn() {
+    public function paypal_security_scan_action_fn() {
 
         if (isset($_POST['data']) && !empty($_POST['data'])) {
             parse_str($_POST['data'], $post_type);
         } else {
             $post_type = array('all' => 'on');
         }
-        $get_array_with_paypal = new AngellEYE_PayPal_Security_for_WordPress_PayPal_Helper();
+        $get_array_with_paypal = new AngellEYE_PayPal_Security_PayPal_Helper();
         $paypal_security_scanner_finalarrayresult = array();
         $paypal_security_scanner_get_all_forms = array();
 
-        //$paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_for_wordpress_get_arraywithpaypaltext($post_type);
-        $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_for_wordpress_get_arraywithpaypaltext($post_type);
-        // $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($paypal_security_scanner_finalarrayresult);
-        $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_for_wordpress_get_total_forms($post_type);
+        //$paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_get_arraywithpaypaltext($post_type);
+        $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_get_arraywithpaypaltext($post_type);
+        // $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_get_total_forms($paypal_security_scanner_finalarrayresult);
+        $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_get_total_forms($paypal_security_scanner_finalarrayresult);
         if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
             $totalpost = $paypal_security_scanner_finalarrayresult['total_post'];
         } else {
@@ -276,8 +276,8 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin {
         endif;
 
         unset($paypal_security_scanner_finalarrayresult);
-        if (isset($paypal_security_for_wordpress_content)) {
-            unset($paypal_security_for_wordpress_content);
+        if (isset($paypal_security_content)) {
+            unset($paypal_security_content);
         }
         if (isset($paypal_security_scanner_get_all_forms)) {
             unset($paypal_security_scanner_get_all_forms);

@@ -8,7 +8,7 @@ jQuery( document ).ready(function() {
             type: "POST",
             data: {
                 'action': 'paypal_scan_action',
-                 data: jQuery('form').serialize(),
+                data: jQuery('form').serialize(),
             },
             dataType: "html",
 
@@ -27,11 +27,11 @@ jQuery( document ).ready(function() {
     $checkboxes.change(function(){
         var countCheckedCheckboxes = $checkboxes.filter(':checked').length;
         if(countCheckedCheckboxes == 0) {
-        	jQuery('#btn_pswp').hide();
-        	jQuery('#notice').show();
+            jQuery('#btn_pswp').hide();
+            jQuery('#notice').show();
         } else {
-        	jQuery('#btn_pswp').show();
-        	jQuery('#notice').hide();
+            jQuery('#btn_pswp').show();
+            jQuery('#notice').hide();
         }
     });
 

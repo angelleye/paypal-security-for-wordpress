@@ -8,11 +8,11 @@
  * run function to execute the list of actions and filters.
  *
  * @since      1.0.0
- * @package    paypal-security-for-wordpress
- * @subpackage paypal-security-for-wordpress/includes
+ * @package    paypal-security
+ * @subpackage paypal-security/includes
  * @author     Angell EYE <service@angelleye.com>
  */
-class AngellEYE_PayPal_Security_for_WordPress_Loader {
+class AngellEYE_PayPal_Security_Loader {
 
     /**
      * The array of actions registered with WordPress.

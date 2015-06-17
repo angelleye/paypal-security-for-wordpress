@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @class       AngellEYE_PayPal_Security_for_WordPress
+ * @class       AngellEYE_PayPal_Security
  * @version		1.0.0
- * @package		paypal-security-for-wordpress
+ * @package		paypal-security
  * @category	Class
  * @author      Angell EYE <service@angelleye.com>
  */
-class AngellEYE_PayPal_Security_for_WordPress_Admin_Display {
+class AngellEYE_PayPal_Security_Admin_Display {
 
     /**
      * Hook in methods
@@ -19,15 +19,15 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin_Display {
     }
 
     public static function add_settings_menu() {
-        add_management_page('PayPal Security', 'PayPal Security', 'manage_options', 'paypal-security-for-wordpress', array(__CLASS__, 'paypal_security_for_wordpress_options'));
+        add_management_page('PayPal Security', 'PayPal Security', 'manage_options', 'paypal-security', array(__CLASS__, 'paypal_security_options'));
     }
 
-    public static function paypal_security_for_wordpress_options() {
+    public static function paypal_security_options() {
         ?>
         <div id="paypal_security_scanner_fieldset">
 
             <fieldset>
-                <legend><h2>PayPal security scanner for WordPress</h2></legend>
+                <legend><h2><?php _e('PayPal security scanner', 'paypal-security'); ?></h2></legend>
                 <form id="frm_scan">
                     <?php
                     $output = 'names'; // names or objects, note names is the default
@@ -62,4 +62,4 @@ class AngellEYE_PayPal_Security_for_WordPress_Admin_Display {
 
 }
 
-AngellEYE_PayPal_Security_for_WordPress_Admin_Display::init();
+AngellEYE_PayPal_Security_Admin_Display::init();

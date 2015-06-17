@@ -7,11 +7,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    paypal-security-for-wordpress
- * @subpackage paypal-security-for-wordpress/includes
+ * @package    paypal-security
+ * @subpackage paypal-security/includes
  * @author     Angell EYE <service@angelleye.com>
  */
-class AngellEYE_PayPal_Security_for_WordPress_i18n {
+class AngellEYE_PayPal_Security_i18n {
 
     /**
      * The domain specified for this plugin.

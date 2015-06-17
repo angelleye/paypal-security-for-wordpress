@@ -85,10 +85,10 @@ table.form-table.tbl_paypal_unsecure_data th {
 .txt_unsecuresource {display:none !important; width:350px !important; height:250px !important;}
 th.th_pageid { width: 50px !important;}
 td.td_url a {
-  word-wrap: break-word !important;
+    word-wrap: break-word !important;
 }
 table.form-table.tbl_paypal_unsecure_data th {
-  padding-top: 10px !important;
+    padding-top: 10px !important;
     background-color: #fafafa;
     padding-bottom:10px !important;
 }
@@ -98,5 +98,5 @@ table.form-table.tbl_paypal_unsecure_data th {
 .color-note {background:#fafafa;}
 .tbl-scan-result td {border:1px solid #ccc; background:#fff !important;font-size:13px !important;}
 div#paypal_security_scanner_fieldset {
-  margin-top: 20px;
+    margin-top: 20px;
 }
