@@ -40,11 +40,15 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
         } else {
             $find_post = array();
             foreach ($post_type as $key => $value) {
-                $find_post[] = $key;
+                $find_post[] = "'".$key."'";
             }
             $query = new WP_Query(array('post_type' => $find_post));
             $paypal_security_content['total_post'] = $query->found_posts;
-            $paypal_security_publisharray = $query->get_posts();
+
+            $selected_post_types = join(',',$find_post); 
+            
+           // $paypal_security_publisharray = $query->get_posts();
+          $paypal_security_publisharray = $wpdb->get_results("SELECT * from $table_name where post_status='publish' and post_type IN ($selected_post_types)");
         }
 
         foreach ($paypal_security_publisharray as $key_post => $paypal_security_publisharray_value) {
