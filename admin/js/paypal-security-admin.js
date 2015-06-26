@@ -42,7 +42,7 @@ jQuery( document ).ready(function() {
     jQuery(document).on('click', ".cls_dialog", function () {
 	
    
-        var formhtml = jQuery(this).next().html();
+        var formhtml = jQuery(this).next().next().html();
 
         var newWindow = window.open("", "newWindow", "resizable=1,width=500,height=250");
         if(!newWindow.document.closed) {

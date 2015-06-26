@@ -100,3 +100,25 @@ table.form-table.tbl_paypal_unsecure_data th {
 div#paypal_security_scanner_fieldset {
     margin-top: 20px;
 }
+img#insecure-mediaum-risk-icon {
+  width: 100px;
+}
+img#insecure-high-risk-icon {
+  width: 100px;
+}
+img#secure-button-icon {
+ width: 100px;
+}
+img#view-icon {
+ width: 100px;
+}
+span.view_btn_code_txt {
+  display: inline-block;
+  width: 100%;
+}
+td.td_viewsource_img {
+  text-align: center;
+  width: 111px;
+  vertical-align: middle;
+ 
+}

@@ -152,125 +152,93 @@ class AngellEYE_PayPal_Security_Admin {
                     </tbody></table>
                 <input type='hidden' id='current_page' /><input type='hidden' id='show_per_page' />
                 <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
-                    <h2>High Risk Buttons</h2>
+                 
                     <table class="form-table tbl_paypal_unsecure_data">
                         <thead>
                             <tr>
-                                <th class="th_pageid"><strong>Page ID</strong></th>
-                                <th class="th_url"><strong>URL</strong></th>
-                                <th class="th_remark_report"><strong>Remarks</strong></th>
+                                <th class="th_pageid"></th>
+                                <th class="th_url" colspan="2"><strong>Button Details</strong></th>
+                               
                             </tr>
                         </thead>
 
                         <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) : ?>
-                            <tr>
-                                <td class="td_pageid"><?php echo $key_paypal_security_scanner_finalarrayresult_unsecure; ?></td>
-                                <td class="td_url">
-                                    <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
+                     			 <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value) :?>
+                           				<?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1 => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value):?>
+		                            	<tr>
+		                            	<td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/insecure-high-risk-icon.png" id="insecure-high-risk-icon"/></td>
+		                            	<td><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
                                         <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
-                                </td>
-                                <td class="td_remark_report">
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level2 => $value_level2) { ?>
-                                        <ul class="unsecure_ul">
-                                            <?php
-                                            foreach ($value_level2 as $key_level3 => $value_level3) {
-                                                foreach ($value_level3 as $key_level4 => $value_level4) {
-                                                    ?>
-
-                                                    <li> <?php echo $value_level4 . '&nbsp;-&nbsp;' . $key_level4; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level3; ?></textarea> </div></li>
-                                                    <?php
-                                                }
-                                            }
-                                            ?>
-                                        </ul>
-
-                                    <?php } ?>
-                                </td>
-                            </tr>      
-
+                                		<br/>
+                                		<strong>Button Security Status:&nbsp;</strong>High Risk<br/>  
+                                		<strong>Pricing Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['pricing_concern']; ?><br/>  
+                                		<strong>Privacy Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['privacy_concern']; ?><br/>  
+                                		</td>
+		                            	<td class="td_viewsource_img">
+		                            	<span class="cls_dialog"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></span><span class="view_btn_code_txt">View Button Code</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1;?></textarea></div>
+		                            	
+		                            	</td>
+		                            	
+		                            	</tr>      
+                             <?php endforeach; ?>
+								 <?php endforeach; ?>
                         <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
-                <?php if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) { ?>
-                    <h2>Medium Risk Buttons</h2>
-                    <table class="form-table tbl_paypal_unsecure_data">
-                        <thead>
-                            <tr>
-                                <th class="th_pageid"><strong>Page ID</strong></th>
-                                <th class="th_url"><strong>URL</strong></th>
-                                <th class="th_remark_report"><strong>Remarks</strong></th>
-                            </tr>
-                        </thead>
-
-                        <?php foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) : ?>
-                            <tr>
-                                <td class="td_pageid"><?php echo $key_paypal_security_scanner_finalarrayresult_unsecure; ?></td>
-                                <td class="td_url">
-                                    <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
-                                        <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
-                                </td>
-                                <td class="td_remark_report">
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level21 => $value_level21) { ?>
-                                        <ul class="medium_risk_buttons">
-                                            <?php
-                                            foreach ($value_level21 as $key_level31 => $value_level31) {
-                                                foreach ($value_level31 as $key_level41 => $value_level41) {
-                                                    ?>
-
-                                                    <li> <?php echo $value_level41 . '&nbsp;-&nbsp;' . $key_level41; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level31; ?></textarea> </div></li>
-                                                    <?php
-                                                }
-                                            }
-                                            ?>
-                                        </ul>
-                                    <?php } ?>
-                                </td>
-                            </tr>      
+                      
+                        <?php /// medium risk start ?>
+                        
+                        <?php foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_medium) : ?>
+                     			 <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium) :?>
+                           				<?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium):?>
+		                            	<tr>
+		                            	<td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/insecure-mediaum-risk-icon.png" id="insecure-mediaum-risk-icon"/></td>
+		                            	<td><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium); ?>' target="_blank">
+                                        <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium); ?></a>
+                                		<br/>
+                                		<strong>Button Security Status:&nbsp;</strong>Medium Risk<br/>  
+                                		<strong>Pricing Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium['button_remark']['pricing_concern']; ?><br/>  
+                                		<strong>Privacy Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium['button_remark']['privacy_concern']; ?><br/>  
+                                		</td>
+		                            	<td class="td_viewsource_img">
+		                            	<span class="cls_dialog"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></span><span class="view_btn_code_txt">View Button Code</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium;?></textarea></div>
+		                            	
+		                            	</td>
+		                            	
+		                            	</tr>      
+                             <?php endforeach; ?>
+								 <?php endforeach; ?>
                         <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
-                <?php if (isset($paypal_security_scanner_finalarrayresult['secure']) && !empty($paypal_security_scanner_finalarrayresult['secure'])) { ?>
-                    <h2>Secure Buttons</h2>
-                    <table class="form-table tbl_paypal_unsecure_data">
-                        <thead>
-                            <tr>
-                                <th class="th_pageid"><strong>Page ID</strong></th>
-                                <th class="th_url"><strong>URL</strong></th>
-                                <th class="th_remark_report"><strong>Remarks</strong></th>
-                            </tr>
-                        </thead>
-
-                        <?php foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) : ?>
-                            <tr>
-                                <td class="td_pageid"><?php echo $key_paypal_security_scanner_finalarrayresult_unsecure; ?></td>
-                                <td class="td_url">
-                                    <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
-                                        <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
-                                </td>
-                                <td class="td_remark_report">
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult['secure'][$key_paypal_security_scanner_finalarrayresult_unsecure] as $key_level22 => $value_level22) { ?>
-                                        <ul class="secure_ul">
-                                            <?php
-                                            foreach ($value_level22 as $key_level32 => $value_level32) {
-                                                // foreach ($value_level32 as $key_level42 => $value_level42) {
-                                                ?>
-
-                                                <li> <?php echo $value_level32; ?> - <span class="cls_dialog">View Source</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $key_level32; ?></textarea> </div></li>
-                                                <?php
-                                                // }
-                                            }
-                                            ?>
-                                        </ul>
-                                    <?php } ?>
-                                </td>
-                            </tr>      
+                        
+                        
+                        
+                                  <?php /// secure start ?>
+                        
+                        <?php foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_secure) : ?>
+                     			 <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure) :?>
+                           				<?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_secure):?>
+		                            	<tr>
+		                            	<td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/secure-button-icon.png" id="secure-button-icon"/></td>
+		                            	<td><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure); ?>' target="_blank">
+                                        <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure); ?></a>
+                                		<br/>
+                                		<strong>Button Security Status:&nbsp;</strong>Secure<br/>  
+                                		<strong>Pricing Concern:&nbsp;</strong>None<br/>  
+                                		<strong>Privacy Concern:&nbsp;</strong>None<br/>  
+                                		</td>
+		                            	<td class="td_viewsource_img">
+		                            	<span class="cls_dialog"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></span><span class="view_btn_code_txt">View Button Code</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure;?></textarea></div>
+		                            	
+		                            	</td>
+		                            	
+		                            	</tr>      
+                             <?php endforeach; ?>
+								 <?php endforeach; ?>
                         <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                        
                 <?php } ?>
-
+               
+                              
+				   </tbody>
+             </table>
             </div> 
             <?php
         endif;

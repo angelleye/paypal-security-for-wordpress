@@ -102,17 +102,44 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
                                         }
 
                                         $retrive_business = $current_form_html->find('[name=business]');
-
-                                        if (isset($retrive_business[0]->attr['value']) && !empty($retrive_business[0]->attr['value'])) {
+										
+                                        $retrive_price_amount = $current_form_html->find('[name=amount]');;
+                                        
+                                        
+                                        
+                                        if (isset($retrive_price_amount[0]->attr['value']) && !empty($retrive_price_amount[0]->attr['value'])) {
+                                        	 
+                                        	$paypal_security_content['unsecure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()]['button_details'][$itemname] = $button_name;
+                                        	if (strpos($retrive_business[0]->attr['value'], '@') != false) {
+                                        		$paypal_security_content['unsecure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()]['button_remark']['pricing_concern'] = "Vulnerable to pricing adjustments prior to submitting payment.";
+                                        		$paypal_security_content['unsecure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()]['button_remark']['privacy_concern'] = "Email address displayed in the button code.";
+                                        	}else if (strpos($retrive_business[0]->attr['value'], '@') == false) {
+                                        			$paypal_security_content['unsecure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()]['button_remark']['pricing_concern'] = "Vulnerable to pricing adjustments prior to submitting payment.";
+                                        			$paypal_security_content['unsecure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()]['button_remark']['privacy_concern'] = "None";
+                                        	}
+                                        	
+                                        	
+                                        }
+                                        
+                                        
+                                        
+                                        if ( (isset($retrive_business[0]->attr['value']) && !empty($retrive_business[0]->attr['value']) ) && (empty($retrive_price_amount[0]->attr['value']))) {
                                             if (strpos($retrive_business[0]->attr['value'], '@') != false) {
-                                                $paypal_security_content['unsecure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
-                                            } else {
-                                                $paypal_security_content['medium_risk_buttons'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()][$itemname] = $button_name;
+                                               // $paypal_security_content['medium_risk_buttons'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()] = "View Cart";
+                                           		$paypal_security_content['medium_risk_buttons'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()]['button_remark']['pricing_concern'] = "None";
+                                                $paypal_security_content['medium_risk_buttons'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()]['button_remark']['privacy_concern'] = "Email address displayed in the button code.";
+                                            
+                                            
+                                             } else {
+                                                $paypal_security_content['secure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()] = "View Cart";
+                                                
                                             }
                                         }
                                     } else if (($retrive_cmd[$key_retrive_cmd]->attr['value'] == '_s-xclick')) {
 
                                         $paypal_security_content['secure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()] = 'Secure Button';
+                                        //$paypal_security_content['secure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()]['button_remark']['pricing_concern'] = 'None';
+                                       // $paypal_security_content['secure'][$paypal_security_publisharray_value->ID][$key_retrive_cmd][$value_retrive_cmd->parent()->outertext()] ['button_remark']['privacy_concern'] = 'None';
                                     }
                                 }
                                 //}
@@ -165,8 +192,6 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
                 $paypal_total_all_forms_count['medium_secure_count'] = $paypal_total_forms_medium_secure_count;
             }
         }
-
-
         return $paypal_total_all_forms_count;
     }
 
