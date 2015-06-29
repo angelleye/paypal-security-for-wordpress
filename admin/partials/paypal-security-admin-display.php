@@ -28,6 +28,8 @@ class AngellEYE_PayPal_Security_Admin_Display {
 
             <fieldset>
                 <legend><h2><?php _e('PayPal security scanner', 'paypal-security'); ?></h2></legend>
+                <div class="div_frm_main">
+                <div class="frm_checkboxes">
                 <form id="frm_scan">
                     <?php
                     $output = 'names'; // names or objects, note names is the default
@@ -52,7 +54,19 @@ class AngellEYE_PayPal_Security_Admin_Display {
                     <span id="notice" style="display:none;">Please select atleast one checkbox to use PayPal security scanner.</span>
                     <img src="<?php echo plugin_dir_url(__FILE__) ?>images/ajax-loader.gif" id="loader_gifimg"/>
                 </form>
-            </fieldset>
+                
+                
+                </div> <!-- frm_checkboxes-->
+                
+                <div class="div_get_totalscan">
+                
+                
+                </div><!--div_get_total_scan-->
+                
+                </div><!--frm_main-->
+             
+                 </fieldset>
+               
         </div>
         <?php do_action('paypal_scan_action'); ?>
         <div id="paypal_scan_response">
