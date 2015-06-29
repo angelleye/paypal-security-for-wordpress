@@ -24,7 +24,7 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 5px;displ
 }
 
 .tbl-scan-result {
-    margin: 20px 0;
+    
     color: #666;
 }
 
@@ -67,7 +67,11 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 5px;displ
 .tbl-scan-result {border:1px solid #000;}
 
 
-table.form-table.tbl_paypal_unsecure_data {width: 98.5%;}
+table.form-table.tbl_paypal_unsecure_data {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 35px;
+}
 img.ui-datepicker-trigger {cursor: pointer;float:right;margin-top:7px;}
 .paddingleft {padding-left:10px;}
 
@@ -92,7 +96,7 @@ table.form-table.tbl_paypal_unsecure_data th {
     background-color: #fafafa;
     padding-bottom:10px !important;
 }
-.tbl-scan-result {width:20% !important;}
+
 .tbl-scan-result {border:1px solid #ccc !important;}
 .tbl-scan-result th {border:1px solid #ccc;}
 .color-note {background:#fafafa;}
@@ -122,3 +126,22 @@ td.td_viewsource_img {
   vertical-align: middle;
  
 }
+
+ .div_tbl_total_count table {
+  display: none;
+}
+
+.tbl_paypal_unsecure_data td.td_viewremark {
+border-right: 0 !important;
+ 
+}
+/*.tbl-scan-result {width:20% !important;}*/
+.div_get_totalscan{display:inline-block;}
+.frm_checkboxes {display: inline-block;vertical-align: top;}
+.div_get_totalscan {
+  display: inline-block;
+  float: right;
+  width: 20%;
+  margin-right: 50px;
+}
+td.td_viewsource_img {border-left: 0 !important;}

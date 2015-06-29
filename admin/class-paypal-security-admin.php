@@ -127,6 +127,7 @@ class AngellEYE_PayPal_Security_Admin {
         if ((isset($paypal_security_scanner_finalarrayresult) && !empty($paypal_security_scanner_finalarrayresult))):
             ?>
             <div id="div_scan_result">
+            <div class="div_tbl_total_count">
                 <table class="tbl-scan-result form-table">
                     <tbody>
                         <tr class="color-note">
@@ -150,6 +151,7 @@ class AngellEYE_PayPal_Security_Admin {
                             <td><?php echo $total_secure_count; ?></td>
                         </tr>
                     </tbody></table>
+                    </div>
                 <input type='hidden' id='current_page' /><input type='hidden' id='show_per_page' />
                 <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
                  
@@ -167,7 +169,7 @@ class AngellEYE_PayPal_Security_Admin {
                            				<?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1 => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value):?>
 		                            	<tr>
 		                            	<td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/insecure-high-risk-icon.png" id="insecure-high-risk-icon"/></td>
-		                            	<td><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
+		                            	<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
                                         <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
                                 		<br/>
                                 		<strong>Button Security Status:&nbsp;</strong>High Risk<br/>  
@@ -185,13 +187,13 @@ class AngellEYE_PayPal_Security_Admin {
                         <?php endforeach; ?>
                       
                         <?php /// medium risk start ?>
-                        
-                        <?php foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_medium) : ?>
+                       <?php if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) {
+                         foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_medium) : ?>
                      			 <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium) :?>
                            				<?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium):?>
 		                            	<tr>
 		                            	<td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/insecure-mediaum-risk-icon.png" id="insecure-mediaum-risk-icon"/></td>
-		                            	<td><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium); ?>' target="_blank">
+		                            	<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium); ?>' target="_blank">
                                         <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium); ?></a>
                                 		<br/>
                                 		<strong>Button Security Status:&nbsp;</strong>Medium Risk<br/>  
@@ -207,17 +209,15 @@ class AngellEYE_PayPal_Security_Admin {
                              <?php endforeach; ?>
 								 <?php endforeach; ?>
                         <?php endforeach; ?>
-                        
-                        
-                        
+                        <?php } ?>
                                   <?php /// secure start ?>
-                        
-                        <?php foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_secure) : ?>
+                        <?php if (isset($paypal_security_scanner_finalarrayresult['secure']) && !empty($paypal_security_scanner_finalarrayresult['secure'])) {
+                        foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_secure) : ?>
                      			 <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure) :?>
                            				<?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_secure):?>
 		                            	<tr>
 		                            	<td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/secure-button-icon.png" id="secure-button-icon"/></td>
-		                            	<td><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure); ?>' target="_blank">
+		                            	<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure); ?>' target="_blank">
                                         <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure); ?></a>
                                 		<br/>
                                 		<strong>Button Security Status:&nbsp;</strong>Secure<br/>  
@@ -233,6 +233,7 @@ class AngellEYE_PayPal_Security_Admin {
                              <?php endforeach; ?>
 								 <?php endforeach; ?>
                         <?php endforeach; ?>
+                        <?php } ?>
                         
                 <?php } ?>
                
