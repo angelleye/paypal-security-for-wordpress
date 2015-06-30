@@ -105,16 +105,16 @@ div#paypal_security_scanner_fieldset {
     margin-top: 20px;
 }
 img#insecure-mediaum-risk-icon {
-  width: 100px;
+  width: 50px;
 }
 img#insecure-high-risk-icon {
-  width: 100px;
+  width: 50px;
 }
 img#secure-button-icon {
- width: 100px;
+ width: 50px;
 }
 img#view-icon {
- width: 100px;
+ width: 50px;
 }
 span.view_btn_code_txt {
   display: inline-block;

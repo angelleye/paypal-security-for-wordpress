@@ -52,6 +52,7 @@ class AngellEYE_PayPal_Security_Admin {
     public function enqueue_styles() {
 
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-admin.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->plugin_name,'two', plugin_dir_url(__FILE__) . 'css/jquery.dataTables.css', array(), $this->version, 'all');
     }
 
     /**
@@ -72,6 +73,10 @@ class AngellEYE_PayPal_Security_Admin {
         wp_enqueue_script('media-upload');
         wp_enqueue_script('jquery-ui-tooltip');
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-admin.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name. 'two', plugin_dir_url(__FILE__) . 'js/jquery.dataTables.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->plugin_name. 'three', plugin_dir_url(__FILE__) . 'js/jquery.form.js', array('jquery'), $this->version, false);
+        
+        
         if (wp_script_is($this->plugin_name)) {
             wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
                         'plugin_url' => plugin_dir_url(__FILE__)
@@ -83,7 +88,8 @@ class AngellEYE_PayPal_Security_Admin {
         /**
          * The class responsible for defining all actions that occur in the Dashboard
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-admin-display.php';
+         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-admin-display.php';
+         
     }
 
     public function paypal_security_scan_action_fn() {
@@ -155,7 +161,7 @@ class AngellEYE_PayPal_Security_Admin {
                 <input type='hidden' id='current_page' /><input type='hidden' id='show_per_page' />
                 <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
                  
-                    <table class="form-table tbl_paypal_unsecure_data">
+                    <table class="form-table tbl_paypal_unsecure_data" id="tbl_resultdata">
                         <thead>
                             <tr>
                                 <th class="th_pageid"></th>

@@ -3,6 +3,7 @@ jQuery( document ).ready(function() {
         jQuery('#gifimg').css('visibility','visible');
         jQuery('#loader_gifimg').css('display','inline');
         jQuery('#btn_pswp').css('margin-right','0px');
+        var offlineTable;
         jQuery.ajax({
             url: ajaxurl,
             type: "POST",
@@ -15,11 +16,11 @@ jQuery( document ).ready(function() {
             success: function(data) {
 
                 jQuery('#paypal_scan_response').html(data);
-                             
+
                	var $result_total_cnt = jQuery(data).find('.div_tbl_total_count').html();
               
               	jQuery('.div_get_totalscan').html($result_total_cnt);
-             
+              	
                 jQuery('#loader_gifimg').css('display','none');
             },
         });
@@ -41,7 +42,8 @@ jQuery( document ).ready(function() {
     });
 
 
-    
+
+       
      
     
     jQuery(document).on('click', ".cls_dialog", function () {
