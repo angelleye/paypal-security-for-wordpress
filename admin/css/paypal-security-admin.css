@@ -24,7 +24,7 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 5px;displ
 }
 
 .tbl-scan-result {
-    
+
     color: #666;
 }
 
@@ -68,9 +68,9 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 5px;displ
 
 
 table.form-table.tbl_paypal_unsecure_data {
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 35px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 35px;
 }
 img.ui-datepicker-trigger {cursor: pointer;float:right;margin-top:7px;}
 .paddingleft {padding-left:10px;}
@@ -105,43 +105,75 @@ div#paypal_security_scanner_fieldset {
     margin-top: 20px;
 }
 img#insecure-mediaum-risk-icon {
-  width: 50px;
+    width: 50px;
 }
 img#insecure-high-risk-icon {
-  width: 50px;
+    width: 50px;
 }
 img#secure-button-icon {
- width: 50px;
+    width: 50px;
 }
 img#view-icon {
- width: 50px;
+    width: 50px;
 }
 span.view_btn_code_txt {
-  display: inline-block;
-  width: 100%;
+    display: inline-block;
+    width: 100%;
 }
 td.td_viewsource_img {
-  text-align: center;
-  width: 111px;
-  vertical-align: middle;
- 
+    text-align: center;
+    width: 111px;
+    vertical-align: middle;
+
 }
 
- .div_tbl_total_count table {
-  display: none;
+.div_tbl_total_count table {
+    display: none;
 }
 
 .tbl_paypal_unsecure_data td.td_viewremark {
-border-right: 0 !important;
- 
+    border-right: 0 !important;
+
 }
 /*.tbl-scan-result {width:20% !important;}*/
 .div_get_totalscan{display:inline-block;}
 .frm_checkboxes {display: inline-block;vertical-align: top;}
 .div_get_totalscan {
-  display: inline-block;
-  float: right;
-  width: 20%;
-  margin-right: 50px;
+    display: inline-block;
+    float: right;
+    width: 20%;
+    margin-right: 50px;
 }
 td.td_viewsource_img {border-left: 0 !important;}
+.cls_site_score {
+    font-size: 25px !important;
+    font-family: Arial;
+    color: #333;
+    line-height: normal;
+}
+
+.cls_site_grade {
+    font-size: 130px;
+    line-height: 1em;
+}
+.cls_site_grade_30 {font-size:30px !important;}
+
+.frm_checkboxes {
+    display: inline-block;
+    vertical-align: top;
+    float:left;
+    width: 25%;
+}
+
+.div_site_score {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.clr_darkgreen {color:#006400}
+.clr_lightgreen {color:#32cd32}
+.clr_lightyellow {color:#F2F20E}
+.clr_darkyellow {color:#e5d10c}
+.clr_darkred {color:#ff0000}

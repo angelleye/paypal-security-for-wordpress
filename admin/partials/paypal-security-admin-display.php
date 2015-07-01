@@ -29,44 +29,49 @@ class AngellEYE_PayPal_Security_Admin_Display {
             <fieldset>
                 <legend><h2><?php _e('PayPal security scanner', 'paypal-security'); ?></h2></legend>
                 <div class="div_frm_main">
-                <div class="frm_checkboxes">
-                <form id="frm_scan">
-                    <?php
-                    $output = 'names'; // names or objects, note names is the default
-                    $operator = 'and'; // 'and' or 'or'
-                    $args = array(
-                        'public' => true,
-                    );
-                    $post_types = get_post_types($args, $output, $operator);
-                    $selectboxhtml = '';
-                    foreach ($post_types as $post_type) {
-                        $selectboxhtml .= '<div>';
-                        $selectboxhtml .= "<label for = " . $post_type . ">";
-                        $selectboxhtml .= "<input type='checkbox' name =" . $post_type . " checked>" . ucfirst($post_type);
-                        $selectboxhtml .= '</label>';
-                        $selectboxhtml .= '</div >';
-                    }
-                    echo $selectboxhtml;
-                    ?>
-                    <h4>Click Scan Now button for scan all insecure PayPal buttons.</h4>
-                    <h5>This could take a while depending on how many Pages / Posts you have.</h5>
-                    <span id="btn_pswp" class="button button-primary btn_pswp">Scan Now</span>
-                    <span id="notice" style="display:none;">Please select atleast one checkbox to use PayPal security scanner.</span>
-                    <img src="<?php echo plugin_dir_url(__FILE__) ?>images/ajax-loader.gif" id="loader_gifimg"/>
-                </form>
-                
-                
-                </div> <!-- frm_checkboxes-->
-                
-                <div class="div_get_totalscan">
-                
-                
-                </div><!--div_get_total_scan-->
-                
+                    <div class="frm_checkboxes">
+                        <form id="frm_scan">
+                            <?php
+                            $output = 'names'; // names or objects, note names is the default
+                            $operator = 'and'; // 'and' or 'or'
+                            $args = array(
+                                'public' => true,
+                            );
+                            $post_types = get_post_types($args, $output, $operator);
+                            $selectboxhtml = '';
+                            foreach ($post_types as $post_type) {
+                                $selectboxhtml .= '<div>';
+                                $selectboxhtml .= "<label for = " . $post_type . ">";
+                                $selectboxhtml .= "<input type='checkbox' name =" . $post_type . " checked>" . ucfirst($post_type);
+                                $selectboxhtml .= '</label>';
+                                $selectboxhtml .= '</div >';
+                            }
+                            echo $selectboxhtml;
+                            ?>
+                            <h4>Click Scan Now button for scan all insecure PayPal buttons.</h4>
+                            <h5>This could take a while depending on how many Pages / Posts you have.</h5>
+                            <span id="btn_pswp" class="button button-primary btn_pswp">Scan Now</span>
+                            <span id="notice" style="display:none;">Please select atleast one checkbox to use PayPal security scanner.</span>
+                            <img src="<?php echo plugin_dir_url(__FILE__) ?>images/ajax-loader.gif" id="loader_gifimg"/>
+                        </form>
+
+
+                    </div> <!-- frm_checkboxes-->
+
+                    <div class="div_site_score">
+
+
+                    </div> <!-- div_site_score -->
+
+                    <div class="div_get_totalscan">
+
+
+                    </div><!--div_get_total_scan-->
+
                 </div><!--frm_main-->
-             
-                 </fieldset>
-               
+
+            </fieldset>
+
         </div>
         <?php do_action('paypal_scan_action'); ?>
         <div id="paypal_scan_response">
