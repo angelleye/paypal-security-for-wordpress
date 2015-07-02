@@ -52,7 +52,7 @@ class AngellEYE_PayPal_Security_Admin {
     public function enqueue_styles() {
 
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-admin.css', array(), $this->version, 'all');
-        wp_enqueue_style($this->plugin_name, 'two', plugin_dir_url(__FILE__) . 'css/jquery.dataTables.css', array(), $this->version, 'all');
+       // wp_enqueue_style($this->plugin_name. 'two', plugin_dir_url(__FILE__) . 'css/shCoreDefault.css', array(), $this->version, 'all');
     }
 
     /**
@@ -73,11 +73,15 @@ class AngellEYE_PayPal_Security_Admin {
         wp_enqueue_script('media-upload');
         wp_enqueue_script('jquery-ui-tooltip');
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-admin.js', array('jquery'), $this->version, false);
-        wp_enqueue_script($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'js/jquery.dataTables.js', array('jquery'), $this->version, false);
-        wp_enqueue_script($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'js/jquery.form.js', array('jquery'), $this->version, false);
+        
+        //wp_enqueue_script($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'js/shCore.js', array('jquery'), $this->version, false);
+		//wp_enqueue_script($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'js/shBrushJScript.js', array('jquery'), $this->version, false);
 
-
-        if (wp_script_is($this->plugin_name)) {
+        
+		
+		
+		
+		if (wp_script_is($this->plugin_name)) {
             wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
                         'plugin_url' => plugin_dir_url(__FILE__)
                     )));
@@ -91,6 +95,13 @@ class AngellEYE_PayPal_Security_Admin {
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-admin-display.php';
     }
 
+    public function paypal_security_scan_admin_head() {?>
+    	<script type="text/javascript">
+    //SyntaxHighlighter.all();
+</script>
+    	
+    <?php }
+    
     public function paypal_security_scan_action_fn() {
 
         if (isset($_POST['data']) && !empty($_POST['data'])) {
@@ -138,41 +149,41 @@ class AngellEYE_PayPal_Security_Admin {
 
 
             $site_score = "Site Score&nbsp;" . absint(($int_total_secure / $int_totalpost) * 100) . "%";
-
-            if ($site_score >= 94 && $site_score <= 100) {
+			$site_score_int = absint(($int_total_secure / $int_totalpost) * 100);
+            if ($site_score_int >= 94 && $site_score_int <= 100) {
                 $site_grade = 'A';
                 $cls_color = 'clr_darkgreen';
-            } elseif ($site_score >= 90 && $site_score <= 93) {
+            } elseif ($site_score_int >= 90 && $site_score_int <= 93) {
                 $site_grade = 'A-';
                 $cls_color = 'clr_lightgreen';
-            } elseif ($site_score >= 87 && $site_score <= 89) {
+            } elseif ($site_score_int >= 87 && $site_score_int <= 89) {
                 $site_grade = 'B+';
                 $cls_color = 'clr_lightgreen';
-            } elseif ($site_score >= 83 && $site_score <= 86) {
+            } elseif ($site_score_int >= 83 && $site_score_int <= 86) {
                 $site_grade = 'B';
                 $cls_color = 'clr_lightgreen';
-            } elseif ($site_score >= 80 && $site_score <= 82) {
+            } elseif ($site_score_int >= 80 && $site_score_int <= 82) {
                 $site_grade = 'B-';
                 $cls_color = 'clr_lightgreen';
-            } elseif ($site_score >= 77 && $site_score <= 79) {
+            } elseif ($site_score_int >= 77 && $site_score_int <= 79) {
                 $site_grade = 'C+';
                 $cls_color = 'clr_lightyellow';
-            } elseif ($site_score >= 73 && $site_score <= 76) {
+            } elseif ($site_score_int >= 73 && $site_score_int <= 76) {
                 $site_grade = 'C';
                 $cls_color = 'clr_lightyellow';
-            } elseif ($site_score >= 70 && $site_score <= 72) {
+            } elseif ($site_score_int >= 70 && $site_score_int <= 72) {
                 $site_grade = 'C-';
                 $cls_color = 'clr_lightyellow';
-            } elseif ($site_score >= 67 && $site_score <= 69) {
+            } elseif ($site_score_int >= 67 && $site_score_int <= 69) {
                 $site_grade = 'D+';
                 $cls_color = 'clr_darkyellow';
-            } elseif ($site_score >= 63 && $site_score <= 66) {
+            } elseif ($site_score_int >= 63 && $site_score_int <= 66) {
                 $site_grade = 'D';
                 $cls_color = 'clr_darkyellow';
-            } elseif ($site_score >= 60 && $site_score <= 62) {
+            } elseif ($site_score_int >= 60 && $site_score_int <= 62) {
                 $site_grade = 'D-';
                 $cls_color = 'clr_darkyellow';
-            } elseif ($site_score >= 0 && $site_score <= 60) {
+            } elseif ($site_score_int >= 0 && $site_score_int < 60) {
                 $site_grade = 'F';
                 $cls_color = 'clr_darkred';
             }
@@ -183,7 +194,9 @@ class AngellEYE_PayPal_Security_Admin {
 
         if ((isset($paypal_security_scanner_finalarrayresult) && !empty($paypal_security_scanner_finalarrayresult))):
             ?>
+      
             <div id="div_scan_result">
+            
                 <div class="div_tbl_total_count">
                     <table class="tbl-scan-result form-table">
                         <tbody>
@@ -209,22 +222,28 @@ class AngellEYE_PayPal_Security_Admin {
                             </tr>
                         </tbody></table>
                 </div>
-                <input type="hidden" id="txt_site_score" name="txt_site_score" value="<?php echo $site_score; ?>">
+                      <div class="abc"></div>
+                      <div class="abc1"></div>
+                      <div class="abc2"></div>
+               <input type="hidden" id="txt_site_score" name="txt_site_score" value="<?php echo $site_score; ?>">
                 <input type="hidden" id="txt_site_grade" name="txt_site_grade" value="<?php echo $site_grade; ?>">
                 <input type="hidden" id="txt_clr_code" name="txt_site_grade" value="<?php echo $cls_color; ?>">
 
-                <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
-
-                    <table class="form-table tbl_paypal_unsecure_data" id="tbl_resultdata">
+                <?php if (!empty($paypal_security_scanner_finalarrayresult['unsecure']) || !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) || !empty($paypal_security_scanner_finalarrayresult['secure'])) { ?>
+                   <table class="form-table tbl_paypal_unsecure_data" id="tbl_resultdata">
                         <thead>
                             <tr>
                                 <th class="th_pageid"></th>
                                 <th class="th_url" colspan="2"><strong>Button Details</strong></th>
 
                             </tr>
-                        </thead>
+                        </thead><tbody>
+               
+                <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
 
-                        <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) : ?>
+                
+
+                        <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { ?>
                             <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value) : ?>
                                 <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1 => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value): ?>
                                     <tr>
@@ -244,8 +263,8 @@ class AngellEYE_PayPal_Security_Admin {
                                     </tr>      
                                 <?php endforeach; ?>
                             <?php endforeach; ?>
-                        <?php endforeach; ?>
-
+                        <?php } ?>
+						<?php } ?>
                         <?php /// medium risk start ?>
                         <?php
                         if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) {
@@ -289,7 +308,11 @@ class AngellEYE_PayPal_Security_Admin {
                                                 <strong>Privacy Concern:&nbsp;</strong>None<br/>  
                                             </td>
                                             <td class="td_viewsource_img">
-                                                <span class="cls_dialog"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></span><span class="view_btn_code_txt">View Button Code</span><div class="cls_dialog_source"><textarea readonly class="txt_unsecuresource"><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure; ?></textarea></div>
+                                                <span class="cls_dialog"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></span><span class="view_btn_code_txt">View Button Code</span>
+                                                	
+                                                	<div class="st">
+                                                		<pre class="brush: js;"><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure; ?></pre>
+                                                	</div>
 
                                             </td>
 
@@ -299,13 +322,14 @@ class AngellEYE_PayPal_Security_Admin {
                             <?php endforeach; ?>
                         <?php } ?>
 
-            <?php } ?>
+      
 
 
                     </tbody>
                 </table>
             </div> 
             <?php
+                }
         endif;
 
         unset($paypal_security_scanner_finalarrayresult);

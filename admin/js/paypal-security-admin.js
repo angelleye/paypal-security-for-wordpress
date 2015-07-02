@@ -1,4 +1,5 @@
 jQuery( document ).ready(function() {
+
     jQuery('#btn_pswp').click(function() {
         jQuery('#gifimg').css('visibility','visible');
         jQuery('#loader_gifimg').css('display','inline');
@@ -14,7 +15,13 @@ jQuery( document ).ready(function() {
             dataType: "html",
 
             success: function(data) {
-
+            	
+            	<link rel='stylesheet' id='paypal-securitytwo-css'  href='http://bmw.dev2.in/wp-content/plugins/paypal-security/admin/css/shCoreDefault.css' type='text/css' media='all' />
+				<script type='text/javascript' src='http://bmw.dev2.in/wp-content/plugins/paypal-security/admin/js/shCore.js'></script>
+				<script type='text/javascript' src='http://bmw.dev2.in/wp-content/plugins/paypal-security/admin/js/shBrushJScript.js'></script>
+				
+				SyntaxHighlighter.all();
+            
                 jQuery('#paypal_scan_response').html(data);
                 var $cls_sitegrade;
                 var $result_total_cnt = jQuery(data).find('.div_tbl_total_count').html();
@@ -23,7 +30,8 @@ jQuery( document ).ready(function() {
                 var $clr_code = jQuery(data).find('#txt_clr_code').val();
                 if ($site_grade == 'No buttons found...') {
                     jQuery('.div_site_score').html('<div class="cls_site_score">'+$site_score+'</div><div class="'+$clr_code+' cls_site_grade_30">'+$site_grade+'</div>');
-                }else {
+                	
+                    }else {
                     jQuery('.div_site_score').html('<div class="cls_site_score">'+$site_score+'</div><div class="'+$clr_code+' cls_site_grade">'+$site_grade+'</div>');
                 }
                 jQuery('.div_get_totalscan').html($result_total_cnt);
@@ -34,6 +42,7 @@ jQuery( document ).ready(function() {
               	
                 jQuery('#loader_gifimg').css('display','none');
             },
+			  
         });
     });
     
@@ -57,15 +66,29 @@ jQuery( document ).ready(function() {
        
      
     
-    jQuery(document).on('click', ".cls_dialog", function () {
+    jQuery(document).on('click', ".cls_dialog", function (url) {
 	
    
         var formhtml = jQuery(this).next().next().html();
-
-        var newWindow = window.open("", "newWindow", "resizable=1,width=500,height=250");
-        if(!newWindow.document.closed) {
+		var width  = 300;
+ var height = 200;
+ var left   = (screen.width  - width)/2;
+ var top    = (screen.height - height)/2;
+ var params = 'width='+width+', height='+height;
+ params += ', top='+top+', left='+left;
+ params += ', directories=no';
+ params += ', location=no';
+ params += ', menubar=no';
+ params += ', resizable=no';
+ params += ', scrollbars=no';
+ params += ', status=no';
+ params += ', toolbar=no';
+        //var newWindow = window.open("", "newWindow", "resizable=1,width=500,height=250");
+       var newWindow=window.open("",'windowname5', params);
+		if(!newWindow.document.closed) {
             newWindow.document.write(formhtml);
         }
+        
     });
 
     var pluginurl = paypal_security_plugin_url.plugin_url;
