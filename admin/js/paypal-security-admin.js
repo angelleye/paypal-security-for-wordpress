@@ -27,9 +27,15 @@ jQuery( document ).ready(function() {
                 var $clr_code = jQuery(data).find('#txt_clr_code').val();
                 jQuery( ".div_site_score" ).addClass( "cls_site_with_border" );
                 if ($site_grade == 'No buttons found...') {
+                	
                     jQuery('.div_site_score').html('<div class="cls_site_score">'+$site_score+'</div><div class="'+$clr_code+' cls_site_grade_30">'+$site_grade+'</div>');
-
+					jQuery( ".div_site_score" ).removeClass( "cls_min196" );
+                    jQuery( ".div_site_score" ).addClass( "cls_min0" );
+					
                 }else {
+                	jQuery( ".div_site_score" ).removeClass( "cls_min0" );
+                	jQuery( ".div_site_score" ).addClass( "cls_min196" );
+                	
                     jQuery('.div_site_score').html('<div class="cls_site_score">'+$site_score+'</div><div class="'+$clr_code+' cls_site_grade">'+$site_grade+'</div>');
                 }
                 jQuery('.div_get_totalscan').html($result_total_cnt);
