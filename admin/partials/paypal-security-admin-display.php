@@ -55,20 +55,19 @@ class AngellEYE_PayPal_Security_Admin_Display {
                             <img src="<?php echo plugin_dir_url(__FILE__) ?>images/ajax-loader.gif" id="loader_gifimg"/>
                         </form>
 
-
                     </div> <!-- frm_checkboxes-->
 
-                      <div class="div_get_totalscan">
+                    <div class="div_get_totalscan">
 
 
-                  	  </div><!--div_get_total_scan-->
+                    </div><!--div_get_total_scan-->
 
                     <div class="div_site_score">
 
 
                     </div> <!-- div_site_score -->
 
-                  
+
 
                 </div><!--frm_main-->
 

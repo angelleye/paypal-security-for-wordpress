@@ -12,11 +12,11 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 5px;displ
 
 #paypal_security_scanner_fieldset fieldset{
     border: 1px solid #ccc;
-  margin: 2px;
-  padding: 1em;
-  margin-right: 18px;
-  width: 77.6%;
-  margin: 0 auto;
+    margin: 2px;
+    padding: 1em;
+    margin-right: 18px;
+    width: 77.6%;
+    margin: 0 auto;
 }
 #paypal_security_scanner_fieldset legend {
     font-weight: bold;
@@ -139,10 +139,10 @@ td.td_viewsource_img {
 .div_get_totalscan{display:inline-block;}
 .frm_checkboxes {display: inline-block;vertical-align: top;}
 .div_get_totalscan {
-  display: inline-block;
-  float: left;
-  width: 23%;
-  /* margin-right: 56px; */
+    display: inline-block;
+    float: left;
+    width: 23%;
+    /* margin-right: 56px; */
 }
 td.td_viewsource_img {border-left: 0 !important;}
 .cls_site_score {
@@ -159,27 +159,31 @@ td.td_viewsource_img {border-left: 0 !important;}
 .cls_site_grade_30 {font-size:15px !important;padding:15px !important;}
 
 .frm_checkboxes {
-   display: inline-block;
-  vertical-align: top;
-  float: left;
-  width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+    width: 50%;
 }
 
 .div_site_score {
-  display: inline-block;
-  float: right;
-  width: 22%;
-  text-align: center;
-  
+    display: inline-block;
+    float: right;
+    width: 22%;
+    text-align: center;
+
 
 }
 .cls_site_with_border {
-  border: 1px solid #ccc;
-  background-color: #fff;
- }
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
 
 .clr_darkgreen {color:#006400}
 .clr_lightgreen {color:#32cd32}
 .clr_lightyellow {color:#F2F20E}
 .clr_darkyellow {color:#e5d10c}
 .clr_darkred {color:#ff0000}
+td.td_viewsource_img a:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
