@@ -21,6 +21,7 @@ jQuery( document ).ready(function() {
                 var $site_score = jQuery(data).find('#txt_site_score').val();
                 var $site_grade = jQuery(data).find('#txt_site_grade').val();
                 var $clr_code = jQuery(data).find('#txt_clr_code').val();
+                jQuery( ".div_site_score" ).addClass( "cls_site_with_border" );
                 if ($site_grade == 'No buttons found...') {
                     jQuery('.div_site_score').html('<div class="cls_site_score">'+$site_score+'</div><div class="'+$clr_code+' cls_site_grade_30">'+$site_grade+'</div>');
                 }else {
