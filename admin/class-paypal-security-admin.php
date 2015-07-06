@@ -265,9 +265,24 @@ class AngellEYE_PayPal_Security_Admin {
                                 $text_break_un_sec = str_replace('>', ">\n", $text_un_sec);
                                 ?>
 
-                                                    <div class="sec-fan" id="un_sec_fan-<?php echo $cnt_un_secure_fancy; ?>" style="width:650px;display: none;">
-                                                        <pre class="brush: js;"><?php echo $text_break_un_sec; ?></pre>
-                                                    </div>
+
+                                <div class="sec-fan" id="un_sec_fan-<?php echo $cnt_un_secure_fancy; ?>" style="width:650px;display: none;">
+
+                                    <div class="fan-maindiv">
+                                                    		<div class="fan-snippet">
+                                                    			<span class="spn-snippet-lable">HTML code snippet</span>
+                                                    			 <pre class="brush: js;"><?php echo $text_break_un_sec; ?></pre>
+                                                 			</div>
+                               				
+                                                  	<div class="fan-act-btndiv">
+	                                                    		<span class="spn-act-btn-lable">Actual Button form</span>
+		                                                        <div class="un_sec_fan" id="un_sec_fan-<?php echo $cnt_secure_fancy; ?>">
+		                                                        	<?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1;?>
+		                                                        </div>
+	                                                        </div>	
+                                                    		</div>	
+                                
+                                  </div>
                                                 </td>
                                             </tr>      
                             <?php endforeach;
@@ -301,8 +316,21 @@ class AngellEYE_PayPal_Security_Admin {
                                                     ?>
 
                                                     <div class="med_sec_fan" id="med_sec_fan-<?php echo $cnt_med_secure_fancy; ?>" style="width:650px;display: none;">
-                                                        <pre class="brush: js;"><?php echo $text_break_med_sec; ?></pre>
-                                                    </div>
+
+                                                    		  
+                                                   <div class="fan-maindiv">
+                                                    		<div class="fan-snippet">
+                                                    			<span class="spn-snippet-lable">HTML code snippet</span>
+                                                    			<pre class="brush: js;"><?php echo $text_break_med_sec; ?></pre>
+                                                 			</div>
+                                                 		<div class="fan-act-btndiv">
+	                                                    		<span class="spn-act-btn-lable">Actual Button form</span>
+		                                                        <div class="med_sec_fan" id="med_sec_fan-<?php echo $cnt_secure_fancy; ?>">
+		                                                        	<?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium;?>
+		                                                        </div>
+	                                                        </div>	
+                                                    		</div>	
+                                                      </div>
                                                 </td>
 
 
@@ -329,14 +357,28 @@ class AngellEYE_PayPal_Security_Admin {
                                                     <strong>Privacy Concern:&nbsp;</strong>None<br/>  
                                                 </td>
                                                 <td class="td_viewsource_img">
-                                                    <a href="#sec_fan-<?php echo $cnt_secure_fancy; ?>" class="cls_dialog fancybox"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a><span class="view_btn_code_txt">View Button Code</span>
+                                                    <a href="#sec_fan-<?php echo $cnt_secure_fancy; ?>" class="cls_dialog fancybox">
+                                                    <img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a>
+                                                    <span class="view_btn_code_txt">View Button Code</span>
                                                     <?php
                                                     $text_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure);
                                                     $text_break_sec = str_replace('>', ">\n", $text_sec);
                                                     ?>
 
                                                     <div class="sec-fan" id="sec_fan-<?php echo $cnt_secure_fancy; ?>" style="width:650px;display: none;">
-                                                        <pre class="brush: js;"><?php echo $text_break_sec; ?></pre>
+                                                        <div class="fan-maindiv">
+                                                    		<div class="fan-snippet">
+                                                    			<span class="spn-snippet-lable">HTML code snippet</span>
+	                                                    		<pre class="brush: js;"><?php echo $text_break_sec; ?></pre>
+	                                                    	</div>
+	                                                    	<div class="fan-act-btndiv">
+	                                                    		<span class="spn-act-btn-lable">Actual Button form</span>
+		                                                        <div class="sec-fan" id="sec_fan-actbtn-<?php echo $cnt_secure_fancy; ?>">
+		                                                        	<?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure;?>
+		                                                        </div>
+	                                                        </div>
+                                                        
+                                                        </div>
                                                     </div>
 
                                                 </td>

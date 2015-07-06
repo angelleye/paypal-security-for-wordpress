@@ -191,3 +191,44 @@ td.td_viewsource_img a:focus {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+span.spn-act-btn-lable {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #fafafa;
+  font-size: 20px;
+  line-height: 1em;
+  margin-bottom: 10px;
+}
+.fan-act-btndiv {
+  display: inline-block;
+  width: 96%;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.fan-snippet {
+  display: inline-block;
+  width: 96%;
+  border: 1px solid rgb(204, 204, 204);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  padding: 10px;
+  margin-bottom:20px;
+}
+span.spn-snippet-lable {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #fafafa;
+  font-size: 20px;
+  line-height: 1em;
+  margin-bottom: 10px;
+}
