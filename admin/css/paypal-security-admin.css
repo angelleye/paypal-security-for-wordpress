@@ -1,11 +1,11 @@
 .tbl_paypal_unsecure_data td {vertical-align:top;border:1px solid #ccc !important;font-size:13px !important;}
-img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 5px;display:none;float:left;margin-right:10px;}
+img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 16px;display:none;float:left;margin-right:10px;}
 .txt_unsecurenote {width:100%;height:auto;}
 #frm_scan .ui-progressbar {
     position: relative !important;
 
 }
-#btn_pswp {float:left;}
+#btn_pswp {float:left; margin-top:12px;}
 #frm_scan {float:left;}
 .tbl_saved_report{float:right;}
 .text-right {text-align:right;padding-right:5px;}

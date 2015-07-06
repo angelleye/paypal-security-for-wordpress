@@ -27,10 +27,16 @@ class AngellEYE_PayPal_Security_Admin_Display {
         <div id="paypal_security_scanner_fieldset">
 
             <fieldset>
-                <legend><h2><?php _e('PayPal security scanner', 'paypal-security'); ?></h2></legend>
+                <legend><h2><?php _e('PayPal Security Scanner', 'paypal-security'); ?></h2></legend>
                 <div class="div_frm_main">
                     <div class="frm_checkboxes">
                         <form id="frm_scan">
+                            <h4>Instructions</h4>
+                            <ol>
+                                <li>Disable (un-check) the boxes for the post types that you know do not contain any PayPal buttons.</li>
+                                <li>Click the Scan Now button to run the scan and return a report of PayPal button security on your site.</li>
+                            </ol>
+                            <p><strong>NOTE</strong>: The scan may take a while depending on how many pages / posts you have on your site.</p>
                             <?php
                             $output = 'names'; // names or objects, note names is the default
                             $operator = 'and'; // 'and' or 'or'
@@ -48,10 +54,8 @@ class AngellEYE_PayPal_Security_Admin_Display {
                             }
                             echo $selectboxhtml;
                             ?>
-                            <h4>Click Scan Now button for scan all insecure PayPal buttons.</h4>
-                            <h5>This could take a while depending on how many Pages / Posts you have.</h5>
                             <span id="btn_pswp" class="button button-primary btn_pswp">Scan Now</span>
-                            <span id="notice" style="display:none;">Please select atleast one checkbox to use PayPal security scanner.</span>
+                            <p id="notice" style="display:none;">Please select at least one checkbox to use PayPal security scanner.</p>
                             <img src="<?php echo plugin_dir_url(__FILE__) ?>images/ajax-loader.gif" id="loader_gifimg"/>
                         </form>
 
