@@ -47,8 +47,8 @@ class AngellEYE_PayPal_Security_Admin_Display {
                             $selectboxhtml = '';
                             foreach ($post_types as $post_type) {
                                 $selectboxhtml .= '<div>';
-                                $selectboxhtml .= "<label for = " . $post_type . ">";
-                                $selectboxhtml .= "<input type='checkbox' name =" . $post_type . " checked>" . ucfirst($post_type);
+                                $selectboxhtml .= "<label for = " . $post_type .'id'. ">";
+                                $selectboxhtml .= "<input type='checkbox' id=" . $post_type .'id'." name =" . $post_type . " checked>" . ucfirst($post_type);
                                 $selectboxhtml .= '</label>';
                                 $selectboxhtml .= '</div >';
                             }

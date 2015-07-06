@@ -259,7 +259,7 @@ class AngellEYE_PayPal_Security_Admin {
                                                     <strong>Privacy Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['privacy_concern']; ?><br/>  
                                                 </td>
                                                 <td class="td_viewsource_img">
-                                                    <a href="#un_sec_fan-<?php echo $cnt_un_secure_fancy; ?>" class="cls_dialog fancybox"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a><span class="view_btn_code_txt">View Button Code</span>
+                                                    <a href="#un_sec_fan-<?php echo $cnt_un_secure_fancy; ?>" class="cls_dialog fancybox"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a><a href="#un_sec_fan-<?php echo $cnt_un_secure_fancy; ?>" class="cls_dialog fancybox"><span class="view_btn_code_txt">View Button Code</span></a>
                                 <?php
                                 $text_un_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1);
                                 $text_break_un_sec = str_replace('>', ">\n", $text_un_sec);
@@ -309,7 +309,7 @@ class AngellEYE_PayPal_Security_Admin {
 
 
                                                 <td class="td_viewsource_img">
-                                                    <a href="#med_sec_fan-<?php echo $cnt_med_secure_fancy; ?>" class="cls_dialog fancybox"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a><span class="view_btn_code_txt">View Button Code</span>
+                                                    <a href="#med_sec_fan-<?php echo $cnt_med_secure_fancy; ?>" class="cls_dialog fancybox"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a> <a href="#med_sec_fan-<?php echo $cnt_med_secure_fancy; ?>" class="cls_dialog fancybox"><span class="view_btn_code_txt">View Button Code</span></a>
                                                     <?php
                                                     $text_med_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium);
                                                     $text_break_med_sec = str_replace('>', ">\n", $text_med_sec);
@@ -359,7 +359,7 @@ class AngellEYE_PayPal_Security_Admin {
                                                 <td class="td_viewsource_img">
                                                     <a href="#sec_fan-<?php echo $cnt_secure_fancy; ?>" class="cls_dialog fancybox">
                                                     <img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a>
-                                                    <span class="view_btn_code_txt">View Button Code</span>
+                                                   <a href="#sec_fan-<?php echo $cnt_secure_fancy; ?>" class="cls_dialog fancybox"> <span class="view_btn_code_txt">View Button Code</span></a>
                                                     <?php
                                                     $text_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure);
                                                     $text_break_sec = str_replace('>', ">\n", $text_sec);
