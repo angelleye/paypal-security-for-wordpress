@@ -36,6 +36,7 @@
 
 .fancybox-opened {
 	z-index: 8030;
+	top: 130px !important;
 }
 
 .fancybox-opened .fancybox-skin {
