@@ -3,6 +3,8 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 16px;disp
 .txt_unsecurenote {width:100%;height:auto;}
 #frm_scan .ui-progressbar {
     position: relative !important;
+    clear: both;
+    margin-top: 55px;
 
 }
 #btn_pswp {float:left; margin-top:12px;}
@@ -233,6 +235,16 @@ span.spn-snippet-lable {
   line-height: 1em;
   margin-bottom: 10px;
 }
+ .ui-progressbar {
+    position: relative;
+  }
+  .progress-label {
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
 
 
 

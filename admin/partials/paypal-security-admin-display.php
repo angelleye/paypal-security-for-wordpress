@@ -25,7 +25,6 @@ class AngellEYE_PayPal_Security_Admin_Display {
     public static function paypal_security_options() {
         ?>
         <div id="paypal_security_scanner_fieldset">
-
             <fieldset>
                 <legend><h2><?php _e('PayPal Security Scanner', 'paypal-security'); ?></h2></legend>
                 <div class="div_frm_main">
@@ -46,37 +45,27 @@ class AngellEYE_PayPal_Security_Admin_Display {
                             $post_types = get_post_types($args, $output, $operator);
                             $selectboxhtml = '';
                             foreach ($post_types as $post_type) {
-                                $selectboxhtml .= '<div>';
-                                $selectboxhtml .= "<label for = " . $post_type .'id'. ">";
-                                $selectboxhtml .= "<input type='checkbox' id=" . $post_type .'id'." name =" . $post_type . " checked>" . ucfirst($post_type);
-                                $selectboxhtml .= '</label>';
-                                $selectboxhtml .= '</div >';
+                                if($post_type != "attachment") {
+                                    $selectboxhtml .= '<div>';
+                                    $selectboxhtml .= "<label for = " . $post_type . 'id' . ">";
+                                    $selectboxhtml .= "<input type='checkbox' id=" . $post_type . 'id' . " name =" . $post_type . " checked>" . ucfirst($post_type);
+                                    $selectboxhtml .= '</label>';
+                                    $selectboxhtml .= '</div >';
+                                }
                             }
                             echo $selectboxhtml;
                             ?>
                             <span id="btn_pswp" class="button button-primary btn_pswp">Scan Now</span>
+                            <div id="progressbar" style="display: none"><div class="progress-label">Loading...</div></div>
+                            <input type="hidden" value="" name="progressbar_timeout" id="progressbar_timeout">
                             <p id="notice" style="display:none;">Please select at least one checkbox to use PayPal security scanner.</p>
                             <img src="<?php echo plugin_dir_url(__FILE__) ?>images/ajax-loader.gif" id="loader_gifimg"/>
                         </form>
-
                     </div> <!-- frm_checkboxes-->
-
-                    <div class="div_get_totalscan">
-
-
-                    </div><!--div_get_total_scan-->
-
-                    <div class="div_site_score">
-
-
-                    </div> <!-- div_site_score -->
-
-
-
+                    <div class="div_get_totalscan"></div><!--div_get_total_scan-->
+                    <div class="div_site_score"></div> <!-- div_site_score -->
                 </div><!--frm_main-->
-
             </fieldset>
-
         </div>
         <?php do_action('paypal_scan_action'); ?>
         <div id="paypal_scan_response">

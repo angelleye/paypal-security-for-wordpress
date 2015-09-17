@@ -13,10 +13,6 @@
 class AngellEYE_PayPal_Security_Activator {
 
     /**
-     * Short Description. (use period)
-     *
-     * Long Description.
-     *
      * @since    1.0.0
      */
     public static function activate() {
@@ -32,7 +28,6 @@ class AngellEYE_PayPal_Security_Activator {
 
         $table_name = $wpdb->prefix . "paypal_security_reports";
         $charset_collate = $wpdb->get_charset_collate();
-
         if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
 		`ID` mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -44,10 +39,6 @@ class AngellEYE_PayPal_Security_Activator {
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);
-        } else if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
-
-            // if already table is there then alter table code will go here
         }
     }
-
 }
