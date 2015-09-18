@@ -40,7 +40,7 @@ class AngellEYE_PayPal_Security_Admin_Post_type {
             ),
             'description' => __('', 'paypal-security'),
             'public' => false,
-            'show_ui' => true,
+            'show_ui' => false,
             'capability_type' => 'post',
             'capabilities' => array(
                 'create_posts' => false, 
