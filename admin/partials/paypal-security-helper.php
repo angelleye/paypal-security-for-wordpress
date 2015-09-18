@@ -44,12 +44,16 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
             $paypal_security_content_final['total_post'] = 0;
         }
 
+        $paypal_security_exclude_post_list = array();
+        $paypal_security_exclude_post_list_data = get_option('paypal_security_exclude_post_list');
+        if (isset($paypal_security_exclude_post_list_data) && !empty($paypal_security_exclude_post_list_data)) {
+            $paypal_security_exclude_post_list = $paypal_security_exclude_post_list_data;
+        }
+
         $post_type = $_POST['data'];
         foreach ($post_type as $key_post => $post_id_value) {
-            $paypal_security_scan_result = get_post_meta($post_id_value, 'paypal_security_scan_result', true);
-            if (isset($paypal_security_scan_result) && !empty($paypal_security_scan_result) && is_array($paypal_security_scan_result)) {
-                $paypal_security_content_final = array_merge_recursive($paypal_security_scan_result, $paypal_security_content_final);
-                $paypal_security_include_post_list[] = $post_id_value;
+            if (in_array($post_id_value, $paypal_security_exclude_post_list)) {
+                $paypal_security_include_post_list[$post_id_value];
             } else {
                 $html = file_get_html(get_permalink($post_id_value));
                 if (isset($html) && !empty($html)) {
@@ -124,7 +128,6 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
                     }
                 }
                 if (!empty($paypal_security_content) && is_array($paypal_security_content)) {
-                    update_post_meta($post_id_value, 'paypal_security_scan_result', $paypal_security_content);
                     $paypal_security_content_final = array_merge_recursive($paypal_security_content, $paypal_security_content_final);
                 } else {
                     unset($paypal_security_include_post_list[$post_id_value]);
@@ -190,11 +193,11 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
         $button_name = '';
         $paypal_security_paypal_form_html = array();
         $post_id_list = array();
-        $paypal_security_exclude_post_list = array();
-        $paypal_security_exclude_post_list_data = get_option('paypal_security_exclude_post_list');
-        if (isset($paypal_security_exclude_post_list_data) && !empty($paypal_security_exclude_post_list_data)) {
-            $paypal_security_exclude_post_list = $paypal_security_exclude_post_list_data;
-        }
+//        $paypal_security_exclude_post_list = array();
+//        $paypal_security_exclude_post_list_data = get_option('paypal_security_exclude_post_list');
+//        if (isset($paypal_security_exclude_post_list_data) && !empty($paypal_security_exclude_post_list_data)) {
+//            $paypal_security_exclude_post_list = $paypal_security_exclude_post_list_data;
+//        }
 
         $find_post = array();
         foreach ($post_type as $key => $value) {
@@ -202,22 +205,24 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
         }
         $selected_post_types = join(',', $find_post);
 
-        $exclude_post_id = array();
-        if (isset($paypal_security_exclude_post_list) && !empty($paypal_security_exclude_post_list) && is_array($paypal_security_exclude_post_list)) {
-            foreach ($paypal_security_exclude_post_list as $paypal_security_exclude_post_list_key => $paypal_security_exclude_post_list_id) {
-                $exclude_post_id[] = "'" . $paypal_security_exclude_post_list_id . "'";
+//        $exclude_post_id = array();
+//        if (isset($paypal_security_exclude_post_list) && !empty($paypal_security_exclude_post_list) && is_array($paypal_security_exclude_post_list)) {
+//            foreach ($paypal_security_exclude_post_list as $paypal_security_exclude_post_list_key => $paypal_security_exclude_post_list_id) {
+//                $exclude_post_id[] = "'" . $paypal_security_exclude_post_list_id . "'";
+//            }
+//            $selected_exclude_post_id = join(',', $exclude_post_id);
+//        } else {
+//            $selected_exclude_post_id = "''";
+//        }
+
+
+        $paypal_security_publisharray = $wpdb->get_results("SELECT ID from $table_name where post_type IN ($selected_post_types) AND post_status = 'publish'", ARRAY_A);
+        if (!empty($paypal_security_publisharray) && is_array($paypal_security_publisharray)) {
+            foreach ($paypal_security_publisharray as $key => $value) {
+                $post_id_list[$key] = $value['ID'];
             }
-            $selected_exclude_post_id = join(',', $exclude_post_id);
-        } else {
-            $selected_exclude_post_id = "''";
         }
-
-
-        $paypal_security_publisharray = $wpdb->get_results("SELECT ID from $table_name where post_type IN ($selected_post_types) AND post_status = 'publish' AND ID NOT IN ($selected_exclude_post_id)", ARRAY_A);
-        foreach ($paypal_security_publisharray as $key => $value) {
-            $post_id_list[$key] = $value['ID'];
-        }
-        $post_id_list['count'] = $key + 1;
+        $post_id_list['count'] = count($paypal_security_publisharray);
         echo json_encode($post_id_list, true);
         exit();
     }
