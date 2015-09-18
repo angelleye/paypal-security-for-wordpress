@@ -93,6 +93,7 @@ class AngellEYE_PayPal_Security_Admin {
          * The class responsible for defining all actions that occur in the Dashboard
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/paypal-security-admin-display.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/class-paypal-security-post-types.php';
     }
 
     public function paypal_security_scan_action_fn() {
