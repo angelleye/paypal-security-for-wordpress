@@ -16,11 +16,29 @@ jQuery(document).ready(function () {
                 if (data) {
                     try {
                         var obj = jQuery.parseJSON(data);
+                        var per_post_run_time = '';
                         if (typeof (obj.count) != "undefined" && obj.count !== null) {
                             jQuery('#loader_gifimg').hide();
                             jQuery('#progressbar').show();
-                            progressbar_time = (obj.count * 3) * 20;
-                            jQuery("#progressbar_timeout").val(progressbar_time);
+                            if(obj.count > 10) {
+                                per_post_run_time = 2.8;
+                            } else if(obj.count > 20) {
+                                per_post_run_time = 2.7;
+                            } else if(obj.count > 30) {
+                                per_post_run_time = 2.6;
+                            } else if(obj.count > 40) {
+                                per_post_run_time = 2.5;
+                            }  else if(obj.count > 50) {
+                                per_post_run_time = 2.6;
+                            } else if(obj.count > 60) {
+                                per_post_run_time = 2.5;
+                            } else if(obj.count > 80) {
+                                per_post_run_time = 2.3;
+                            } else if(obj.count > 100) {
+                                per_post_run_time = 2.2;
+                            }
+                            progressbar_time = (per_post_run_time * 3) * 20;
+                            jQuery("#progressbar_timeout").val(parseInt(progressbar_time));
                             jQuery("#progressbar").progressbar({
                                 value: false,
                                 change: function () {

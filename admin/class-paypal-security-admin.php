@@ -55,6 +55,7 @@ class AngellEYE_PayPal_Security_Admin {
         if ($screen->id == 'tools_page_paypal-security') {
             wp_enqueue_style($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'css/shCoreDefault.css', array(), $this->version, 'all');
             wp_enqueue_style($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'css/jquery.fancybox.css', array(), $this->version, 'all');
+            wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
         }
     }
 
