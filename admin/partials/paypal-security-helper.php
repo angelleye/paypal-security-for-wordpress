@@ -53,7 +53,7 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
         $post_type = $_POST['data'];
         foreach ($post_type as $key_post => $post_id_value) {
             if (in_array($post_id_value, $paypal_security_exclude_post_list)) {
-                $paypal_security_include_post_list[$post_id_value];
+                $paypal_security_include_post_list[$post_id_value] = $post_id_value;
             } else {
                 $html = file_get_html(get_permalink($post_id_value));
                 if (isset($html) && !empty($html)) {
