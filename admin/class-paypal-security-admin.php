@@ -105,15 +105,12 @@ class AngellEYE_PayPal_Security_Admin {
     }
 
     public function paypal_security_scan_action_fn_scan() {
-
-//        if (isset($_POST['data']) && !empty($_POST['data'])) {
-//            parse_str($_POST['data'], $post_type);
-//        }
         $get_array_with_paypal = new AngellEYE_PayPal_Security_PayPal_Helper();
         $paypal_security_scanner_finalarrayresult = array();
         $paypal_security_scanner_get_all_forms = array();
         $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_get_arraywithpaypaltext();
         $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_get_total_forms($paypal_security_scanner_finalarrayresult);
+        $this->paypal_security_add_report_history($paypal_security_scanner_finalarrayresult, $paypal_security_scanner_get_all_forms);
         if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
             $totalpost = $paypal_security_scanner_finalarrayresult['total_post'];
         } else {
@@ -373,6 +370,40 @@ class AngellEYE_PayPal_Security_Admin {
             unset($paypal_security_scanner_get_all_forms);
         }
         exit(1);
+    }
+
+    public function post_updated_remove_exclude_post_list($post_ID) {
+        $paypal_security_exclude_post_list = get_option('paypal_security_exclude_post_list');
+        if (isset($paypal_security_exclude_post_list) && !empty($paypal_security_exclude_post_list)) {
+            if (in_array($post_ID, $paypal_security_exclude_post_list)) {
+                unset($paypal_security_exclude_post_list[$post_ID]);
+                update_option('paypal_security_exclude_post_list', $paypal_security_exclude_post_list);
+            }
+        }
+    }
+    
+    public function plugin_remove_exclude_post_list() {
+        delete_option('paypal_security_exclude_post_list');
+    }        
+
+
+    public function paypal_security_add_report_history($paypal_security_scanner_final_result, $paypal_security_scanner_get_all_forms) {
+
+        $insert_report_array = array(
+            'ID' => '',
+            'post_type' => 'report_history', // Custom Post Type Slug
+            'post_status' => 'publish',
+            'post_title' => date('Y-m-d H:i:s'),
+        );
+
+        $post_id = wp_insert_post($insert_report_array);
+
+        if (isset($paypal_security_scanner_final_result) && !empty($paypal_security_scanner_final_result)) {
+            update_post_meta($post_id, 'paypal_security_scanner_final_result', $paypal_security_scanner_final_result);
+        }
+        if (isset($paypal_security_scanner_get_all_forms) && !empty($paypal_security_scanner_get_all_forms)) {
+            update_post_meta($post_id, 'paypal_security_scanner_get_all_forms', $paypal_security_scanner_get_all_forms);
+        }
     }
 
 }
