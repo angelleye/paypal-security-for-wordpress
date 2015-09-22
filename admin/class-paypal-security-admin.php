@@ -111,31 +111,31 @@ class AngellEYE_PayPal_Security_Admin {
         $paypal_security_scanner_get_all_forms = array();
         $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_get_arraywithpaypaltext();
         $paypal_security_scanner_get_all_forms = $get_array_with_paypal->paypal_security_get_total_forms($paypal_security_scanner_finalarrayresult);
-        
+
         if (isset($paypal_security_scanner_finalarrayresult['total_post']) && !empty($paypal_security_scanner_finalarrayresult['total_post'])) {
             $totalpost = $paypal_security_scanner_finalarrayresult['total_post'];
         } else {
             $totalpost = '0';
         }
-       
+
         if (isset($paypal_security_scanner_get_all_forms['unsecure_count']) && !empty($paypal_security_scanner_get_all_forms['unsecure_count'])) {
             $total_unsecur_count = $paypal_security_scanner_get_all_forms['unsecure_count'];
         } else {
             $total_unsecur_count = '0';
         }
-        
+
         if (isset($paypal_security_scanner_get_all_forms['secure_count']) && !empty($paypal_security_scanner_get_all_forms['secure_count'])) {
             $total_secure_count = $paypal_security_scanner_get_all_forms['secure_count'];
         } else {
             $total_secure_count = '0';
         }
-        
+
         if (isset($paypal_security_scanner_get_all_forms['medium_secure_count']) && !empty($paypal_security_scanner_get_all_forms['medium_secure_count'])) {
             $total_medium_secure_count = $paypal_security_scanner_get_all_forms['medium_secure_count'];
         } else {
             $total_medium_secure_count = '0';
         }
-        
+
         $int_totalpost = intval($total_unsecur_count) + intval($total_secure_count) + intval($total_medium_secure_count);
         $int_total_secure = intval($total_secure_count);
         $site_score = '';
@@ -193,41 +193,56 @@ class AngellEYE_PayPal_Security_Admin {
             <div id="div_scan_result">
                 <div class="div_tbl_total_count">
                     <?php
-                    
                     $tbl_scan_result = '<table class="tbl-scan-result form-table">';
-                        $tbl_scan_result .= '<tbody>';
-                            $tbl_scan_result .= '<tr class="color-note">';
-                                $tbl_scan_result .= '<th><strong>Note</strong></th>';
-                                $tbl_scan_result .= '<th><strong>Count</strong></th>';
-                            $tbl_scan_result .= '</tr>';
-                            $tbl_scan_result .= '<tr class="color-total">';
-                                $tbl_scan_result .= '<td>Total Posts and Pages Scanned:</td>';
-                                $tbl_scan_result .= "<td>$totalpost</td>";
-                            $tbl_scan_result .= '</tr>';
-                            $tbl_scan_result .= '<tr class="color-unsecure">';
-                                $tbl_scan_result .= '<td>Total High Risk Buttons Found:</td>';
-                                $tbl_scan_result .= "<td>$total_unsecur_count</td>";
-                            $tbl_scan_result .= '</tr>';
-                            $tbl_scan_result .= '<tr class="color-unsecure">';
-                                $tbl_scan_result .= "<td>Total Medium Risk Buttons Found:</td>";
-                                $tbl_scan_result .= "<td>$total_medium_secure_count</td>";
-                            $tbl_scan_result .= "</tr>";
-                            $tbl_scan_result .= '<tr class="color-secure">';
-                                $tbl_scan_result .= '<td>Total Secure Buttons Found:</td>';
-                                $tbl_scan_result .= "<td>$total_secure_count</td>";
-                            $tbl_scan_result .= "</tr>";
-                        $tbl_scan_result .= "</tbody></table>";
-                        echo $tbl_scan_result;
-                ?>
+                    $tbl_scan_result .= '<tbody>';
+                    $tbl_scan_result .= '<tr class="color-note">';
+                    $tbl_scan_result .= '<th><strong>Note</strong></th>';
+                    $tbl_scan_result .= '<th><strong>Count</strong></th>';
+                    $tbl_scan_result .= '</tr>';
+                    $tbl_scan_result .= '<tr class="color-total">';
+                    $tbl_scan_result .= '<td>Total Posts and Pages Scanned:</td>';
+                    $tbl_scan_result .= "<td>$totalpost</td>";
+                    $tbl_scan_result .= '</tr>';
+                    $tbl_scan_result .= '<tr class="color-unsecure">';
+                    $tbl_scan_result .= '<td>Total High Risk Buttons Found:</td>';
+                    $tbl_scan_result .= "<td>$total_unsecur_count</td>";
+                    $tbl_scan_result .= '</tr>';
+                    $tbl_scan_result .= '<tr class="color-unsecure">';
+                    $tbl_scan_result .= "<td>Total Medium Risk Buttons Found:</td>";
+                    $tbl_scan_result .= "<td>$total_medium_secure_count</td>";
+                    $tbl_scan_result .= "</tr>";
+                    $tbl_scan_result .= '<tr class="color-secure">';
+                    $tbl_scan_result .= '<td>Total Secure Buttons Found:</td>';
+                    $tbl_scan_result .= "<td>$total_secure_count</td>";
+                    $tbl_scan_result .= "</tr>";
+                    $tbl_scan_result .= "</tbody></table>";
+                    echo $tbl_scan_result;
+                    ?>
                 </div>
                 <input type="hidden" id="txt_site_score" name="txt_site_score" value="<?php echo $site_score; ?>">
                 <input type="hidden" id="txt_site_grade" name="txt_site_grade" value="<?php echo $site_grade; ?>">
                 <input type="hidden" id="txt_clr_code" name="txt_site_grade" value="<?php echo $cls_color; ?>">
-                <?php 
-                $paypal_website_scan_report['scan_data'] = $tbl_scan_result;
-                $paypal_website_scan_report['txt_site_score'] = $site_score_int;
-                $paypal_website_scan_report['txt_site_grade'] = $site_grade;
-                $paypal_website_scan_report['txt_cls_color'] = $cls_color;
+                <?php
+                if (isset($tbl_scan_result) && !empty($tbl_scan_result)) {
+                    $paypal_website_scan_report['scan_data'] = $tbl_scan_result;
+                } else {
+                    $paypal_website_scan_report['scan_data'] = '';
+                }
+                if (isset($site_score_int) && !empty($site_score_int)) {
+                    $paypal_website_scan_report['txt_site_score'] = $site_score_int;
+                } else {
+                    $paypal_website_scan_report['txt_site_score'] = '';
+                }
+                if (isset($site_grade) && !empty($site_grade)) {
+                    $paypal_website_scan_report['txt_site_grade'] = $site_grade;
+                } else {
+                    $paypal_website_scan_report['txt_site_grade'] = '';
+                }
+                if (isset($cls_color) && !empty($cls_color)) {
+                    $paypal_website_scan_report['txt_cls_color'] = $cls_color;
+                } else {
+                    $paypal_website_scan_report['txt_cls_color'] = '';
+                }
                 ?>
                 <?php if (!empty($paypal_security_scanner_finalarrayresult['unsecure']) || !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) || !empty($paypal_security_scanner_finalarrayresult['secure'])) { ?>
                     <table class="form-table tbl_paypal_unsecure_data" id="tbl_resultdata">
@@ -397,11 +412,10 @@ class AngellEYE_PayPal_Security_Admin {
             }
         }
     }
-    
+
     public function plugin_remove_exclude_post_list() {
         delete_option('paypal_security_exclude_post_list');
-    }        
-
+    }
 
     public function paypal_security_add_report_history($paypal_website_scan_report) {
 
@@ -417,7 +431,6 @@ class AngellEYE_PayPal_Security_Admin {
         if (isset($paypal_website_scan_report) && !empty($paypal_website_scan_report)) {
             update_post_meta($post_id, 'paypal_website_scan_report', $paypal_website_scan_report);
         }
-        
     }
 
 }
