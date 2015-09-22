@@ -70,67 +70,62 @@ class AngellEYE_PayPal_Security_Admin_Display {
         <?php do_action('paypal_scan_action'); ?>
         <div id="paypal_scan_response">
         </div>
-        <div class='wrap' id="report_history">
-            <table class="widefat" cellspacing="0" id="report_history_table"><thead>
-                    <tr>
-                        <th>Scan Date</th>
-                        <th>Scan Data</th>       
-                        <th>Site Score Percentage</th>
-                        <th>Site Grade</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Scan Date</th>
-                        <th>Scan Data</th>       
-                        <th>Site Score Percentage</th>
-                        <th>Site Grade</th>
-                    </tr>
-                </tfoot>
-                <tbody>
+        <?php
+        $type = 'report_history';
+        $args = array(
+            'post_type' => $type,
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+        );
+        $posts = get_posts($args);
+        $tbody = '';
+        if ($posts) {
+            ?>
+            <div class='wrap' id="report_history">
+                <table class="widefat" cellspacing="0" id="report_history_table"><thead>
+                        <tr>
+                            <th><?php echo __('Scan Date', 'paypal-security') ?></th>
+                            <th><?php echo __('Scan Data', 'paypal-security') ?></th>
+                            <th><?php echo __('Site Score Percentage', 'paypal-security') ?></th>
+                            <th><?php echo __('Site Grade', 'paypal-security') ?></th>
 
-                    <?php
-                    $type = 'report_history';
-                    $args = array(
-                        'post_type' => $type,
-                        'post_status' => 'publish',
-                        'posts_per_page' => -1,
-                    );
-
-                    $posts = get_posts($args);
-                    $tbody = '';
-                    foreach ($posts as $post):
-                        $tbody .= "<tr>";
-
-                        $paypal_website_scan_report = get_post_meta($post->ID, 'paypal_website_scan_report', true);
-
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th><?php echo __('Scan Date', 'paypal-security') ?></th>
+                            <th><?php echo __('Scan Data', 'paypal-security') ?></th>
+                            <th><?php echo __('Site Score Percentage', 'paypal-security') ?></th>
+                            <th><?php echo __('Site Grade', 'paypal-security') ?></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <?php
+                        foreach ($posts as $post):
+                            $tbody .= "<tr>";
+                            $paypal_website_scan_report = get_post_meta($post->ID, 'paypal_website_scan_report', true);
                             $tbody .= "<td>" . get_the_time("y-m-d g:i:s", $post->ID) . "</td>";
                             $tbody .= "<td>" . $paypal_website_scan_report['scan_data'] . "</td>";
-                            if( empty($paypal_website_scan_report['txt_site_score']) ) {
+                            if (empty($paypal_website_scan_report['txt_site_score'])) {
                                 $paypal_website_scan_report['txt_site_score'] = 0;
                             }
-                            $tbody .= "<td>" . $paypal_website_scan_report['txt_site_score'].'%' . "</td>";
+                            $tbody .= "<td>" . $paypal_website_scan_report['txt_site_score'] . '%' . "</td>";
                             $txt_cls_color = $paypal_website_scan_report['txt_cls_color'];
-                            if($paypal_website_scan_report['txt_site_grade'] == 'No buttons found...') {
+                            if ($paypal_website_scan_report['txt_site_grade'] == 'No buttons found...') {
                                 $paypal_website_scan_report['txt_site_grade'] = 'N/A';
                                 $class = '';
                             } else {
                                 $class = 'cls_site_grade';
                             }
                             $tbody .= "<td><div class=' $class $txt_cls_color'>" . $paypal_website_scan_report['txt_site_grade'] . "</div></tr>";
-                      
-
-                        $tbody .= "</tr>";
-                    endforeach;
-                    echo $tbody;
-
-           
-                    ?>
-
-
-                </tbody></table>
-        </div>
-        <?php
+                            $tbody .= "</tr>";
+                        endforeach;
+                        echo $tbody;
+                        ?>
+                    </tbody></table>
+            </div>
+            <?php
+        }
     }
 
 }
