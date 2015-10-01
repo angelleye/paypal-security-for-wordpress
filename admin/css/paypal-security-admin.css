@@ -256,6 +256,26 @@ span.spn-snippet-lable {
 #report_history .widefat thead td, .widefat thead th {
     border: medium none;
 }
+#pps_recommendation .alert-box {
+     background: rgba(237, 237, 237, 0.56) none repeat scroll 0 0;
+    border-left: 3px solid green;
+    padding: 15px 20px;
+}
+#pps_recommendation .alert-box ul {
+    list-style: square;
+    margin-left: 16px;
+}
+#pps_recommendation {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: inline-block;
+    float: left;
+    font-family: verdana;
+    font-size: 13px;
+    margin-top: 10px;
+    padding: 1em;
+    width: 54%;
+}
 @media screen and (max-width: 1300px){
     .cls_site_score {font-size: 20px !important;}
     .cls_site_grade {font-size: 100px;line-height: 158px;}

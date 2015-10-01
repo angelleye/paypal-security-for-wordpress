@@ -290,12 +290,29 @@ class AngellEYE_PayPal_Security_Admin {
                                             <?php
                                         endforeach;
                                         $cnt_un_secure_fancy = $cnt_un_secure_fancy + 1;
-                                        ?>
-                                    <?php endforeach; ?>
-                                <?php } ?>
-                            <?php } ?>
-                            <?php /// medium risk start ?>
-                            <?php
+                                    
+                                     endforeach;
+                                } 
+                                ?>
+                                <div id="pss_recommendation_data" style="display: none">
+                                    <p><h2><?php echo __('PayPal Security Scan recommendation', 'paypal-security'); ?></h2></p>
+                                    <?php echo '<p><span>' . __( 'Want to add PayPal secure Button to your site ? There is a WordPress plugin for that —', 'paypal-security' ) . ' <a href="' . esc_url( 'https://wordpress.org/plugins/paypal-wp-button-manager/' ) .'" >'.  __( 'PayPal WP Button Manager', 'paypal-security' ) . '</a></span></p>'; ?>
+                                    <h3><?php echo __('PayPal WP Button Manager', 'paypal-security'); ?></h3>
+                                    <div class="alert-box">
+                                        <span><?php echo __('Developed by an Ace Certified PayPal Developer, official PayPal Partner, PayPal Ambassador, and 3-time PayPal Star Developer Award Winner.', 'paypal-security'); ?> </span><br>
+                                        <h3><?php echo __('Introduction', 'paypal-security'); ?></h3>
+                                        <span><?php echo __('Easily create and manage PayPal Standard payment buttons within WordPress, and place them on Pages / Posts using shortcodes.', 'paypal-security'); ?></span>
+                                        <ul>
+                                            <li><?php echo __('Buy Now Button', 'paypal-security'); ?></li>
+                                            <li><?php echo __('Donation Button', 'paypal-security'); ?></li>
+                                            <li><?php echo __('Subscription Button', 'paypal-security'); ?></li>
+                                            <li><?php echo __('Shopping Cart Button / View Cart Button', 'paypal-security'); ?></li>
+                                            <li><?php echo __('Shortcodes for easy placement of buttons on Pages / Posts', 'paypal-security'); ?></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                              <?php               
+                             } 
                             if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) {
                                 foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_medium) :
                                     ?>

@@ -70,6 +70,7 @@ jQuery(document).ready(function () {
                                     jQuery('#paypal_scan_response').html(data);
                                     SyntaxHighlighter.highlight();
                                     jQuery('.fancybox').fancybox();
+                                    var pss_recommendation_data = jQuery(data).find('#pss_recommendation_data').html();
                                     var $result_total_cnt = jQuery(data).find('.div_tbl_total_count').html();
                                     var $site_score = jQuery(data).find('#txt_site_score').val();
                                     var $site_grade = jQuery(data).find('#txt_site_grade').val();
@@ -85,6 +86,13 @@ jQuery(document).ready(function () {
                                         jQuery('.div_site_score').html('<div class="cls_site_score">' + $site_score + '</div><div class="' + $clr_code + ' cls_site_grade">' + $site_grade + '</div>');
                                     }
                                     jQuery('.div_get_totalscan').html($result_total_cnt);
+                                    if(typeof(pss_recommendation_data) != "undefined" && pss_recommendation_data !== null) {
+                                        jQuery('#pps_recommendation').html(pss_recommendation_data);
+                                        jQuery('#pps_recommendation').show();
+                                    } else {
+                                        jQuery('#pps_recommendation').html('');
+                                        jQuery('#pps_recommendation').hide();
+                                    }
 
 
                                 }

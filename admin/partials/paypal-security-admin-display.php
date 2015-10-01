@@ -64,6 +64,7 @@ class AngellEYE_PayPal_Security_Admin_Display {
                     </div> <!-- frm_checkboxes-->
                     <div class="div_get_totalscan"></div><!--div_get_total_scan-->
                     <div class="div_site_score"></div> <!-- div_site_score -->
+                    <div id="pps_recommendation" style="display: none;"></div>
                 </div><!--frm_main-->
             </fieldset>
         </div>
