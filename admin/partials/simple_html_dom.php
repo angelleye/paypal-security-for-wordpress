@@ -73,7 +73,7 @@ function file_get_html($url, $use_include_path = false, $context=null, $offset =
     $dom = new simple_html_dom(null, $lowercase, $forceTagsClosed, $target_charset, $stripRN, $defaultBRText, $defaultSpanText);
     // For sourceforge users: uncomment the next line and comment the retreive_url_contents line 2 lines down if it is not already done.
 	
-    if (get_http_response_code($url) == "400"){
+    if (get_http_response_code($url) == "404"){
     	return false;
     }else {
     $contents = file_get_contents($url, $use_include_path, $context, $offset);
