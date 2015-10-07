@@ -297,6 +297,7 @@ class AngellEYE_PayPal_Security_Admin {
                                 <div id="pss_recommendation_data" style="display: none">
                                     <p><h2><?php echo __('PayPal Security Scan recommendation', 'paypal-security'); ?></h2></p>
                                     <?php echo '<p><span>' . __( 'Want to add PayPal secure Button to your site ? There is a WordPress plugin for that —', 'paypal-security' ) . ' <a href="' . esc_url( 'https://wordpress.org/plugins/paypal-wp-button-manager/' ) .'" >'.  __( 'PayPal WP Button Manager', 'paypal-security' ) . '</a></span></p>'; ?>
+                                    <?php $this->install_paypal_wp_button_manager_plugin(); ?>
                                     <h3><?php echo __('PayPal WP Button Manager', 'paypal-security'); ?></h3>
                                     <div class="alert-box">
                                         <span><?php echo __('Developed by an Ace Certified PayPal Developer, official PayPal Partner, PayPal Ambassador, and 3-time PayPal Star Developer Award Winner.', 'paypal-security'); ?> </span><br>
@@ -448,6 +449,17 @@ class AngellEYE_PayPal_Security_Admin {
         if (isset($paypal_website_scan_report) && !empty($paypal_website_scan_report)) {
             update_post_meta($post_id, 'paypal_website_scan_report', $paypal_website_scan_report);
         }
+    }
+    
+    public function install_paypal_wp_button_manager_plugin() {
+        $plugin_slug = "paypal-wp-button-manager";
+        $plugin_name = "PayPal WP Button Manager";
+        if ( !is_dir( WP_PLUGIN_DIR . '/' . $plugin_slug ) ) {
+            if ( current_user_can('install_plugins') ) {
+                $plugin_install_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=' . $plugin_slug), 'install-plugin_' . $plugin_slug);
+                 echo '<p><span><a class="install-now button" data-slug="' . esc_attr( $plugin_slug ) . '" href="' . esc_url( $plugin_install_url ) . '" aria-label="' . esc_attr( sprintf( __( 'Install %s now' ), $plugin_name ) ) . '" data-name="' . esc_attr( $plugin_name ) . '">' . __( 'Install Now' ) . '</a></span></p>';
+            }
+        } 
     }
 
 }
