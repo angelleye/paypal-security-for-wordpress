@@ -18,7 +18,6 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 16px;disp
     padding: 1em;
     margin-right: 18px;
     width: 77.6%;
-    margin: 0 auto;
 }
 #paypal_security_scanner_fieldset legend {
     font-weight: bold;
@@ -246,7 +245,6 @@ span.spn-snippet-lable {
     text-shadow: 1px 1px 0 #fff;
 }
 #report_history_table {
-    margin: 0 94px 0 auto;
     width: 81.8%;
 }
 #report_history .widefat tbody td {
@@ -256,6 +254,7 @@ span.spn-snippet-lable {
 #report_history .widefat thead td, .widefat thead th {
     border: medium none;
 }
+<<<<<<< HEAD
 #pps_recommendation .alert-box {
      background: rgba(237, 237, 237, 0.56) none repeat scroll 0 0;
     border-left: 3px solid green;
@@ -275,6 +274,10 @@ span.spn-snippet-lable {
     margin-top: 10px;
     padding: 1em;
     width: 54%;
+=======
+#report_history_table .tbl-scan-result.form-table {
+    max-width: 100%;
+>>>>>>> 34c2069f1314f8650e6580bf9f119100f86e4f40
 }
 @media screen and (max-width: 1300px){
     .cls_site_score {font-size: 20px !important;}
