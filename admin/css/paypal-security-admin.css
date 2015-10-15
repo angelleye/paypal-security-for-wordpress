@@ -5,7 +5,6 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 16px;disp
     position: relative !important;
     clear: both;
     margin-top: 55px;
-
 }
 #btn_pswp {float:left; margin-top:12px;}
 #frm_scan {float:left;}
@@ -14,14 +13,10 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 16px;disp
 
 #paypal_security_scanner_fieldset fieldset{
     border: 1px solid #ccc;
-    margin: 2px;
-    padding: 1em;
-    margin-right: 18px;
-    width: 77.6%;
+    padding-left: 1em;
 }
 #paypal_security_scanner_fieldset legend {
     font-weight: bold;
-    height: 15px;
 }
 
 .tbl-scan-result {
@@ -66,13 +61,6 @@ img#loader_gifimg {display: inline-block;margin-left: 10px;margin-top: 16px;disp
 .medium-text {width:180px;}
 
 .tbl-scan-result {border:1px solid #000;}
-
-
-table.form-table.tbl_paypal_unsecure_data {
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 35px;
-}
 img.ui-datepicker-trigger {cursor: pointer;float:right;margin-top:7px;}
 .paddingleft {padding-left:10px;}
 
@@ -98,13 +86,10 @@ table.form-table.tbl_paypal_unsecure_data th {
     padding-bottom:10px !important;
 }
 
-.tbl-scan-result {border:1px solid #ccc !important;   margin-top: 0px !important;max-width:300px;}
+.tbl-scan-result {border:1px solid #ccc !important;   margin-top: 0px !important;max-width:410px;}
 .tbl-scan-result th {border:1px solid #ccc;}
 .color-note {background:#fafafa;}
 .tbl-scan-result td {border:1px solid #ccc; background:#fff !important;font-size:13px !important;}
-div#paypal_security_scanner_fieldset {
-    margin-top: 20px;
-}
 img#insecure-mediaum-risk-icon {
     width: 50px;
 }
@@ -142,7 +127,8 @@ td.td_viewsource_img {
 .div_get_totalscan {
     display: inline-block;
     float: left;
-    width: 34%;
+    width: 30%;
+    padding-left: 9px;
     /* margin-right: 56px; */
 }
 td.td_viewsource_img {border-left: 0 !important;}
@@ -161,27 +147,26 @@ td.td_viewsource_img {border-left: 0 !important;}
 
 .frm_checkboxes {
     display: inline-block;
-    vertical-align: top;
     float: left;
-    width: 40%;
-    padding-right:2%;
+    width: 46%;
+    padding-bottom: 20px;
 }
 
 .div_site_score {
     display: inline-block;
-    float: right;
     width: 22%;
     text-align: center;
-
-
 }
 .cls_min0 { min-height:0px;}
 .clsmin0 .cls_site_score {margin-top:0px;}
-.cls_min196 { min-height:180px;}
+.cls_min196 { min-height:188px;}
 .cls_min196 .cls_site_score {margin-top:14px;}
 .cls_site_with_border {
     border: 1px solid #ccc;
     background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
 }
 
 .clr_darkgreen {color:#006400}
@@ -254,7 +239,6 @@ span.spn-snippet-lable {
 #report_history .widefat thead td, .widefat thead th {
     border: medium none;
 }
-<<<<<<< HEAD
 #pps_recommendation .alert-box {
      background: rgba(237, 237, 237, 0.56) none repeat scroll 0 0;
     border-left: 3px solid green;
@@ -271,34 +255,44 @@ span.spn-snippet-lable {
     float: left;
     font-family: verdana;
     font-size: 13px;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 1em;
-    width: 54%;
-=======
+    width: 97.5%;
+}
 #report_history_table .tbl-scan-result.form-table {
     max-width: 100%;
->>>>>>> 34c2069f1314f8650e6580bf9f119100f86e4f40
+}
+
+#paypal_scan_response {
+    float: left;
+    margin-top: 15px;
+    width: 100%;
 }
 @media screen and (max-width: 1300px){
     .cls_site_score {font-size: 20px !important;}
     .cls_site_grade {font-size: 100px;line-height: 158px;}
     .tbl-scan-result td{line-height:normal;}
+    
 }
 @media screen and (max-width: 1079px){
     .cls_site_grade {font-size: 100px;line-height:178px;}
     .cls_site_score {font-size: 18px !important;}
+    #pps_recommendation {width: auto;}
 }
 @media screen and (max-width: 817px){
     .cls_site_score {font-size: 18px !important;}
     .cls_site_grade {font-size: 95px;line-height: 196px;}
+    #pps_recommendation {width: auto;}
 }
 
 @media screen and (max-width: 806px){
     .cls_site_grade {line-height: 231px;}
+    #pps_recommendation {width: auto;}
 }
 @media screen and (max-width: 799px){
     .cls_site_score {font-size: 16px !important;}
     .cls_site_grade {line-height: 220px;}
+    #pps_recommendation {width: auto;}
 }
 
 @media screen and (max-width: 782px){
@@ -314,4 +308,11 @@ span.spn-snippet-lable {
     .tbl_paypal_unsecure_data td{text-align:center;}
     th.th_pageid {background: #fff !important;border: 0 !important;background-color: #fff;}
     td.td_viewsource_img {text-align: center;width: 100%;box-sizing: border-box;border-left:1px solid #ccc !important;}
+    .div_get_totalscan {padding-left: 0;}
+    #paypal_security_scanner_fieldset fieldset {padding-left: 0px;}
+    #frm_scan {padding-left: 5px;}
+    #pps_recommendation {width: auto;}
+    #paypal_security_scanner_fieldset legend h2 {
+        padding-left: 9px;
+    }
 }

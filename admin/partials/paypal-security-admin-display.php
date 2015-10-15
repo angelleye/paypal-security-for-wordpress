@@ -30,6 +30,7 @@ class AngellEYE_PayPal_Security_Admin_Display {
             <a href="?page=paypal-security&tab=scan_history" class="nav-tab <?php echo $active_tab == 'scan_history' ? 'nav-tab-active' : ''; ?>"><?php echo __('Scan History', 'paypal-security'); ?></a>
         </h2>
         <?php if( $active_tab == 'scanner' ) { ?>
+        <div class="wrap">
         <div id="paypal_security_scanner_fieldset">
             <fieldset>
                 <legend><h2><?php _e('PayPal Security Scanner', 'paypal-security'); ?></h2></legend>
@@ -70,13 +71,14 @@ class AngellEYE_PayPal_Security_Admin_Display {
                     </div> <!-- frm_checkboxes-->
                     <div class="div_get_totalscan"></div><!--div_get_total_scan-->
                     <div class="div_site_score"></div> <!-- div_site_score -->
-                    <div id="pps_recommendation" style="display: none;"></div>
+                    
                 </div><!--frm_main-->
             </fieldset>
         </div>
         <?php do_action('paypal_scan_action'); ?>
-        
+        <div id="pps_recommendation" style="display: none;"></div>
         <div id="paypal_scan_response">
+        </div>
         </div>
         <?php  } elseif($active_tab == 'scan_history') {
 
