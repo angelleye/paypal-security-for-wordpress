@@ -461,5 +461,19 @@ class AngellEYE_PayPal_Security_Admin {
             }
         } 
     }
+    
+    public function ps_hide_update_notice() {
+        $screen = get_current_screen();
+        
+        if ( $screen->id == "tools_page_paypal-security" ) {
+            ?>
+            <style>
+                .updated.fade {
+                    display: none;
+                }
+            </style>
+            <?php
+        }
+    }
 
 }
