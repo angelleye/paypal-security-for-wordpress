@@ -475,5 +475,12 @@ class AngellEYE_PayPal_Security_Admin {
             <?php
         }
     }
-
+    public function pss_delete_paypal_scan_history() {
+        global $wpdb;
+        if( isset($_POST['value']) && $_POST['value'] == 'yes') {
+            $wpdb->query( $wpdb->prepare( "DELETE p, pm FROM $wpdb->posts p INNER JOIN $wpdb->postmeta pm ON pm.post_id = p.ID WHERE p.post_type = %s", 'report_history'));
+            echo json_encode(array("statusmsg" => 'success'));
+            exit();
+        }
+    }
 }

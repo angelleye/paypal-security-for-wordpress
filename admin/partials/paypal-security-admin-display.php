@@ -93,7 +93,7 @@ class AngellEYE_PayPal_Security_Admin_Display {
             if ($posts) {
                 ?>
                 <div class='wrap' id="report_history">
-                    <h3><?php _e('PayPal Security Scan History', 'paypal-security'); ?></h3>
+                    <h3><?php _e('PayPal Security Scan History', 'paypal-security'); ?><span class="button button-primary btn_pswp" id="delete_ps_history"><?php echo __('Delete Scan History', 'paypal-security') ?></span></h3>
                     <table class="widefat" cellspacing="0" id="report_history_table"><thead>
                             <tr>
                                 <th><?php echo __('Scan Date', 'paypal-security') ?></th>
@@ -137,6 +137,8 @@ class AngellEYE_PayPal_Security_Admin_Display {
                         </tbody></table>
                 </div>
                 <?php
+            } else {
+               echo __('No PayPal Report History found', 'paypal-security');
             }
         }
     }
