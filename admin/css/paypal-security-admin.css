@@ -254,7 +254,6 @@ span.spn-snippet-lable {
 #report_history .widefat thead td, .widefat thead th {
     border: medium none;
 }
-<<<<<<< HEAD
 #pps_recommendation .alert-box {
      background: rgba(237, 237, 237, 0.56) none repeat scroll 0 0;
     border-left: 3px solid green;
@@ -274,11 +273,13 @@ span.spn-snippet-lable {
     margin-top: 10px;
     padding: 1em;
     width: 54%;
-=======
+}
 #report_history_table .tbl-scan-result.form-table {
     max-width: 100%;
->>>>>>> 34c2069f1314f8650e6580bf9f119100f86e4f40
 }
+#delete_ps_history {float: right;}
+
+#report_history h3 {width: 81.5%;}
 @media screen and (max-width: 1300px){
     .cls_site_score {font-size: 20px !important;}
     .cls_site_grade {font-size: 100px;line-height: 158px;}

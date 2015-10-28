@@ -155,6 +155,7 @@ class AngellEYE_PayPal_Security {
         $this->loader->add_action( 'publish_post', $plugin_admin, 'post_updated_remove_exclude_post_list', 10, 1 );
         $this->loader->add_action( 'deactivate_plugin', $plugin_admin, 'plugin_remove_exclude_post_list', 10);
         $this->loader->add_action( 'activated_plugin', $plugin_admin, 'plugin_remove_exclude_post_list', 10 );
+        $this->loader->add_action('wp_ajax_pss_delete_paypal_scan_history', $plugin_admin, 'pss_delete_paypal_scan_history');
        
     }
 

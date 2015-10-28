@@ -1,6 +1,7 @@
 jQuery(document).ready(function () {
     var progressbar_time = '';
     jQuery('#btn_pswp').click(function () {
+        jQuery('#btn_pswp').hide();
         jQuery('#gifimg').css('visibility', 'visible');
         jQuery('#loader_gifimg').css('display', 'inline');
         jQuery('#btn_pswp').css('margin-right', '0px');
@@ -93,8 +94,9 @@ jQuery(document).ready(function () {
                                         jQuery('#pps_recommendation').html('');
                                         jQuery('#pps_recommendation').hide();
                                     }
-
-
+                                     setTimeout(function () {
+                                         jQuery('#btn_pswp').show();
+                                    }, 1000);
                                 }
                             });
                         }
@@ -152,4 +154,24 @@ jQuery(document).ready(function () {
     jQuery(".txt_unsecuresource").click(function () {
         select_all(this);
     })
+    
+   jQuery("#delete_ps_history").live("click", function () {
+        if (!confirm("Are you sure want to delete PayPal security scan history?")) {
+            return false;
+        } else {
+            var data = {
+                action: 'pss_delete_paypal_scan_history',
+                value: 'yes'
+            };
+            jQuery.post(ajaxurl, data, function (response) {
+                var responseOb = JSON.parse(response);
+                if(responseOb.statusmsg == 'success') {
+                    window.location.reload();
+                        return;
+                }
+            });
+        }
+    });
+        
+        
 });
