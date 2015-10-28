@@ -116,7 +116,7 @@ class AngellEYE_PayPal_Security_Admin_Display {
                             foreach ($posts as $post):
                                 $tbody .= "<tr>";
                                 $paypal_website_scan_report = get_post_meta($post->ID, 'paypal_website_scan_report', true);
-                                $tbody .= "<td>" . get_the_time("y-m-d g:i:s", $post->ID) . "</td>";
+                                $tbody .= "<td>" . get_the_time("m-d-Y", $post->ID) . "</td>";
                                 $tbody .= "<td>" . $paypal_website_scan_report['scan_data'] . "</td>";
                                 if (empty($paypal_website_scan_report['txt_site_score'])) {
                                     $paypal_website_scan_report['txt_site_score'] = 0;
