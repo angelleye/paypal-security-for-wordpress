@@ -296,31 +296,30 @@ class AngellEYE_PayPal_Security_Admin {
                                 }
                                 ?>
                             <div id="pss_recommendation_data" style="display: none">
-
-                                <?php if (!$this->ps_is_plugin_installed('PayPal WP Button Manager')) { ?>
-
-                                    <p><h2><?php echo __('PayPal Security Scan recommendation', 'paypal-security'); ?></h2></p>
-                                    <?php echo '<p><span>' . __('Want to add PayPal secure Button to your site ? There is a WordPress plugin for that —', 'paypal-security') . ' <a href="' . esc_url('https://wordpress.org/plugins/paypal-wp-button-manager/') . '" >' . __('PayPal WP Button Manager', 'paypal-security') . '</a></span></p>'; ?>
-                                    <?php $this->install_paypal_wp_button_manager_plugin(); ?>
-                                    <h3><?php echo __('PayPal WP Button Manager', 'paypal-security'); ?></h3>
-                                    <div class="alert-box">
-                                        <span><?php echo __('Developed by an Ace Certified PayPal Developer, official PayPal Partner, PayPal Ambassador, and 3-time PayPal Star Developer Award Winner.', 'paypal-security'); ?> </span><br>
-                                        <h3><?php echo __('Introduction', 'paypal-security'); ?></h3>
-                                        <span><?php echo __('Easily create and manage PayPal Standard payment buttons within WordPress, and place them on Pages / Posts using shortcodes.', 'paypal-security'); ?></span>
-                                        <ul>
-                                            <li><?php echo __('Buy Now Button', 'paypal-security'); ?></li>
-                                            <li><?php echo __('Donation Button', 'paypal-security'); ?></li>
-                                            <li><?php echo __('Subscription Button', 'paypal-security'); ?></li>
-                                            <li><?php echo __('Shopping Cart Button / View Cart Button', 'paypal-security'); ?></li>
-                                            <li><?php echo __('Shortcodes for easy placement of buttons on Pages / Posts', 'paypal-security'); ?></li>
-                                        </ul>
-                                    </div>
-
-                                <?php } elseif ($this->ps_is_plugin_active('PayPal WP Button Manager')) { 
+                                <?php
+                                if ($this->ps_is_plugin_active('PayPal WP Button Manager')) {
                                     echo '<p>' . __('You already activated PayPal WP Button Manager plugin, you need to use it to build the buttons.', 'paypal-security') . '</p>';
-                                } else { 
+                                } else {
                                     echo '<p>' . __('You should activate the PayPal WP Button Manager plugin and use it to build buttons.', 'paypal-security') . '</p>';
-                                 } ?>
+                                    $this->ps_active_plugin_using_name('PayPal WP Button Manager');
+                                }
+                                ?>
+                                <p><h2><?php echo __('PayPal Security Scan recommendation', 'paypal-security'); ?></h2></p>
+                                <?php echo '<p><span>' . __('Want to add PayPal secure Button to your site ? There is a WordPress plugin for that —', 'paypal-security') . ' <a href="' . esc_url('https://wordpress.org/plugins/paypal-wp-button-manager/') . '" >' . __('PayPal WP Button Manager', 'paypal-security') . '</a></span></p>'; ?>
+                                <?php $this->install_paypal_wp_button_manager_plugin(); ?>
+                                <h3><?php echo __('PayPal WP Button Manager', 'paypal-security'); ?></h3>
+                                <div class="alert-box">
+                                    <span><?php echo __('Developed by an Ace Certified PayPal Developer, official PayPal Partner, PayPal Ambassador, and 3-time PayPal Star Developer Award Winner.', 'paypal-security'); ?> </span><br>
+                                    <h3><?php echo __('Introduction', 'paypal-security'); ?></h3>
+                                    <span><?php echo __('Easily create and manage PayPal Standard payment buttons within WordPress, and place them on Pages / Posts using shortcodes.', 'paypal-security'); ?></span>
+                                    <ul>
+                                        <li><?php echo __('Buy Now Button', 'paypal-security'); ?></li>
+                                        <li><?php echo __('Donation Button', 'paypal-security'); ?></li>
+                                        <li><?php echo __('Subscription Button', 'paypal-security'); ?></li>
+                                        <li><?php echo __('Shopping Cart Button / View Cart Button', 'paypal-security'); ?></li>
+                                        <li><?php echo __('Shortcodes for easy placement of buttons on Pages / Posts', 'paypal-security'); ?></li>
+                                    </ul>
+                                </div>
                             </div>
                             <?php
                         }
@@ -520,7 +519,8 @@ class AngellEYE_PayPal_Security_Admin {
             $all_plugins = get_plugins();
             foreach ($all_plugins as $plugin_slug => $plugin_item) {
                 if ($plugin_item['Title'] == $plugin_name) {
-                    is_plugin_active($plugin_slug) ? true : false;
+                    $return = is_plugin_active($plugin_slug) ? true : false;
+                    return $return;
                 }
             }
             return false;
@@ -529,4 +529,29 @@ class AngellEYE_PayPal_Security_Admin {
         }
     }
 
+    public function ps_active_plugin_using_name($plugin_name = null) {
+        $plugin_slug = '';
+        $s = '';
+        $page = 1;
+        $context = 'all';
+        if (!empty($plugin_name)) {
+            if (!function_exists('get_plugins')) {
+                require_once ABSPATH . 'wp-admin/includes/plugin.php';
+            }
+            $all_plugins = get_plugins();
+            foreach ($all_plugins as $plugin_slug => $plugin_item) {
+                if ($plugin_item['Title'] == $plugin_name) {
+                    break;
+                }
+            }
+            
+        } 
+        if( !empty($plugin_slug) ) {
+            $activeate_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $plugin_slug . '&amp;plugin_status=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'activate-plugin_' . $plugin_slug );
+            if (current_user_can('install_plugins')) {
+                $plugin_install_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=' . $plugin_slug), 'install-plugin_' . $plugin_slug);
+                echo '<p><span><a class="install-now button" data-slug="' . esc_attr($plugin_slug) . '" href="' . esc_url($activeate_url) . '" aria-label="' . esc_attr(sprintf(__('Install %s now'), $plugin_name)) . '" data-name="' . esc_attr($plugin_name) . '">' . __('Activate Now') . '</a></span></p>';
+            }
+        }
+    }
 }
