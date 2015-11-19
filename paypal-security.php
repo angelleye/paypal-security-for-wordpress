@@ -22,7 +22,7 @@ if (!defined('WPINC')) {
  * The code that runs during plugin activation.
  * This action is documented in includes/class-paypal-security-activator.php
  */
-function activate_plugin_name() {
+function activate_paypal_security() {
     require_once plugin_dir_path(__FILE__) . 'includes/class-paypal-security-activator.php';
     AngellEYE_PayPal_Security_Activator::activate();
 }
@@ -31,13 +31,13 @@ function activate_plugin_name() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-paypal-security-deactivator.php
  */
-function deactivate_plugin_name() {
+function deactivate_paypal_security() {
     require_once plugin_dir_path(__FILE__) . 'includes/class-paypal-security-deactivator.php';
     AngellEYE_PayPal_Security_Deactivator::deactivate();
 }
 
-register_activation_hook(__FILE__, 'activate_plugin_name');
-register_deactivation_hook(__FILE__, 'deactivate_plugin_name');
+register_activation_hook(__FILE__, 'activate_paypal_security');
+register_deactivation_hook(__FILE__, 'deactivate_paypal_security');
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -54,10 +54,10 @@ require plugin_dir_path(__FILE__) . 'includes/class-paypal-security.php';
  *
  * @since    1.0.0
  */
-function run_plugin_name() {
+function run_paypal_security() {
 
     $plugin = new AngellEYE_PayPal_Security();
     $plugin->run();
 }
 
-run_plugin_name();
+run_paypal_security();
