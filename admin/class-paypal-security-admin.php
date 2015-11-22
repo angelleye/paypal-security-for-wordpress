@@ -299,7 +299,7 @@ class AngellEYE_PayPal_Security_Admin {
                                 <?php
                                 if ($this->ps_is_plugin_active('PayPal WP Button Manager')) {
                                     echo '<p>' . __('You already activated PayPal WP Button Manager plugin, you need to use it to build the buttons.', 'paypal-security') . '</p>';
-                                } else {
+                                } elseif($this->ps_is_plugin_installed('PayPal WP Button Manager')) {
                                     echo '<p>' . __('You should activate the PayPal WP Button Manager plugin and use it to build buttons.', 'paypal-security') . '</p>';
                                     $this->ps_active_plugin_using_name('PayPal WP Button Manager');
                                 }
