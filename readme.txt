@@ -47,6 +47,10 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Frequently Asked Questions ==
 
+= Where do I find the PayPal Security scanner after it has been installed and activated? =
+
+* Login to your WordPress admin panel and go to Tools -> PayPal Security.
+
 = What does this security scanner do, exactly? =
 
 * The PayPal Security plugin scans all of your site's content searching for PayPal HTML button code.
