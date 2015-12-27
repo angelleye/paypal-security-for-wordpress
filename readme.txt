@@ -14,6 +14,14 @@ Developed by an Ace Certified PayPal Developer, official PayPal Partner, PayPal 
 
 Scans all site content and returns a report of any insecure PayPal buttons that are found as well as a recommendation on securing your PayPal buttons.
 
+= Localization =
+PayPal IPN for WordPress was developed with localization in mind and is ready for translation.
+
+If you're interested in helping translate please [let us know](http://www.angelleye.com/contact-us/)!
+
+= Get Involved =
+Developers can contribute to the source code on the [PayPal Security for WordPress Git repository on BitBucket](https://github.com/angelleye/paypal-security-for-wordpress).
+
 == Installation ==
 
 = Automatic installation =
