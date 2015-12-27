@@ -250,7 +250,7 @@ class AngellEYE_PayPal_Security_Admin {
                         <thead>
                             <tr>
                                 <th class="th_pageid"></th>
-                                <th class="th_url" colspan="2"><strong>Button Details</strong></th>
+                                <th class="th_url" colspan="2"><strong>PayPal Button Security Details</strong></th>
                             </tr>
                         </thead><tbody>
                             <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
@@ -296,30 +296,28 @@ class AngellEYE_PayPal_Security_Admin {
                                 }
                                 ?>
                             <div id="pss_recommendation_data" style="display: none">
+                                <p><h2><?php echo __('PayPal Security Scan Recommendation', 'paypal-security'); ?></h2></p>
+                                <ul>
+                                <li><?php echo __('Scroll down to see details about the security of the individual buttons found on your site.', 'paypal-security'); ?></li>
+                                <li><?php echo __('The insecure buttons on your site should be replaced with PayPal hosted buttons to ensure that they are secure.', 'paypal-security'); ?></li>
+                                <li><?php echo __('This can be done', 'paypal-security') . ' <a href="' . esc_url('https://www.angelleye.com/how-to-create-a-paypal-button/') . '" target="_blank">' . __('manually through your PayPal account profile', 'paypal-security') . '</a>' . __(', or you can use our free plugin', 'paypal-security') . ', <a href="https://www.angelleye.com/product/wordpress-paypal-button-manager/" target="_blank">PayPal WP Button Manager</a>, ' . __('to build and manage securely hosted PayPal buttons within WordPress.', 'paypal-security'); ?></li>
                                 <?php
-                                if ($this->ps_is_plugin_active('PayPal WP Button Manager')) {
-                                    echo '<p>' . __('You already activated PayPal WP Button Manager plugin, you need to use it to build the buttons.', 'paypal-security') . '</p>';
-                                } elseif($this->ps_is_plugin_installed('PayPal WP Button Manager')) {
-                                    echo '<p>' . __('You should activate the PayPal WP Button Manager plugin and use it to build buttons.', 'paypal-security') . '</p>';
+                                if ($this->ps_is_plugin_active('PayPal WP Button Manager'))
+                                {
+                                    echo '<li>' . __('We see that you already have our PayPal WP Button Manager plugin installed and activated.', 'paypal-security') . ' <a href="' . esc_url('https://www.angelleye.com/paypal-wp-button-manager-user-guide/') . '" target="_blank"> ' . __('Click here to view documentation', 'paypal-security') . '</a> ' . __('on how you can use it to create secure PayPal buttons.', 'paypal-security') . '</a></li>';
+                                }
+                                elseif($this->ps_is_plugin_installed('PayPal WP Button Manager'))
+                                {
+                                    echo '<li>' . __('We see that you already have our PayPal WP Button Manager plugin installed, but it is not currently active.  We recommend that you activate it and use it to', 'paypal-security') . ' <a target="_blank" href="' . esc_url('https://www.angelleye.com/paypal-wp-button-manager-user-guide/') . '">' . __('build hosted, secure buttons', 'paypal-security') . '</a> ' . __('to replace your current buttons.', 'paypal-security') . '</li>';
                                     $this->ps_active_plugin_using_name('PayPal WP Button Manager');
                                 }
+                                else
+                                {
+                                    echo '<li>' . __('Click the button below to automatically install the PayPal WP Button Manager plugin.', 'paypal-security') . '</li>';
+                                    $this->install_paypal_wp_button_manager_plugin();
+                                }
                                 ?>
-                                <p><h2><?php echo __('PayPal Security Scan recommendation', 'paypal-security'); ?></h2></p>
-                                <?php echo '<p><span>' . __('Want to add PayPal secure Button to your site ? There is a WordPress plugin for that —', 'paypal-security') . ' <a href="' . esc_url('https://wordpress.org/plugins/paypal-wp-button-manager/') . '" >' . __('PayPal WP Button Manager', 'paypal-security') . '</a></span></p>'; ?>
-                                <?php $this->install_paypal_wp_button_manager_plugin(); ?>
-                                <h3><?php echo __('PayPal WP Button Manager', 'paypal-security'); ?></h3>
-                                <div class="alert-box">
-                                    <span><?php echo __('Developed by an Ace Certified PayPal Developer, official PayPal Partner, PayPal Ambassador, and 3-time PayPal Star Developer Award Winner.', 'paypal-security'); ?> </span><br>
-                                    <h3><?php echo __('Introduction', 'paypal-security'); ?></h3>
-                                    <span><?php echo __('Easily create and manage PayPal Standard payment buttons within WordPress, and place them on Pages / Posts using shortcodes.', 'paypal-security'); ?></span>
-                                    <ul>
-                                        <li><?php echo __('Buy Now Button', 'paypal-security'); ?></li>
-                                        <li><?php echo __('Donation Button', 'paypal-security'); ?></li>
-                                        <li><?php echo __('Subscription Button', 'paypal-security'); ?></li>
-                                        <li><?php echo __('Shopping Cart Button / View Cart Button', 'paypal-security'); ?></li>
-                                        <li><?php echo __('Shortcodes for easy placement of buttons on Pages / Posts', 'paypal-security'); ?></li>
-                                    </ul>
-                                </div>
+                                </ul>
                             </div>
                             <?php
                         }
