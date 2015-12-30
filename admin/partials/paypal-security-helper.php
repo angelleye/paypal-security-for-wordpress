@@ -55,13 +55,12 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
             if (in_array($post_id_value, $paypal_security_exclude_post_list)) {
                 $paypal_security_include_post_list[$post_id_value] = $post_id_value;
             } else {
-                if( "draft" == get_post_status($post_id_value) ) {
-                    $html = file_get_html($post_id_value);
+                if( "draft" == get_post_status(sanitize_text_field($post_id_value)) ) {
+                    $html = file_get_html(sanitize_text_field($post_id_value));
                 } else {
-                    $html = file_get_html(get_permalink($post_id_value));
+                    $html = file_get_html(get_permalink(sanitize_text_field($post_id_value)));
                 }
-                //$html = get_the_content($post_id_value);
-                if (isset($html) && !empty($html)) {
+                 if (isset($html) && !empty($html)) {
                     $paypal_action_url = '';
                     foreach ($html->find('form') as $e) {
                         if (!preg_match("~\bpaypal.com\b~", $e->action)) {
@@ -72,8 +71,6 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
                                 $retrive_cmd = $html->find('[name=cmd]');
                                 foreach ($retrive_cmd as $key_retrive_cmd => $value_retrive_cmd) {
                                     $viewcart_str_html = str_get_html($value_retrive_cmd->parent()->outertext());
-                                    //$check_is_viewcart = $viewcart_str_html->find('[name=item_name]');
-                                    //$check_is_shoppingbutton = $viewcart_str_html->find('[name=shopping_url]');
                                     if (isset($retrive_cmd[$key_retrive_cmd]->attr['value']) && !empty($retrive_cmd[$key_retrive_cmd]->attr['value'])) {
                                         if (($retrive_cmd[$key_retrive_cmd]->attr['value'] != '_s-xclick')) {
                                             $current_form_html = str_get_html($value_retrive_cmd->parent()->outertext());
@@ -141,7 +138,7 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
         }
         foreach ($_POST['data'] as $key_post => $post_id_value) {
             if (!in_array($post_id_value, $paypal_security_include_post_list)) {
-                $paypal_security_exclude_post_list[$post_id_value] = $post_id_value;
+                $paypal_security_exclude_post_list[sanitize_text_field($post_id_value)] = sanitize_text_field($post_id_value);
             }
         }
         update_option('paypal_security_exclude_post_list', array_unique($paypal_security_exclude_post_list));
@@ -196,28 +193,12 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
         $button_name = '';
         $paypal_security_paypal_form_html = array();
         $post_id_list = array();
-//        $paypal_security_exclude_post_list = array();
-//        $paypal_security_exclude_post_list_data = get_option('paypal_security_exclude_post_list');
-//        if (isset($paypal_security_exclude_post_list_data) && !empty($paypal_security_exclude_post_list_data)) {
-//            $paypal_security_exclude_post_list = $paypal_security_exclude_post_list_data;
-//        }
 
         $find_post = array();
         foreach ($post_type as $key => $value) {
-            $find_post[] = "'" . $key . "'";
+            $find_post[] = "'" . sanitize_text_field($key) . "'";
         }
         $selected_post_types = join(',', $find_post);
-
-//        $exclude_post_id = array();
-//        if (isset($paypal_security_exclude_post_list) && !empty($paypal_security_exclude_post_list) && is_array($paypal_security_exclude_post_list)) {
-//            foreach ($paypal_security_exclude_post_list as $paypal_security_exclude_post_list_key => $paypal_security_exclude_post_list_id) {
-//                $exclude_post_id[] = "'" . $paypal_security_exclude_post_list_id . "'";
-//            }
-//            $selected_exclude_post_id = join(',', $exclude_post_id);
-//        } else {
-//            $selected_exclude_post_id = "''";
-//        }
-
 
         $paypal_security_publisharray = $wpdb->get_results("SELECT ID from $table_name where post_type IN ($selected_post_types) AND post_status = 'publish' OR post_status = 'draft'", ARRAY_A);
         if (!empty($paypal_security_publisharray) && is_array($paypal_security_publisharray)) {
