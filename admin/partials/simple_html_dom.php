@@ -72,14 +72,18 @@ function file_get_html($url, $use_include_path = false, $context=null, $offset =
     // We DO force the tags to be terminated.
     $dom = new simple_html_dom(null, $lowercase, $forceTagsClosed, $target_charset, $stripRN, $defaultBRText, $defaultSpanText);
     // For sourceforge users: uncomment the next line and comment the retreive_url_contents line 2 lines down if it is not already done.
-	
-    if (get_http_response_code($url) == "404"){
-    	return false;
-    }else {
-    $contents = file_get_contents($url, $use_include_path, $context, $offset);
-    // Paperg - use our own mechanism for getting the contents as we want to control the timeout.
-    //$contents = retrieve_url_contents($url);
-    } 
+    if(is_numeric($url)) {
+        $post_object = get_post( $url );        
+        $contents = do_shortcode( $post_object->post_content );
+    } else {
+        if (get_http_response_code($url) == "404"){
+            return false;
+        }else {
+        $contents = file_get_contents($url, $use_include_path, $context, $offset);
+        // Paperg - use our own mechanism for getting the contents as we want to control the timeout.
+        //$contents = retrieve_url_contents($url);
+        } 
+    }
     if (empty($contents) || strlen($contents) > MAX_FILE_SIZE)
     {
         return false;

@@ -55,7 +55,12 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
             if (in_array($post_id_value, $paypal_security_exclude_post_list)) {
                 $paypal_security_include_post_list[$post_id_value] = $post_id_value;
             } else {
-                $html = file_get_html(get_permalink($post_id_value));
+                if( "draft" == get_post_status($post_id_value) ) {
+                    $html = file_get_html($post_id_value);
+                } else {
+                    $html = file_get_html(get_permalink($post_id_value));
+                }
+                //$html = get_the_content($post_id_value);
                 if (isset($html) && !empty($html)) {
                     $paypal_action_url = '';
                     foreach ($html->find('form') as $e) {
@@ -214,7 +219,7 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
 //        }
 
 
-        $paypal_security_publisharray = $wpdb->get_results("SELECT ID from $table_name where post_type IN ($selected_post_types) AND post_status = 'publish'", ARRAY_A);
+        $paypal_security_publisharray = $wpdb->get_results("SELECT ID from $table_name where post_type IN ($selected_post_types) AND post_status = 'publish' OR post_status = 'draft'", ARRAY_A);
         if (!empty($paypal_security_publisharray) && is_array($paypal_security_publisharray)) {
             foreach ($paypal_security_publisharray as $key => $value) {
                 $post_id_list[$key] = $value['ID'];
