@@ -67,25 +67,27 @@ class AngellEYE_PayPal_Security_Admin {
      */
     public function enqueue_scripts() {
         $screen = get_current_screen();
-        wp_enqueue_script('jquery-ui-core');
-        wp_enqueue_script('jquery-ui-progressbar');
-        wp_enqueue_script('jquery-ui-datepicker');
-        wp_enqueue_script('jquery-ui-dialog');
-        wp_enqueue_script('jquery-ui-accordion');
-        wp_enqueue_script('jquery-ui-tabs');
-        wp_enqueue_script('thickbox');
-        wp_enqueue_script('media-upload');
-        wp_enqueue_script('jquery-ui-tooltip');
-        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-admin.js', array('jquery'), $this->version, false);
-        wp_enqueue_script($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'js/shCore.js', array('jquery'), $this->version, false);
         if ($screen->id == 'tools_page_paypal-security') {
-            wp_enqueue_script($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'js/shBrushJScript.js', array('jquery'), $this->version, false);
-            wp_enqueue_script($this->plugin_name . 'four', plugin_dir_url(__FILE__) . 'js/jquery.fancybox.js', array('jquery'), $this->version, false);
-        }
-        if (wp_script_is($this->plugin_name)) {
-            wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
-                'plugin_url' => plugin_dir_url(__FILE__)
-            )));
+            wp_enqueue_script('jquery-ui-core');
+            wp_enqueue_script('jquery-ui-progressbar');
+            wp_enqueue_script('jquery-ui-datepicker');
+            wp_enqueue_script('jquery-ui-dialog');
+            wp_enqueue_script('jquery-ui-accordion');
+            wp_enqueue_script('jquery-ui-tabs');
+            wp_enqueue_script('thickbox');
+            wp_enqueue_script('media-upload');
+            wp_enqueue_script('jquery-ui-tooltip');
+            wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-admin.js', array('jquery'), $this->version, false);
+            wp_enqueue_script($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'js/shCore.js', array('jquery'), $this->version, false);
+            if ($screen->id == 'tools_page_paypal-security') {
+                wp_enqueue_script($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'js/shBrushJScript.js', array('jquery'), $this->version, false);
+                wp_enqueue_script($this->plugin_name . 'four', plugin_dir_url(__FILE__) . 'js/jquery.fancybox.js', array('jquery'), $this->version, false);
+            }
+            if (wp_script_is($this->plugin_name)) {
+                wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
+                    'plugin_url' => plugin_dir_url(__FILE__)
+                )));
+            }
         }
     }
 
@@ -143,10 +145,7 @@ class AngellEYE_PayPal_Security_Admin {
         $site_score = '';
         $site_grade = '';
         $cls_color = '';
-        $cnt_secure_fancy = 0;
-        $cnt_un_secure_fancy = 0;
-        $cnt_med_secure_fancy = 0;
-        if ($int_totalpost > 0) {
+          if ($int_totalpost > 0) {
             $site_score = "Site Score&nbsp;" . absint(($int_total_secure / $int_totalpost) * 100) . "%";
             $site_score_int = absint(($int_total_secure / $int_totalpost) * 100);
             if ($site_score_int >= 94 && $site_score_int <= 100) {
@@ -256,6 +255,7 @@ class AngellEYE_PayPal_Security_Admin {
                          foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { 
                               foreach ($paypal_security_scanner_finalarrayresult_unsecure_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value) {
                                  foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1 => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value) {
+                                      $cnt_un_secure_fancy = $this->angelleye_generator_fancybox_key();
                                       $paypal_button_security_details .= "<tr>";
                                       //$rating_html .= '<span style="width:' . ( ( $rating / 5 ) * 100 ) . '%"><strong class="rating">' . $rating . '</strong> ' . __( 'out of 5', 'woocommerce' ) . '</span>';
                                       $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/insecure-high-risk-icon.png" id="insecure-high-risk-icon"/></td>';
@@ -289,7 +289,6 @@ class AngellEYE_PayPal_Security_Admin {
                                       $paypal_button_security_details .= '</td>';
                                       $paypal_button_security_details .= '</tr>';                                            
                          }
-                         $cnt_un_secure_fancy = $cnt_un_secure_fancy + 1;
                     }
                }
                     $paypal_button_security_details .= '<div id="pss_recommendation_data" style="display: none">';
@@ -317,10 +316,11 @@ class AngellEYE_PayPal_Security_Admin {
                     $paypal_button_security_details .= '</ul>';
                     $paypal_button_security_details .= '</div>';                            
                   }
-                        if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) {
+                    if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) {
                             foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_medium) :                               
                                  foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium) : 
                                     foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium):
+                                        $cnt_med_secure_fancy = $this->angelleye_generator_fancybox_key();
                                         $paypal_button_security_details .= '<tr>';
                                         $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/insecure-mediaum-risk-icon.png" id="insecure-mediaum-risk-icon"/></td>';
                                         $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium) . '" target="_blank">';
@@ -353,14 +353,14 @@ class AngellEYE_PayPal_Security_Admin {
                                         $paypal_button_security_details .= '</td>';
                                         $paypal_button_security_details .= '</tr>';                                       
                                     endforeach;
-                                    $cnt_med_secure_fancy = $cnt_med_secure_fancy + 1;                                   
                                endforeach;
                       endforeach;
                    }                        
-                        if (isset($paypal_security_scanner_finalarrayresult['secure']) && !empty($paypal_security_scanner_finalarrayresult['secure'])) {
+                    if (isset($paypal_security_scanner_finalarrayresult['secure']) && !empty($paypal_security_scanner_finalarrayresult['secure'])) {
                             foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_secure) :                               
                                 foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure) :
                                     foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_secure):
+                                        $cnt_secure_fancy = $this->angelleye_generator_fancybox_key();
                                         $paypal_button_security_details .= '<tr>';
                                         $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/secure-button-icon.png" id="secure-button-icon"/></td>';
                                         $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure) . '" target="_blank">';
@@ -395,11 +395,10 @@ class AngellEYE_PayPal_Security_Admin {
                                         $paypal_button_security_details .= '</td>';
                                         $paypal_button_security_details .= '</tr>';                                      
                                     endforeach;
-                                    $cnt_secure_fancy = $cnt_secure_fancy + 1;
                              endforeach;
                          endforeach;
                         } 
-                        $paypal_button_security_details .= '</tbody>';
+                    $paypal_button_security_details .= '</tbody>';
                     $paypal_button_security_details .= '</table>';
                 $paypal_button_security_details .= '</div>'; 
                 echo $paypal_button_security_details;
@@ -544,5 +543,17 @@ class AngellEYE_PayPal_Security_Admin {
                 echo '<p><span><a class="install-now button" data-slug="' . esc_attr($plugin_slug) . '" href="' . esc_url($activeate_url) . '" aria-label="' . esc_attr(sprintf(__('Install %s now'), $plugin_name)) . '" data-name="' . esc_attr($plugin_name) . '">' . __('Activate Now') . '</a></span></p>';
             }
         }
+    }
+    
+    /**
+     * @return type
+     */
+    public function angelleye_generator_fancybox_key() {
+        $key = md5(microtime());
+        $new_key = '';
+        for ($i = 1; $i <= 10; $i ++) {
+            $new_key .= $key[$i];
+		}
+        return strtoupper($new_key);
     }
 }
