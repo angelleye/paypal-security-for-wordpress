@@ -108,6 +108,7 @@ class AngellEYE_PayPal_Security_Admin {
     public function paypal_security_scan_action_fn_scan() {
         $get_array_with_paypal = new AngellEYE_PayPal_Security_PayPal_Helper();
         $paypal_website_scan_report = array();
+        $paypal_button_security_details = '';
         $paypal_security_scanner_finalarrayresult = array();
         $paypal_security_scanner_get_all_forms = array();
         $paypal_security_scanner_finalarrayresult = $get_array_with_paypal->paypal_security_get_arraywithpaypaltext();
@@ -190,10 +191,8 @@ class AngellEYE_PayPal_Security_Admin {
             $site_score = '';
         }
         if ((isset($paypal_security_scanner_finalarrayresult) && !empty($paypal_security_scanner_finalarrayresult))):
-            ?>
-            <div id="div_scan_result">
-                <div class="div_tbl_total_count">
-                    <?php
+            $paypal_button_security_details .= '<div id="div_scan_result">';
+                $paypal_button_security_details .= '<div class="div_tbl_total_count">';
                     $tbl_scan_result = '<table class="tbl-scan-result form-table">';
                     $tbl_scan_result .= '<tbody>';
                     $tbl_scan_result .= '<tr class="color-note">';
@@ -217,13 +216,13 @@ class AngellEYE_PayPal_Security_Admin {
                     $tbl_scan_result .= "<td>$total_secure_count</td>";
                     $tbl_scan_result .= "</tr>";
                     $tbl_scan_result .= "</tbody></table>";
-                    echo $tbl_scan_result;
-                    ?>
-                </div>
-                <input type="hidden" id="txt_site_score" name="txt_site_score" value="<?php echo $site_score; ?>">
-                <input type="hidden" id="txt_site_grade" name="txt_site_grade" value="<?php echo $site_grade; ?>">
-                <input type="hidden" id="txt_clr_code" name="txt_site_grade" value="<?php echo $cls_color; ?>">
-                <?php
+                    $paypal_button_security_details .= $tbl_scan_result;
+
+                 $paypal_button_security_details .= "</div>";
+                $paypal_button_security_details .= "<input type='hidden' id='txt_site_score' name='txt_site_score' value='$site_score'>";
+                $paypal_button_security_details .= "<input type='hidden' id='txt_site_grade' name='txt_site_grade' value='$site_grade'>";
+                $paypal_button_security_details .= "<input type='hidden' id='txt_clr_code' name='txt_site_grade' value='$cls_color'>";
+                
                 if (isset($tbl_scan_result) && !empty($tbl_scan_result)) {
                     $paypal_website_scan_report['scan_data'] = $tbl_scan_result;
                 } else {
@@ -244,177 +243,166 @@ class AngellEYE_PayPal_Security_Admin {
                 } else {
                     $paypal_website_scan_report['txt_cls_color'] = '';
                 }
-                ?>
-                <?php if (!empty($paypal_security_scanner_finalarrayresult['unsecure']) || !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) || !empty($paypal_security_scanner_finalarrayresult['secure'])) { ?>
-                    <table class="form-table tbl_paypal_unsecure_data" id="tbl_resultdata">
-                        <thead>
-                            <tr>
-                                <th class="th_pageid"></th>
-                                <th class="th_url" colspan="2"><strong>PayPal Button Security Details</strong></th>
-                            </tr>
-                        </thead><tbody>
-                            <?php if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { ?>
-                                <?php foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { ?>
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value) : ?>
-                                        <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1 => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value): ?>
-                                            <tr>
-                                                <td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/insecure-high-risk-icon.png" id="insecure-high-risk-icon"/></td>
-                                                <td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?>' target="_blank">
-                                                        <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure); ?></a>
-                                                    <br/>
-                                                    <strong>Button Security Status:&nbsp;</strong>High Risk<br/>
-                                                    <strong>Pricing Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['pricing_concern']; ?><br/>
-                                                    <strong>Privacy Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['privacy_concern']; ?><br/>
-                                                </td>
-                                                <td class="td_viewsource_img">
-                                                    <a href="#un_sec_fan-<?php echo $cnt_un_secure_fancy; ?>" class="cls_dialog fancybox"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a><a href="#un_sec_fan-<?php echo $cnt_un_secure_fancy; ?>" class="cls_dialog fancybox"><span class="view_btn_code_txt">View Button Code</span></a>
-                                                    <?php
-                                                    $text_un_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1);
-                                                    $text_break_un_sec = str_replace('>', ">\n", $text_un_sec);
-                                                    ?>
-                                                    <div class="sec-fan" id="un_sec_fan-<?php echo $cnt_un_secure_fancy; ?>" style="width:650px;display: none;">
-                                                        <div class="fan-maindiv">
-                                                            <div class="fan-snippet">
-                                                                <span class="spn-snippet-lable">HTML code snippet</span>
-                                                                <pre class="brush: js;"><?php echo $text_break_un_sec; ?></pre>
-                                                            </div>
-                                                            <div class="fan-act-btndiv">
-                                                                <span class="spn-act-btn-lable">Actual Button form</span>
-                                                                <div class="un_sec_fan" id="un_sec_fan-<?php echo $cnt_secure_fancy; ?>">
-                                                                    <?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1; ?>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                        endforeach;
-                                        $cnt_un_secure_fancy = $cnt_un_secure_fancy + 1;
+                
+                if (!empty($paypal_security_scanner_finalarrayresult['unsecure']) || !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) || !empty($paypal_security_scanner_finalarrayresult['secure'])) { 
+                    $paypal_button_security_details .= "<table class='form-table tbl_paypal_unsecure_data' id='tbl_resultdata'>";
+                    $paypal_button_security_details .= "<thead>";
+                    $paypal_button_security_details .= "<tr>";
+                    $paypal_button_security_details .= "<th class='th_pageid'></th>";
+                    $paypal_button_security_details .= "<th class='th_url' colspan='2'><strong>PayPal Button Security Details</strong></th>";
+                    $paypal_button_security_details .= "</tr>";
+                    $paypal_button_security_details .= "</thead><tbody>";
+                    if (isset($paypal_security_scanner_finalarrayresult['unsecure']) && !empty($paypal_security_scanner_finalarrayresult['unsecure'])) { 
+                         foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { 
+                              foreach ($paypal_security_scanner_finalarrayresult_unsecure_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value) {
+                                 foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1 => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value) {
+                                      $paypal_button_security_details .= "<tr>";
+                                      //$rating_html .= '<span style="width:' . ( ( $rating / 5 ) * 100 ) . '%"><strong class="rating">' . $rating . '</strong> ' . __( 'out of 5', 'woocommerce' ) . '</span>';
+                                      $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/insecure-high-risk-icon.png" id="insecure-high-risk-icon"/></td>';
+                                      $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure) .'" target="_blank">';
+                                      $paypal_button_security_details .= get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure);
+                                      $paypal_button_security_details .= "<br/>";
+                                      $paypal_button_security_details .= '<strong>Button Security Status:&nbsp;</strong>High Risk<br/>';
+                                      $paypal_button_security_details .= "<strong>Pricing Concern:&nbsp;</strong>" . $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['pricing_concern'] . "<br/>";
+                                      $paypal_button_security_details .= "<strong>Privacy Concern:&nbsp;</strong>" . $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['privacy_concern'] . "<br/>";
+                                      $paypal_button_security_details .= "</td>";
+                                      $paypal_button_security_details .= '<td class="td_viewsource_img">';
+                                      $paypal_button_security_details .= '<a href="#un_sec_fan-' . $cnt_un_secure_fancy . '" class="cls_dialog fancybox"><img src="' . plugin_dir_url(__FILE__) . 'partials/images/view.png" id="view-icon"/></a><a href="#un_sec_fan-' . $cnt_un_secure_fancy . '" class="cls_dialog fancybox"><span class="view_btn_code_txt">View Button Code</span></a>';
 
-                                    endforeach;
-                                }
-                                ?>
-                            <div id="pss_recommendation_data" style="display: none">
-                                <p><h2><?php echo __('PayPal Security Scan Recommendation', 'paypal-security'); ?></h2></p>
-                                <ul>
-                                <li><?php echo __('Scroll down to see details about the security of the individual buttons found on your site.', 'paypal-security'); ?></li>
-                                <li><?php echo __('The insecure buttons on your site should be replaced with PayPal hosted buttons to ensure that they are secure.', 'paypal-security'); ?></li>
-                                <li><?php echo __('This can be done', 'paypal-security') . ' <a href="' . esc_url('https://www.angelleye.com/how-to-create-a-paypal-button/') . '" target="_blank">' . __('manually through your PayPal account profile', 'paypal-security') . '</a>' . __(', or you can use our free plugin', 'paypal-security') . ', <a href="https://www.angelleye.com/product/wordpress-paypal-button-manager/" target="_blank">PayPal WP Button Manager</a>, ' . __('to build and manage securely hosted PayPal buttons within WordPress.', 'paypal-security'); ?></li>
-                                <?php
-                                if ($this->ps_is_plugin_active('PayPal WP Button Manager'))
-                                {
-                                    echo '<li>' . __('We see that you already have our PayPal WP Button Manager plugin installed and activated.', 'paypal-security') . ' <a href="' . esc_url('https://www.angelleye.com/paypal-wp-button-manager-user-guide/') . '" target="_blank"> ' . __('Click here to view documentation', 'paypal-security') . '</a> ' . __('on how you can use it to create secure PayPal buttons.', 'paypal-security') . '</a></li>';
-                                }
-                                elseif($this->ps_is_plugin_installed('PayPal WP Button Manager'))
-                                {
-                                    echo '<li>' . __('We see that you already have our PayPal WP Button Manager plugin installed, but it is not currently active.  We recommend that you activate it and use it to', 'paypal-security') . ' <a target="_blank" href="' . esc_url('https://www.angelleye.com/paypal-wp-button-manager-user-guide/') . '">' . __('build hosted, secure buttons', 'paypal-security') . '</a> ' . __('to replace your current buttons.', 'paypal-security') . '</li>';
-                                    $this->ps_active_plugin_using_name('PayPal WP Button Manager');
-                                }
-                                else
-                                {
-                                    echo '<li>' . __('Click the button below to automatically install the PayPal WP Button Manager plugin.', 'paypal-security') . '</li>';
-                                    $this->install_paypal_wp_button_manager_plugin();
-                                }
-                                ?>
-                                </ul>
-                            </div>
-                            <?php
-                        }
+                                      $text_un_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1);
+                                      $text_break_un_sec = str_replace('>', ">\n", $text_un_sec);
+
+                                      $paypal_button_security_details .= '<div class="sec-fan" id="un_sec_fan-' . $cnt_un_secure_fancy . '" style="width:650px;display: none;">';
+                                      $paypal_button_security_details .= '<div class="fan-maindiv">';
+                                      $paypal_button_security_details .= '<div class="fan-snippet">';
+                                      $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
+                                      $paypal_button_security_details .= '<pre class="brush: js;">' . $text_break_un_sec . '</pre>';
+                                      $paypal_button_security_details .= '</div>';
+                                      $paypal_button_security_details .= '<div class="fan-act-btndiv">';
+                                      $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
+                                      $paypal_button_security_details .= '<div class="un_sec_fan" id="un_sec_fan-' . $cnt_secure_fancy . '">';
+                                      $paypal_button_security_details .= $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1;
+                                      $paypal_button_security_details .= '</div>';
+                                      $paypal_button_security_details .= '</div>';
+                                      $paypal_button_security_details .= '</div>';
+                                      $paypal_button_security_details .= '</div>';
+                                      $paypal_button_security_details .= '</td>';
+                                      $paypal_button_security_details .= '</tr>';                                            
+                         }
+                         $cnt_un_secure_fancy = $cnt_un_secure_fancy + 1;
+                    }
+               }
+                    $paypal_button_security_details .= '<div id="pss_recommendation_data" style="display: none">';
+                    $paypal_button_security_details .= '<p><h2>'.__('PayPal Security Scan Recommendation', 'paypal-security').'</h2></p>';
+                    $paypal_button_security_details .= '<ul>';
+                    $paypal_button_security_details .= '<li>'.__('Scroll down to see details about the security of the individual buttons found on your site.', 'paypal-security').'</li>';
+                    $paypal_button_security_details .= '<li>'.__('The insecure buttons on your site should be replaced with PayPal hosted buttons to ensure that they are secure.', 'paypal-security').'</li>';
+                    $paypal_button_security_details .= '<li>'.__('This can be done', 'paypal-security') . ' <a href="' . esc_url('https://www.angelleye.com/how-to-create-a-paypal-button/') . '" target="_blank">' . __('manually through your PayPal account profile', 'paypal-security') . '</a>' . __(', or you can use our free plugin', 'paypal-security') . ', <a href="https://www.angelleye.com/product/wordpress-paypal-button-manager/" target="_blank">PayPal WP Button Manager</a>, ' . __('to build and manage securely hosted PayPal buttons within WordPress.', 'paypal-security').'</li>';
+
+                    if ($this->ps_is_plugin_active('PayPal WP Button Manager'))
+                    {
+                        $paypal_button_security_details .= '<li>' . __('We see that you already have our PayPal WP Button Manager plugin installed and activated.', 'paypal-security') . ' <a href="' . esc_url('https://www.angelleye.com/paypal-wp-button-manager-user-guide/') . '" target="_blank"> ' . __('Click here to view documentation', 'paypal-security') . '</a> ' . __('on how you can use it to create secure PayPal buttons.', 'paypal-security') . '</a></li>';
+                    }
+                    elseif($this->ps_is_plugin_installed('PayPal WP Button Manager'))
+                    {
+                        $paypal_button_security_details .= '<li>' . __('We see that you already have our PayPal WP Button Manager plugin installed, but it is not currently active.  We recommend that you activate it and use it to', 'paypal-security') . ' <a target="_blank" href="' . esc_url('https://www.angelleye.com/paypal-wp-button-manager-user-guide/') . '">' . __('build hosted, secure buttons', 'paypal-security') . '</a> ' . __('to replace your current buttons.', 'paypal-security') . '</li>';
+                        $this->ps_active_plugin_using_name('PayPal WP Button Manager');
+                    }
+                    else
+                    {
+                        $paypal_button_security_details .= '<li>' . __('Click the button below to automatically install the PayPal WP Button Manager plugin.', 'paypal-security') . '</li>';
+                        $this->install_paypal_wp_button_manager_plugin();
+                    }
+
+                    $paypal_button_security_details .= '</ul>';
+                    $paypal_button_security_details .= '</div>';                            
+                  }
                         if (isset($paypal_security_scanner_finalarrayresult['medium_risk_buttons']) && !empty($paypal_security_scanner_finalarrayresult['medium_risk_buttons'])) {
-                            foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_medium) :
-                                ?>
-                                <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium) : ?>
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium): ?>
-                                        <tr>
-                                            <td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/insecure-mediaum-risk-icon.png" id="insecure-mediaum-risk-icon"/></td>
-                                            <td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium); ?>' target="_blank">
-                                                    <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium); ?></a>
-                                                <br/>
-                                                <strong>Button Security Status:&nbsp;</strong>Medium Risk<br/>
-                                                <strong>Pricing Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium['button_remark']['pricing_concern']; ?><br/>
-                                                <strong>Privacy Concern:&nbsp;</strong><?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium['button_remark']['privacy_concern']; ?><br/>
-                                            </td>
-                                            <td class="td_viewsource_img">
-                                                <a href="#med_sec_fan-<?php echo $cnt_med_secure_fancy; ?>" class="cls_dialog fancybox"><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a> <a href="#med_sec_fan-<?php echo $cnt_med_secure_fancy; ?>" class="cls_dialog fancybox"><span class="view_btn_code_txt">View Button Code</span></a>
-                                                <?php
-                                                $text_med_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium);
-                                                $text_break_med_sec = str_replace('>', ">\n", $text_med_sec);
-                                                ?>
-                                                <div class="med_sec_fan" id="med_sec_fan-<?php echo $cnt_med_secure_fancy; ?>" style="width:650px;display: none;">
-                                                    <div class="fan-maindiv">
-                                                        <div class="fan-snippet">
-                                                            <span class="spn-snippet-lable">HTML code snippet</span>
-                                                            <pre class="brush: js;"><?php echo $text_break_med_sec; ?></pre>
-                                                        </div>
-                                                        <div class="fan-act-btndiv">
-                                                            <span class="spn-act-btn-lable">Actual Button form</span>
-                                                            <div class="med_sec_fan" id="med_sec_fan-<?php echo $cnt_secure_fancy; ?>">
-                                                                <?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium; ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php
+                            foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_medium) :                               
+                                 foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium) : 
+                                    foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium):
+                                        $paypal_button_security_details .= '<tr>';
+                                        $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/insecure-mediaum-risk-icon.png" id="insecure-mediaum-risk-icon"/></td>';
+                                        $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium) . '" target="_blank">';
+                                        $paypal_button_security_details .= get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium) . '</a>';
+                                        $paypal_button_security_details .= '<br/>';
+                                        $paypal_button_security_details .= '<strong>Button Security Status:&nbsp;</strong>Medium Risk<br/>';
+                                        $paypal_button_security_details .= '<strong>Pricing Concern:&nbsp;</strong>' . $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium['button_remark']['pricing_concern'] . '<br/>';
+                                        $paypal_button_security_details .= '<strong>Privacy Concern:&nbsp;</strong>' . $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium['button_remark']['privacy_concern'] . '<br/>';
+                                        $paypal_button_security_details .= '</td>';
+                                        $paypal_button_security_details .= '<td class="td_viewsource_img">';
+                                        $paypal_button_security_details .= '<a href="#med_sec_fan-' . $cnt_med_secure_fancy . '" class="cls_dialog fancybox"><img src="' . plugin_dir_url(__FILE__) . 'partials/images/view.png" id="view-icon"/></a> <a href="#med_sec_fan-' . $cnt_med_secure_fancy . '" class="cls_dialog fancybox"><span class="view_btn_code_txt">View Button Code</span></a>';
+                                            
+                                        $text_med_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium);
+                                        $text_break_med_sec = str_replace('>', ">\n", $text_med_sec);
+                                            
+                                        $paypal_button_security_details .= '<div class="med_sec_fan" id="med_sec_fan-' . $cnt_med_secure_fancy . '" style="width:650px;display: none;">';
+                                        $paypal_button_security_details .= '<div class="fan-maindiv">';
+                                        $paypal_button_security_details .= '<div class="fan-snippet">';
+                                        $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
+                                        $paypal_button_security_details .= '<pre class="brush: js;">' . $text_break_med_sec . '</pre>';
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '<div class="fan-act-btndiv">';
+                                        $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
+                                        $paypal_button_security_details .= '<div class="med_sec_fan" id="med_sec_fan-' . $cnt_secure_fancy . '">';
+                                        $paypal_button_security_details .= $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium;
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '</td>';
+                                        $paypal_button_security_details .= '</tr>';                                       
                                     endforeach;
-                                    $cnt_med_secure_fancy = $cnt_med_secure_fancy + 1;
-                                    ?>
-                                <?php endforeach; ?>
-                            <?php endforeach; ?>
-                        <?php } ?>
-                        <?php /// secure start ?>
-                        <?php
+                                    $cnt_med_secure_fancy = $cnt_med_secure_fancy + 1;                                   
+                               endforeach;
+                      endforeach;
+                   }                        
                         if (isset($paypal_security_scanner_finalarrayresult['secure']) && !empty($paypal_security_scanner_finalarrayresult['secure'])) {
-                            foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_secure) :
-                                ?>
-                                <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure) : ?>
-                                    <?php foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_secure): ?>
-                                        <tr>
-                                            <td><img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/secure-button-icon.png" id="secure-button-icon"/></td>
-                                            <td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href='<?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure); ?>' target="_blank">
-                                                    <?php echo get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure); ?></a>
-                                                <br/>
-                                                <strong>Button Security Status:&nbsp;</strong>Secure<br/>
-                                                <strong>Pricing Concern:&nbsp;</strong>None<br/>
-                                                <strong>Privacy Concern:&nbsp;</strong>None<br/>
-                                            </td>
-                                            <td class="td_viewsource_img">
-                                                <a href="#sec_fan-<?php echo $cnt_secure_fancy; ?>" class="cls_dialog fancybox">
-                                                    <img src="<?php echo plugin_dir_url(__FILE__) ?>partials/images/view.png" id="view-icon"/></a>
-                                                <a href="#sec_fan-<?php echo $cnt_secure_fancy; ?>" class="cls_dialog fancybox"> <span class="view_btn_code_txt">View Button Code</span></a>
-                                                <?php
-                                                $text_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure);
-                                                $text_break_sec = str_replace('>', ">\n", $text_sec);
-                                                ?>
-                                                <div class="sec-fan" id="sec_fan-<?php echo $cnt_secure_fancy; ?>" style="width:650px;display: none;">
-                                                    <div class="fan-maindiv">
-                                                        <div class="fan-snippet">
-                                                            <span class="spn-snippet-lable">HTML code snippet</span>
-                                                            <pre class="brush: js;"><?php echo $text_break_sec; ?></pre>
-                                                        </div>
-                                                        <div class="fan-act-btndiv">
-                                                            <span class="spn-act-btn-lable">Actual Button form</span>
-                                                            <div class="sec-fan" id="sec_fan-actbtn-<?php echo $cnt_secure_fancy; ?>">
-                                                                <?php echo $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure; ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php
+                            foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_secure) :                               
+                                foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure) :
+                                    foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_secure):
+                                        $paypal_button_security_details .= '<tr>';
+                                        $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/secure-button-icon.png" id="secure-button-icon"/></td>';
+                                        $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure) . '" target="_blank">';
+                                        $paypal_button_security_details .= get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure) . '</a>';
+                                        $paypal_button_security_details .= '<br/>';
+                                        $paypal_button_security_details .= '<strong>Button Security Status:&nbsp;</strong>Secure<br/>';
+                                        $paypal_button_security_details .= '<strong>Pricing Concern:&nbsp;</strong>None<br/>';
+                                        $paypal_button_security_details .= '<strong>Privacy Concern:&nbsp;</strong>None<br/>';
+                                        $paypal_button_security_details .= '</td>';
+                                        $paypal_button_security_details .= '<td class="td_viewsource_img">';
+                                        $paypal_button_security_details .= '<a href="#sec_fan-' . $cnt_secure_fancy . '" class="cls_dialog fancybox">';
+                                        $paypal_button_security_details .= '<img src="' . plugin_dir_url(__FILE__) . 'partials/images/view.png" id="view-icon"/></a>';
+                                        $paypal_button_security_details .= '<a href="#sec_fan-' . $cnt_secure_fancy . '" class="cls_dialog fancybox"> <span class="view_btn_code_txt">View Button Code</span></a>';
+                                                
+                                        $text_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure);
+                                        $text_break_sec = str_replace('>', ">\n", $text_sec);
+                                               
+                                        $paypal_button_security_details .= '<div class="sec-fan" id="sec_fan-' . $cnt_secure_fancy . '" style="width:650px;display: none;">';
+                                        $paypal_button_security_details .= '<div class="fan-maindiv">';
+                                        $paypal_button_security_details .= '<div class="fan-snippet">';
+                                        $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
+                                        $paypal_button_security_details .= '<pre class="brush: js;">' . $text_break_sec . '</pre>';
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '<div class="fan-act-btndiv">';
+                                        $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
+                                        $paypal_button_security_details .= '<div class="sec-fan" id="sec_fan-actbtn-' . $cnt_secure_fancy . '">';
+                                        $paypal_button_security_details .= $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure;
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '</div>';
+                                        $paypal_button_security_details .= '</td>';
+                                        $paypal_button_security_details .= '</tr>';                                      
                                     endforeach;
                                     $cnt_secure_fancy = $cnt_secure_fancy + 1;
-                                    ?>
-                                <?php endforeach; ?>
-                            <?php endforeach; ?>
-                        <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php
+                             endforeach;
+                         endforeach;
+                        } 
+                        $paypal_button_security_details .= '</tbody>';
+                    $paypal_button_security_details .= '</table>';
+                $paypal_button_security_details .= '</div>'; 
+                echo $paypal_button_security_details;
             }
         endif;
         unset($paypal_security_scanner_finalarrayresult);
@@ -424,7 +412,7 @@ class AngellEYE_PayPal_Security_Admin {
         if (isset($paypal_security_scanner_get_all_forms)) {
             unset($paypal_security_scanner_get_all_forms);
         }
-        $this->paypal_security_add_report_history($paypal_website_scan_report);
+        $this->paypal_security_add_report_history($paypal_website_scan_report, $paypal_button_security_details);
         exit(1);
     }
 
@@ -442,7 +430,7 @@ class AngellEYE_PayPal_Security_Admin {
         delete_option('paypal_security_exclude_post_list');
     }
 
-    public function paypal_security_add_report_history($paypal_website_scan_report) {
+    public function paypal_security_add_report_history($paypal_website_scan_report, $paypal_button_security_details) {
 
         $insert_report_array = array(
             'ID' => '',
@@ -456,6 +444,11 @@ class AngellEYE_PayPal_Security_Admin {
         if (isset($paypal_website_scan_report) && !empty($paypal_website_scan_report)) {
             update_post_meta($post_id, 'paypal_website_scan_report', $paypal_website_scan_report);
         }
+        
+        if (isset($paypal_button_security_details) && !empty($paypal_button_security_details)) {
+            update_post_meta($post_id, 'paypal_button_security_details', $paypal_button_security_details);
+        }
+        
     }
 
     public function install_paypal_wp_button_manager_plugin() {

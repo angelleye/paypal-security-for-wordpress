@@ -1,5 +1,7 @@
 jQuery(document).ready(function () {
     var progressbar_time = '';
+    SyntaxHighlighter.highlight();
+    jQuery('.fancybox').fancybox();
     jQuery('#btn_pswp').click(function () {
         jQuery('#btn_pswp').hide();
         jQuery('#gifimg').css('visibility', 'visible');

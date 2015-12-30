@@ -272,7 +272,9 @@ span.spn-snippet-lable {
     max-width: 100%;
 }
 #delete_ps_history {float: right;}
-
+tr.paypal_button_security_details td {
+    border-top: medium none !important;
+}
 #report_history h3 {width: 81.5%;}
 @media screen and (max-width: 1300px){
     .cls_site_score {font-size: 20px !important;}
