@@ -17,7 +17,12 @@
 if (!defined('WPINC')) {
     die;
 }
-
+/**
+ * define plugin basename
+ */
+if (!defined('PAYPAL_SECURITY_PLUGIN_BASENAME')) {
+    define('PAYPAL_SECURITY_PLUGIN_BASENAME', plugin_basename(__FILE__));
+}
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-paypal-security-activator.php

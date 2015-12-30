@@ -62,6 +62,9 @@ class AngellEYE_PayPal_Security {
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
+        
+        $prefix = is_network_admin() ? 'network_admin_' : '';
+        add_filter("{$prefix}plugin_action_links_" . PAYPAL_SECURITY_PLUGIN_BASENAME, array($this, 'plugin_action_links'), 10, 4);
     }
 
     /**
@@ -212,6 +215,26 @@ class AngellEYE_PayPal_Security {
      */
     public function get_version() {
         return $this->version;
+    }
+    
+    /**
+     * @since     1.0.0
+     * @param type $actions
+     * @param type $plugin_file
+     * @param type $plugin_data
+     * @param type $context
+     * @return type
+     */
+    public function plugin_action_links($actions, $plugin_file, $plugin_data, $context) {
+        $custom_actions = array(
+            'scanner' => sprintf('<a href="%s">%s</a>', admin_url('/tools.php?page=paypal-security'), __('Scanner', 'paypal-security')),
+            'docs' => sprintf('<a href="%s" target="_blank">%s</a>', 'https://www.angelleye.com/category/docs/paypal-security-wordpress/', __('Docs', 'paypal-security')),
+            'support' => sprintf('<a href="%s" target="_blank">%s</a>', 'https://wordpress.org/support/plugin/paypal-security/', __('Support', 'paypal-security')),
+            'review' => sprintf('<a href="%s" target="_blank">%s</a>', 'http://wordpress.org/support/view/plugin-reviews/paypal-security', __('Write a Review', 'paypal-security')),
+        );
+
+        // add the links to the front of the actions list
+        return array_merge($custom_actions, $actions);
     }
 
 }
