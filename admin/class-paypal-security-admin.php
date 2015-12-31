@@ -42,7 +42,6 @@ class AngellEYE_PayPal_Security_Admin {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
         $this->load_dependencies();
-        //$this->ps_is_plugin_installed('PayPal WP Button Manager');
     }
 
     /**
@@ -55,7 +54,6 @@ class AngellEYE_PayPal_Security_Admin {
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-admin.css', array(), $this->version, 'all');
         if ($screen->id == 'tools_page_paypal-security') {
             wp_enqueue_style($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'css/shCoreDefault.css', array(), $this->version, 'all');
-            wp_enqueue_style($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'css/jquery.fancybox.css', array(), $this->version, 'all');
             wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
         }
     }
@@ -70,18 +68,11 @@ class AngellEYE_PayPal_Security_Admin {
         if ($screen->id == 'tools_page_paypal-security') {
             wp_enqueue_script('jquery-ui-core');
             wp_enqueue_script('jquery-ui-progressbar');
-            wp_enqueue_script('jquery-ui-datepicker');
-            wp_enqueue_script('jquery-ui-dialog');
-            wp_enqueue_script('jquery-ui-accordion');
-            wp_enqueue_script('jquery-ui-tabs');
             wp_enqueue_script('thickbox');
-            wp_enqueue_script('media-upload');
-            wp_enqueue_script('jquery-ui-tooltip');
             wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-admin.js', array('jquery'), $this->version, false);
             wp_enqueue_script($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'js/shCore.js', array('jquery'), $this->version, false);
             if ($screen->id == 'tools_page_paypal-security') {
                 wp_enqueue_script($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'js/shBrushJScript.js', array('jquery'), $this->version, false);
-                wp_enqueue_script($this->plugin_name . 'four', plugin_dir_url(__FILE__) . 'js/jquery.fancybox.js', array('jquery'), $this->version, false);
             }
             if (wp_script_is($this->plugin_name)) {
                 wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
@@ -108,6 +99,7 @@ class AngellEYE_PayPal_Security_Admin {
     }
 
     public function paypal_security_scan_action_fn_scan() {
+        $thinkbox_inline = "#TB_inline?width=600&height=550&inlineId=";
         $get_array_with_paypal = new AngellEYE_PayPal_Security_PayPal_Helper();
         $paypal_website_scan_report = array();
         $paypal_button_security_details = '';
@@ -255,9 +247,8 @@ class AngellEYE_PayPal_Security_Admin {
                          foreach ($paypal_security_scanner_finalarrayresult['unsecure'] as $key_paypal_security_scanner_finalarrayresult_unsecure => $paypal_security_scanner_finalarrayresult_unsecure_value) { 
                               foreach ($paypal_security_scanner_finalarrayresult_unsecure_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value) {
                                  foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1 => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value) {
-                                      $cnt_un_secure_fancy = $this->angelleye_generator_fancybox_key();
+                                      $cnt_un_secure_think = $this->angelleye_generator_thinkbox_key();
                                       $paypal_button_security_details .= "<tr>";
-                                      //$rating_html .= '<span style="width:' . ( ( $rating / 5 ) * 100 ) . '%"><strong class="rating">' . $rating . '</strong> ' . __( 'out of 5', 'woocommerce' ) . '</span>';
                                       $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/insecure-high-risk-icon.png" id="insecure-high-risk-icon"/></td>';
                                       $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure) .'" target="_blank">';
                                       $paypal_button_security_details .= get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure);
@@ -267,12 +258,12 @@ class AngellEYE_PayPal_Security_Admin {
                                       $paypal_button_security_details .= "<strong>Privacy Concern:&nbsp;</strong>" . $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['privacy_concern'] . "<br/>";
                                       $paypal_button_security_details .= "</td>";
                                       $paypal_button_security_details .= '<td class="td_viewsource_img">';
-                                      $paypal_button_security_details .= '<a href="#un_sec_fan-' . $cnt_un_secure_fancy . '" class="cls_dialog fancybox"><img src="' . plugin_dir_url(__FILE__) . 'partials/images/view.png" id="view-icon"/></a><a href="#un_sec_fan-' . $cnt_un_secure_fancy . '" class="cls_dialog fancybox"><span class="view_btn_code_txt">View Button Code</span></a>';
+                                      $paypal_button_security_details .= '<a href="'.$thinkbox_inline . $cnt_un_secure_think . '" class="cls_dialog thickbox"><img src="' . plugin_dir_url(__FILE__) . 'partials/images/view.png" id="view-icon"/></a><a href="'.$thinkbox_inline . $cnt_un_secure_think . '" class="cls_dialog thickbox"><span class="view_btn_code_txt">View Button Code</span></a>';
 
                                       $text_un_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1);
                                       $text_break_un_sec = str_replace('>', ">\n", $text_un_sec);
 
-                                      $paypal_button_security_details .= '<div class="sec-fan" id="un_sec_fan-' . $cnt_un_secure_fancy . '" style="width:650px;display: none;">';
+                                      $paypal_button_security_details .= '<div class="sec-fan" id="'. $cnt_un_secure_think . '" style="width:650px;display: none;">';
                                       $paypal_button_security_details .= '<div class="fan-maindiv">';
                                       $paypal_button_security_details .= '<div class="fan-snippet">';
                                       $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
@@ -280,7 +271,7 @@ class AngellEYE_PayPal_Security_Admin {
                                       $paypal_button_security_details .= '</div>';
                                       $paypal_button_security_details .= '<div class="fan-act-btndiv">';
                                       $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
-                                      $paypal_button_security_details .= '<div class="un_sec_fan" id="un_sec_fan-' . $cnt_secure_fancy . '">';
+                                      $paypal_button_security_details .= '<div class="un_sec_fan" id="'. $cnt_un_secure_think . '">';
                                       $paypal_button_security_details .= $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1;
                                       $paypal_button_security_details .= '</div>';
                                       $paypal_button_security_details .= '</div>';
@@ -320,7 +311,7 @@ class AngellEYE_PayPal_Security_Admin {
                             foreach ($paypal_security_scanner_finalarrayresult['medium_risk_buttons'] as $key_paypal_security_scanner_finalarrayresult_unsecure_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_medium) :                               
                                  foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium) : 
                                     foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_medium as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium):
-                                        $cnt_med_secure_fancy = $this->angelleye_generator_fancybox_key();
+                                        $cnt_med_secure_think = $this->angelleye_generator_thinkbox_key();
                                         $paypal_button_security_details .= '<tr>';
                                         $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/insecure-mediaum-risk-icon.png" id="insecure-mediaum-risk-icon"/></td>';
                                         $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_medium) . '" target="_blank">';
@@ -331,12 +322,12 @@ class AngellEYE_PayPal_Security_Admin {
                                         $paypal_button_security_details .= '<strong>Privacy Concern:&nbsp;</strong>' . $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_medium['button_remark']['privacy_concern'] . '<br/>';
                                         $paypal_button_security_details .= '</td>';
                                         $paypal_button_security_details .= '<td class="td_viewsource_img">';
-                                        $paypal_button_security_details .= '<a href="#med_sec_fan-' . $cnt_med_secure_fancy . '" class="cls_dialog fancybox"><img src="' . plugin_dir_url(__FILE__) . 'partials/images/view.png" id="view-icon"/></a> <a href="#med_sec_fan-' . $cnt_med_secure_fancy . '" class="cls_dialog fancybox"><span class="view_btn_code_txt">View Button Code</span></a>';
+                                        $paypal_button_security_details .= '<a href="'. $thinkbox_inline . $cnt_med_secure_think . '" class="cls_dialog thickbox"><img src="' . plugin_dir_url(__FILE__) . 'partials/images/view.png" id="view-icon"/></a> <a href="'. $thinkbox_inline . $cnt_med_secure_think . '" class="cls_dialog thickbox"><span class="view_btn_code_txt">View Button Code</span></a>';
                                             
                                         $text_med_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium);
                                         $text_break_med_sec = str_replace('>', ">\n", $text_med_sec);
                                             
-                                        $paypal_button_security_details .= '<div class="med_sec_fan" id="med_sec_fan-' . $cnt_med_secure_fancy . '" style="width:650px;display: none;">';
+                                        $paypal_button_security_details .= '<div class="med_sec_fan" id="' . $cnt_med_secure_think . '" style="width:650px;display: none;">';
                                         $paypal_button_security_details .= '<div class="fan-maindiv">';
                                         $paypal_button_security_details .= '<div class="fan-snippet">';
                                         $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
@@ -344,7 +335,7 @@ class AngellEYE_PayPal_Security_Admin {
                                         $paypal_button_security_details .= '</div>';
                                         $paypal_button_security_details .= '<div class="fan-act-btndiv">';
                                         $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
-                                        $paypal_button_security_details .= '<div class="med_sec_fan" id="med_sec_fan-' . $cnt_secure_fancy . '">';
+                                        $paypal_button_security_details .= '<div class="med_sec_fan" id="' . $cnt_med_secure_think . '">';
                                         $paypal_button_security_details .= $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_medium;
                                         $paypal_button_security_details .= '</div>';
                                         $paypal_button_security_details .= '</div>';
@@ -360,7 +351,7 @@ class AngellEYE_PayPal_Security_Admin {
                             foreach ($paypal_security_scanner_finalarrayresult['secure'] as $key_paypal_security_scanner_finalarrayresult_unsecure_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_secure) :                               
                                 foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure) :
                                     foreach ($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_secure as $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure => $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value_secure):
-                                        $cnt_secure_fancy = $this->angelleye_generator_fancybox_key();
+                                        $cnt_secure_think = $this->angelleye_generator_thinkbox_key();
                                         $paypal_button_security_details .= '<tr>';
                                         $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/secure-button-icon.png" id="secure-button-icon"/></td>';
                                         $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure_secure) . '" target="_blank">';
@@ -371,14 +362,14 @@ class AngellEYE_PayPal_Security_Admin {
                                         $paypal_button_security_details .= '<strong>Privacy Concern:&nbsp;</strong>None<br/>';
                                         $paypal_button_security_details .= '</td>';
                                         $paypal_button_security_details .= '<td class="td_viewsource_img">';
-                                        $paypal_button_security_details .= '<a href="#sec_fan-' . $cnt_secure_fancy . '" class="cls_dialog fancybox">';
+                                        $paypal_button_security_details .= '<a href="' . $thinkbox_inline . $cnt_secure_think . '" class="cls_dialog thickbox">';
                                         $paypal_button_security_details .= '<img src="' . plugin_dir_url(__FILE__) . 'partials/images/view.png" id="view-icon"/></a>';
-                                        $paypal_button_security_details .= '<a href="#sec_fan-' . $cnt_secure_fancy . '" class="cls_dialog fancybox"> <span class="view_btn_code_txt">View Button Code</span></a>';
+                                        $paypal_button_security_details .= '<a href="' . $thinkbox_inline . $cnt_secure_think . '" class="cls_dialog thickbox"> <span class="view_btn_code_txt">View Button Code</span></a>';
                                                 
                                         $text_sec = trim($paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure);
                                         $text_break_sec = str_replace('>', ">\n", $text_sec);
                                                
-                                        $paypal_button_security_details .= '<div class="sec-fan" id="sec_fan-' . $cnt_secure_fancy . '" style="width:650px;display: none;">';
+                                        $paypal_button_security_details .= '<div class="sec-fan" id="' . $cnt_secure_think . '" style="width:650px;display: none;">';
                                         $paypal_button_security_details .= '<div class="fan-maindiv">';
                                         $paypal_button_security_details .= '<div class="fan-snippet">';
                                         $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
@@ -386,7 +377,7 @@ class AngellEYE_PayPal_Security_Admin {
                                         $paypal_button_security_details .= '</div>';
                                         $paypal_button_security_details .= '<div class="fan-act-btndiv">';
                                         $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
-                                        $paypal_button_security_details .= '<div class="sec-fan" id="sec_fan-actbtn-' . $cnt_secure_fancy . '">';
+                                        $paypal_button_security_details .= '<div class="sec-fan" id="' . $cnt_secure_think . '">';
                                         $paypal_button_security_details .= $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_secure;
                                         $paypal_button_security_details .= '</div>';
                                         $paypal_button_security_details .= '</div>';
@@ -548,7 +539,7 @@ class AngellEYE_PayPal_Security_Admin {
     /**
      * @return type
      */
-    public function angelleye_generator_fancybox_key() {
+    public function angelleye_generator_thinkbox_key() {
         $key = md5(microtime());
         $new_key = '';
         for ($i = 1; $i <= 10; $i ++) {

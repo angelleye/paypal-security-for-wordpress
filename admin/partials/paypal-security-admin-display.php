@@ -24,6 +24,7 @@ class AngellEYE_PayPal_Security_Admin_Display {
 
     public static function paypal_security_options() {
         $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'scanner';
+        add_thickbox();
         ?>
         <h2 class="nav-tab-wrapper">
             <a href="?page=paypal-security&tab=scanner" class="nav-tab <?php echo $active_tab == 'scanner' ? 'nav-tab-active' : ''; ?>"><?php echo __('Scanner', 'paypal-security'); ?></a>

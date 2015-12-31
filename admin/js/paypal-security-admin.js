@@ -1,7 +1,6 @@
 jQuery(document).ready(function () {
     var progressbar_time = '';
     SyntaxHighlighter.highlight();
-    jQuery('.fancybox').fancybox();
     jQuery('#btn_pswp').click(function () {
         jQuery('#btn_pswp').hide();
         jQuery('#gifimg').css('visibility', 'visible');
@@ -72,7 +71,6 @@ jQuery(document).ready(function () {
                                     }, 1000);
                                     jQuery('#paypal_scan_response').html(data);
                                     SyntaxHighlighter.highlight();
-                                    jQuery('.fancybox').fancybox();
                                     var pss_recommendation_data = jQuery(data).find('#pss_recommendation_data').html();
                                     var $result_total_cnt = jQuery(data).find('.div_tbl_total_count').html();
                                     var $site_score = jQuery(data).find('#txt_site_score').val();
@@ -122,12 +120,7 @@ jQuery(document).ready(function () {
         }
     });
 
-    jQuery(document).on('click', ".cls_dialog", function (url) {
-    });
-
-
-
-    function progress() {
+   function progress() {
         var val = jQuery("#progressbar").progressbar("value") || 0;
         jQuery("#progressbar").progressbar("value", val + 2);
         if (val < 88) {
@@ -136,19 +129,6 @@ jQuery(document).ready(function () {
 
     }
     var pluginurl = paypal_security_plugin_url.plugin_url;
-    jQuery("#dt_start_from").datepicker({
-        showOn: "button",
-        buttonImage: pluginurl + '/partials/images/calendar.gif',
-        buttonImageOnly: true
-    });
-    jQuery("#dt_to").datepicker({
-        showOn: "button",
-        buttonImage: pluginurl + '/partials/images/calendar.gif',
-        buttonImageOnly: true
-    });
-    jQuery(".cls_dialog_source").dialog({
-        autoOpen: false
-    });
     var select_all = function (control) {
         jQuery(control).focus().select();
         var copy = $(control).val();
@@ -174,6 +154,4 @@ jQuery(document).ready(function () {
             });
         }
     });
-        
-        
 });
