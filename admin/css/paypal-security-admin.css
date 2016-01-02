@@ -280,6 +280,9 @@ tr.paypal_button_security_details td {
     text-align: center !important;
     width: 96% !important;
 }
+pre.prettyprint {
+    text-align: left;
+}
 @media screen and (max-width: 1300px){
     .cls_site_score {font-size: 20px !important;}
     .cls_site_grade {font-size: 100px;line-height: 158px;}

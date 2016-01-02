@@ -53,7 +53,6 @@ class AngellEYE_PayPal_Security_Admin {
         $screen = get_current_screen();
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-admin.css', array(), $this->version, 'all');
         if ($screen->id == 'tools_page_paypal-security') {
-            wp_enqueue_style($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'css/shCoreDefault.css', array(), $this->version, 'all');
             wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
         }
     }
@@ -70,9 +69,11 @@ class AngellEYE_PayPal_Security_Admin {
             wp_enqueue_script('jquery-ui-progressbar');
             wp_enqueue_script('thickbox');
             wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-admin.js', array('jquery'), $this->version, false);
-            wp_enqueue_script($this->plugin_name . 'three', plugin_dir_url(__FILE__) . 'js/shCore.js', array('jquery'), $this->version, false);
             if ($screen->id == 'tools_page_paypal-security') {
-                wp_enqueue_script($this->plugin_name . 'two', plugin_dir_url(__FILE__) . 'js/shBrushJScript.js', array('jquery'), $this->version, false);
+                wp_enqueue_script('run_prettify', 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css', array('jquery'), $this->version, false);
+                
+                
+                
             }
             if (wp_script_is($this->plugin_name)) {
                 wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
@@ -99,7 +100,7 @@ class AngellEYE_PayPal_Security_Admin {
     }
 
     public function paypal_security_scan_action_fn_scan() {
-        $thinkbox_inline = "#TB_inline?width=600&inlineId=";
+        $thinkbox_inline = "#TB_inline?height=1200;width=600&amp;&inlineId=";
         $get_array_with_paypal = new AngellEYE_PayPal_Security_PayPal_Helper();
         $paypal_website_scan_report = array();
         $paypal_button_security_details = '';
@@ -267,7 +268,7 @@ class AngellEYE_PayPal_Security_Admin {
                                       $paypal_button_security_details .= '<div class="fan-maindiv">';
                                       $paypal_button_security_details .= '<div class="fan-snippet">';
                                       $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
-                                      $paypal_button_security_details .= '<pre class="brush: js;">' . $text_break_un_sec . '</pre>';
+                                      $paypal_button_security_details .= '<pre class="prettyprint lang-html">' . $text_break_un_sec . '</pre>';
                                       $paypal_button_security_details .= '</div>';
                                       $paypal_button_security_details .= '<div class="fan-act-btndiv">';
                                       $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
@@ -331,7 +332,7 @@ class AngellEYE_PayPal_Security_Admin {
                                         $paypal_button_security_details .= '<div class="fan-maindiv">';
                                         $paypal_button_security_details .= '<div class="fan-snippet">';
                                         $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
-                                        $paypal_button_security_details .= '<pre class="brush: js;">' . $text_break_med_sec . '</pre>';
+                                        $paypal_button_security_details .= '<pre class="prettyprint lang-html">' . $text_break_med_sec . '</pre>';
                                         $paypal_button_security_details .= '</div>';
                                         $paypal_button_security_details .= '<div class="fan-act-btndiv">';
                                         $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
@@ -373,7 +374,7 @@ class AngellEYE_PayPal_Security_Admin {
                                         $paypal_button_security_details .= '<div class="fan-maindiv">';
                                         $paypal_button_security_details .= '<div class="fan-snippet">';
                                         $paypal_button_security_details .= '<span class="spn-snippet-lable">HTML code snippet</span>';
-                                        $paypal_button_security_details .= '<pre class="brush: js;">' . $text_break_sec . '</pre>';
+                                        $paypal_button_security_details .= '<pre class="prettyprint lang-html">' . $text_break_sec . '</pre>';
                                         $paypal_button_security_details .= '</div>';
                                         $paypal_button_security_details .= '<div class="fan-act-btndiv">';
                                         $paypal_button_security_details .= '<span class="spn-act-btn-lable">Actual Button form</span>';
