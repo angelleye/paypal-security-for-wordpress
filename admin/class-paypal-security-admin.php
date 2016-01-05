@@ -251,7 +251,7 @@ class AngellEYE_PayPal_Security_Admin {
                                       $paypal_button_security_details .= "<tr>";
                                       $paypal_button_security_details .= '<td><img src="' . plugin_dir_url(__FILE__) . 'partials/images/insecure-high-risk-icon.png" id="insecure-high-risk-icon"/></td>';
                                       $paypal_button_security_details .= '<td class="td_viewremark"><strong>Page URL:&nbsp;</strong> <a href="' . get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure) .'" target="_blank">';
-                                      $paypal_button_security_details .= get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure);
+                                      $paypal_button_security_details .= get_permalink($key_paypal_security_scanner_finalarrayresult_unsecure) . '</a>';
                                       $paypal_button_security_details .= "<br/>";
                                       $paypal_button_security_details .= '<strong>Button Security Status:&nbsp;</strong>High Risk<br/>';
                                       $paypal_button_security_details .= "<strong>Pricing Concern:&nbsp;</strong>" . $paypal_security_scanner_finalarrayresult_unsecure_value_key_value_key1_value['button_remark']['pricing_concern'] . "<br/>";
