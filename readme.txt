@@ -63,5 +63,10 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Changelog ==
 
+= 1.1.0 - =
+* Tweak - Includes draft content in the security scan. ([#30](https://github.com/angelleye/paypal-security-for-wordpress/issues/30))
+* Tweak - Adds scan / button details into scan history. ([#31](https://github.com/angelleye/paypal-security-for-wordpress/issues/31))
+* Tweak - General code improvements and bug fixes.
+
 = 1.0.0 =
 * Initial stable release.
