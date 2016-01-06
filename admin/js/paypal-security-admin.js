@@ -1,6 +1,5 @@
 jQuery(document).ready(function () {
     var progressbar_time = '';
- 
     function code_formater(s) {
        if(typeof(s) != "undefined" && s !== null) {
         return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -97,6 +96,7 @@ jQuery(document).ready(function () {
                                     jQuery('#paypal_scan_response').html(data);
                                     jQuery('.prettyprint').each(function(i, obj) {
                                         var quineHtml = code_formater(jQuery(this).html());
+                                        alert(quineHtml);
                                         if(typeof(quineHtml) != "undefined" && quineHtml !== null) {
                                             jQuery(this).html("");
                                            jQuery(this).html(quineHtml);
