@@ -55,7 +55,6 @@ class AngellEYE_PayPal_Security_Admin {
         if ($screen->id == 'tools_page_paypal-security') {
             wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
         }
-        
     }
 
     /**
@@ -69,8 +68,10 @@ class AngellEYE_PayPal_Security_Admin {
             wp_enqueue_script('jquery-ui-core');
             wp_enqueue_script('jquery-ui-progressbar');
             wp_enqueue_script('thickbox');
-            wp_enqueue_script('run_prettify', 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css', array('jquery'), $this->version, false);
             wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-admin.js', array('jquery'), $this->version, false);
+            if ($screen->id == 'tools_page_paypal-security') {
+                wp_enqueue_script('run_prettify_paypal-security', 'https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css', array('jquery'), $this->version, false);
+            }
             if (wp_script_is($this->plugin_name)) {
                 wp_localize_script($this->plugin_name, 'paypal_security_plugin_url', apply_filters('paypal_security_plugin_url_filter', array(
                     'plugin_url' => plugin_dir_url(__FILE__)
