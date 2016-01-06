@@ -1,6 +1,31 @@
 jQuery(document).ready(function () {
     var progressbar_time = '';
-    SyntaxHighlighter.highlight();
+ 
+    function code_formater(s) {
+       if(typeof(s) != "undefined" && s !== null) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+    }
+    
+    function ps_resize_thickbox() {
+        var TB_HEIGHT = 'auto';
+        var TB_WIDTH = jQuery('#TB_window').width();
+        jQuery(document).find('#TB_window').width(TB_WIDTH).height(TB_HEIGHT).css('margin-left', -TB_WIDTH / 2);
+        jQuery(document).find('#TB_ajaxContent').css({'width': '', 'height': ''});
+    }
+    
+     jQuery(window).resize(function() {
+        ps_resize_thickbox();
+    }); 
+    
+    jQuery('.prettyprint').each(function(i, obj) {
+        var quineHtml = code_formater(jQuery(this).html());
+        if(typeof(quineHtml) != "undefined" && quineHtml !== null) {
+            jQuery(this).html("");
+           jQuery(this).html(quineHtml);
+       }
+    });
+    
     jQuery('#btn_pswp').click(function () {
         jQuery('#btn_pswp').hide();
         jQuery('#gifimg').css('visibility', 'visible');
@@ -70,7 +95,13 @@ jQuery(document).ready(function () {
                                         jQuery("#progressbar").hide();
                                     }, 1000);
                                     jQuery('#paypal_scan_response').html(data);
-                                    SyntaxHighlighter.highlight();
+                                    jQuery('.prettyprint').each(function(i, obj) {
+                                        var quineHtml = code_formater(jQuery(this).html());
+                                        if(typeof(quineHtml) != "undefined" && quineHtml !== null) {
+                                            jQuery(this).html("");
+                                           jQuery(this).html(quineHtml);
+                                       }
+                                    });
                                     var pss_recommendation_data = jQuery(data).find('#pss_recommendation_data').html();
                                     var $result_total_cnt = jQuery(data).find('.div_tbl_total_count').html();
                                     var $site_score = jQuery(data).find('#txt_site_score').val();
