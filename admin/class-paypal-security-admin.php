@@ -100,7 +100,7 @@ class AngellEYE_PayPal_Security_Admin {
     }
 
     public function paypal_security_scan_action_fn_scan() {
-        $thinkbox_inline = "#TB_inline?height=1200;width=600&amp;&inlineId=";
+        $thinkbox_inline = "#TB_inline?height=1200&width=600&inlineId=";
         $get_array_with_paypal = new AngellEYE_PayPal_Security_PayPal_Helper();
         $paypal_website_scan_report = array();
         $paypal_button_security_details = '';
