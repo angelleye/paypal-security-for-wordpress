@@ -96,12 +96,17 @@ jQuery(document).ready(function () {
                                     jQuery('#paypal_scan_response').html(data);
                                     jQuery('.prettyprint').each(function(i, obj) {
                                         var quineHtml = code_formater(jQuery(this).html());
-                                        alert(quineHtml);
                                         if(typeof(quineHtml) != "undefined" && quineHtml !== null) {
                                             jQuery(this).html("");
                                            jQuery(this).html(quineHtml);
                                        }
                                     });
+                                    jQuery.getScript("https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true", function(){
+
+                                    alert("Script loaded but not necessarily executed.");
+
+                                 });
+
                                     var pss_recommendation_data = jQuery(data).find('#pss_recommendation_data').html();
                                     var $result_total_cnt = jQuery(data).find('.div_tbl_total_count').html();
                                     var $site_score = jQuery(data).find('#txt_site_score').val();
