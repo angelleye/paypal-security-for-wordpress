@@ -102,10 +102,7 @@ jQuery(document).ready(function () {
                                        }
                                     });
                                     jQuery.getScript("https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true", function(){
-
-                                    alert("Script loaded but not necessarily executed.");
-
-                                 });
+                                    });
 
                                     var pss_recommendation_data = jQuery(data).find('#pss_recommendation_data').html();
                                     var $result_total_cnt = jQuery(data).find('.div_tbl_total_count').html();
