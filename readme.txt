@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: paypal, security, payments, standard, buttons, subscriptions, hosted
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,7 +63,7 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Changelog ==
 
-= 1.1.0 - =
+= 1.0.1 - =
 * Tweak - Includes draft content in the security scan. ([#30](https://github.com/angelleye/paypal-security-for-wordpress/issues/30))
 * Tweak - Adds scan / button details into scan history. ([#31](https://github.com/angelleye/paypal-security-for-wordpress/issues/31))
 * Tweak - General code improvements and bug fixes.
