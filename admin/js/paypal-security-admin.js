@@ -101,7 +101,7 @@ jQuery(document).ready(function () {
                                            jQuery(this).html(quineHtml);
                                        }
                                     });
-                                    jQuery.getScript("https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true", function(){
+                                    jQuery.getScript(paypal_security_plugin_url.plugin_url + "js/run_prettify.js?autoload=true", function(){
                                     });
 
                                     var pss_recommendation_data = jQuery(data).find('#pss_recommendation_data').html();
