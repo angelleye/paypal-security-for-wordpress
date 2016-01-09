@@ -63,7 +63,10 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Changelog ==
 
-= 1.0.1 - =
+= 1.0.2 - 01.09.2016 =
+* Tweak - Adjusts Google Prettify. ([#38](https://github.com/angelleye/paypal-security-for-wordpress/issues/38))
+
+= 1.0.1 - 01.08.2016 =
 * Tweak - Includes draft content in the security scan. ([#30](https://github.com/angelleye/paypal-security-for-wordpress/issues/30))
 * Tweak - Adds scan / button details into scan history. ([#31](https://github.com/angelleye/paypal-security-for-wordpress/issues/31))
 * Tweak - General code improvements and bug fixes.
