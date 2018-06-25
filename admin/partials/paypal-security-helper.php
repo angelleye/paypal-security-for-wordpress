@@ -38,7 +38,7 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
         $button_name = '';
         $paypal_security_paypal_form_html = array();
         if (isset($_POST['data']['count']) && !empty($_POST['data']['count'])) {
-            $paypal_security_content['total_post'] = $_POST['data']['count'];
+            $paypal_security_content['total_post'] = sanitize_text_field($_POST['data']['count']);
             unset($_POST['data']['count']);
         } else {
             $paypal_security_content['total_post'] = 0;
@@ -50,7 +50,7 @@ class AngellEYE_PayPal_Security_PayPal_Helper {
             $paypal_security_exclude_post_list = $paypal_security_exclude_post_list_data;
         }
 
-        $post_type = $_POST['data'];
+        $post_type = wp_unslash($_POST['data']);        
         foreach ($post_type as $key_post => $post_id_value) {
             if (in_array($post_id_value, $paypal_security_exclude_post_list)) {
                 $paypal_security_include_post_list[$post_id_value] = $post_id_value;

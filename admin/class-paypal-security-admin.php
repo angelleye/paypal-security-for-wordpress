@@ -88,7 +88,7 @@ class AngellEYE_PayPal_Security_Admin {
 
     public function paypal_security_scan_action_fn() {
         if (isset($_POST['data']) && !empty($_POST['data'])) {
-            parse_str($_POST['data'], $post_type);
+            parse_str(wp_unslash($_POST['data']), $post_type);
         }
         $PayPal_Security_PayPal_Helper = new AngellEYE_PayPal_Security_PayPal_Helper();
         $paypal_security_scanner_finalarrayresult = $PayPal_Security_PayPal_Helper->paypal_security_get_post_result($post_type);
