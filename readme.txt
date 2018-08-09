@@ -65,6 +65,7 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 = 1.0.3 - xx.xx.2018 =
 * [PAYP-1](https://github.com/angelleye/paypal-security-for-wordpress/pull/40) - Tweak - Data sanitization.
+* [PAYP-2](https://github.com/angelleye/paypal-security-for-wordpress/pull/41) - Fix - Resolves an undefined error with the scanner results.
 
 = 1.0.2 - 01.09.2016 =
 * Tweak - Adjusts Google Prettify. ([#38](https://github.com/angelleye/paypal-security-for-wordpress/issues/38))
