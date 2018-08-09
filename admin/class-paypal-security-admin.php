@@ -389,6 +389,8 @@ class AngellEYE_PayPal_Security_Admin {
                     $paypal_button_security_details .= '</table>';
                 $paypal_button_security_details .= '</div>'; 
                 echo $paypal_button_security_details;
+            } else {
+                echo $paypal_button_security_details;
             }
         endif;
         unset($paypal_security_scanner_finalarrayresult);
