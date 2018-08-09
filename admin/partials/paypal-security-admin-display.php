@@ -23,7 +23,7 @@ class AngellEYE_PayPal_Security_Admin_Display {
     }
 
     public static function paypal_security_options() {
-        $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'scanner';
+        $active_tab = isset($_GET['tab']) ? sanitize_key($_GET['tab']) : 'scanner';
         add_thickbox();
         ?>
         <h2 class="nav-tab-wrapper">
