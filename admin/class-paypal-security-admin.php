@@ -53,7 +53,7 @@ class AngellEYE_PayPal_Security_Admin {
         $screen = get_current_screen();
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/paypal-security-admin.css', array(), $this->version, 'all');
         if ($screen->id == 'tools_page_paypal-security') {
-            wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+            wp_enqueue_style('jquery-style', plugin_dir_url(__FILE__) .'css/jquery-ui.css', array(), $this->version, 'all');
         }
     }
 
@@ -88,7 +88,7 @@ class AngellEYE_PayPal_Security_Admin {
 
     public function paypal_security_scan_action_fn() {
         if (isset($_POST['data']) && !empty($_POST['data'])) {
-            parse_str($_POST['data'], $post_type);
+            parse_str(wp_unslash($_POST['data']), $post_type);
         }
         $PayPal_Security_PayPal_Helper = new AngellEYE_PayPal_Security_PayPal_Helper();
         $paypal_security_scanner_finalarrayresult = $PayPal_Security_PayPal_Helper->paypal_security_get_post_result($post_type);
