@@ -3,8 +3,8 @@ Contributors: angelleye
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SG9SQU2GBXJNA
 Tags: paypal, security, payments, standard, buttons, subscriptions, hosted
 Requires at least: 3.8
-Tested up to: 4.4
-Stable tag: 1.0.2
+Tested up to: 4.9.8
+Stable tag: 1.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,7 +63,7 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Changelog ==
 
-= 1.0.3 - xx.xx.2018 =
+= 1.0.3 - 08.18.2018 =
 * [PAYP-1](https://github.com/angelleye/paypal-security-for-wordpress/pull/40) - Tweak - Data sanitization.
 * [PAYP-2](https://github.com/angelleye/paypal-security-for-wordpress/pull/41) - Fix - Resolves an undefined error with the scanner results.
 

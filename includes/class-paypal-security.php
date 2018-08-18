@@ -56,7 +56,7 @@ class AngellEYE_PayPal_Security {
     public function __construct() {
 
         $this->plugin_name = 'paypal-security';
-        $this->version = '1.0.2';
+        $this->version = '1.0.3';
 
         $this->load_dependencies();
         $this->set_locale();
