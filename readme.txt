@@ -63,6 +63,9 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Changelog ==
 
+= 2.0.0 - 04.04.2019 =
+* Feature - Adds AE Updater compatibility for future notices and automated updates. ([PAYP-6](https://github.com/angelleye/paypal-security-for-wordpress/pull/43))
+
 = 1.0.3 - 08.18.2018 =
 * [PAYP-1](https://github.com/angelleye/paypal-security-for-wordpress/pull/40) - Tweak - Data sanitization.
 * [PAYP-2](https://github.com/angelleye/paypal-security-for-wordpress/pull/41) - Fix - Resolves an undefined error with the scanner results.
