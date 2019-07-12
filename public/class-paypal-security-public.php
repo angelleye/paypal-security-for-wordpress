@@ -54,5 +54,4 @@ class AngellEYE_PayPal_Security_Public {
 
         //wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/paypal-security-public.js', array('jquery'), $this->version, false);
     }
-
 }
