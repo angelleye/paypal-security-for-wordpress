@@ -5,7 +5,7 @@
  * Plugin Name:       PayPal Security
  * Plugin URI:        http://www.angelleye.com/
  * Description:       A security scanner that looks for PayPal concerns and provides feedback.
- * Version:           1.0.4
+ * Version:           2.0.0
  * Author:            Angell EYE
  * Author URI:        http://www.angelleye.com/
  * License:           GNU General Public License v3.0

@@ -3,8 +3,8 @@ Contributors: angelleye
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SG9SQU2GBXJNA
 Tags: paypal, security, payments, standard, buttons, subscriptions, hosted
 Requires at least: 3.8
-Tested up to: 4.9.8
-Stable tag: 1.0.4
+Tested up to: 5.3
+Stable tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,8 +63,9 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Changelog ==
 
-= 2.0.0 - xx.xx.2019 =
+= 2.0.0 - 11.20.2019 =
 * Feature - Adds AE Updater compatibility for future notices and automated updates. ([PAYP-6](https://github.com/angelleye/paypal-security-for-wordpress/pull/43))
+* Verification - WordPress 5.3 compatibility.
 
 = 1.0.4 - 07.09.2019 =
 * Tweak - Minor adjustment to JavaScript.
