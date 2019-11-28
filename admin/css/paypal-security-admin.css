@@ -288,6 +288,10 @@ pre.prettyprint {
     white-space: -o-pre-wrap; /* Opera 7 */
     word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
+.updater-dismissible {
+    padding-right: 38px;
+    position: relative;
+}
 
 @media screen and (max-width: 1300px){
     .cls_site_score {font-size: 20px !important;}
