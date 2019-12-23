@@ -63,6 +63,9 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Changelog ==
 
+= 2.0.1 - 23.12.2019 =
+* Tweak - Adjustment to Updater plugin notice dismissible. ([PAYP-7](https://github.com/angelleye/paypal-security-for-wordpress/pull/44))
+
 = 2.0.0 - 11.20.2019 =
 * Feature - Adds AE Updater compatibility for future notices and automated updates. ([PAYP-6](https://github.com/angelleye/paypal-security-for-wordpress/pull/43))
 * Verification - WordPress 5.3 compatibility.
