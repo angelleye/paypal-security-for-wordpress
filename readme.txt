@@ -63,7 +63,7 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 
 == Changelog ==
 
-= 2.0.1 - 23.12.2019 =
+= 2.0.1 - 12.XX.2019 =
 * Tweak - Adjustment to Updater plugin notice dismissible. ([PAYP-7](https://github.com/angelleye/paypal-security-for-wordpress/pull/44))
 
 = 2.0.0 - 11.20.2019 =
