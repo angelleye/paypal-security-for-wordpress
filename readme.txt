@@ -3,8 +3,8 @@ Contributors: angelleye
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SG9SQU2GBXJNA
 Tags: paypal, security, payments, standard, buttons, subscriptions, hosted
 Requires at least: 3.8
-Tested up to: 5.3
-Stable tag: 2.0.0
+Tested up to: 5.3.2
+Stable tag: 2.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -62,6 +62,9 @@ In the search field type PayPal Security and click Search Plugins. Once you've f
 * As of now, drafts are not included in the security scan.  We are working to improve this in a future release.
 
 == Changelog ==
+
+= 2.0.1 - 12.30.2019 =
+* Tweak - Adjustment to Updater plugin notice dismissible. ([PAYP-7](https://github.com/angelleye/paypal-security-for-wordpress/pull/44))
 
 = 2.0.0 - 11.20.2019 =
 * Feature - Adds AE Updater compatibility for future notices and automated updates. ([PAYP-6](https://github.com/angelleye/paypal-security-for-wordpress/pull/43))
